@@ -1,0 +1,7 @@
+# ICAM
+extends: ../CoLOED/theme-diaporama.yml
+
+lead-font-color: #EE8208
+subtitle-font-color: #EE8208
+heading-font-color: #EE8208
+caption-font-color: #EE8208

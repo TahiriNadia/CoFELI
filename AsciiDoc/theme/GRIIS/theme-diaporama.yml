@@ -1,0 +1,7 @@
+# GRIIS
+extends: ../CoLOED/theme-diaporama.yml
+
+lead-font-color: #5C90B9
+subtitle-font-color: #5C90B9
+heading-font-color: #5C90B9
+caption-font-color: #5C90B9

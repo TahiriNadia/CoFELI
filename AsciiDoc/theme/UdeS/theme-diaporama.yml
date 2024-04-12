@@ -1,0 +1,7 @@
+# UdeS
+extends: ../CoLOED/theme-diaporama.yml
+
+lead-font-color: #107839
+subtitle-font-color: #107839
+heading-font-color: #107839
+caption-font-color: #107839

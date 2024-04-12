@@ -1,0 +1,3 @@
+// Paramétrage d'attributs spécifiques à UCAC-ICAM
+:logo_tete_width: 300
+:logo_pied_width: 150

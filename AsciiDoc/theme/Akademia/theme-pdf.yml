@@ -1,0 +1,7 @@
+# UdeS
+extends: ../CoLOED/theme-pdf.yml
+
+lead-font-color: #003776
+subtitle-font-color: #003776
+heading-font-color: #003776
+caption-font-color: #003776

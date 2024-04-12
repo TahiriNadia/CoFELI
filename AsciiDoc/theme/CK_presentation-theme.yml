@@ -1,0 +1,44 @@
+# Thème pour les présentations
+#
+extends: base
+page:
+  size: [16.5cm, 9.5cm]
+  margin: [1cm, 1cm, 1cm, 1cm]
+  layout: portrait
+  numbering:
+    start-at: toc
+
+title_page:
+  text_align: center
+  title:
+    font_size: 30
+    font_style: bold
+    font-color: #000000
+    top: 10%
+  subtitle:
+    font_size: 26
+    font_style: normal
+    font-color: #6D97AB
+    margin-top: 0.5cm
+#  background-image: /Users/khnc2501/Depots/Alexandrie/IFT187/src/presentation/_images/arriere-plan.png
+
+heading:
+  font_style: bold
+  margin:
+    top: 0.5cm
+    bottom: 0.5cm
+    min_height_after: 0.5cm
+
+footer:
+  font_size: 8
+  height: 1cm
+  recto:
+    left:
+      content: © 2018-{docdate}, CoFELI [CC BY-NC-SA 4.0]
+    right:
+      content: '{page-number} / {page-count}'
+  verso:
+    left:
+      content: $footer-recto-left-content
+    right:
+      content: $footer-recto-right-content

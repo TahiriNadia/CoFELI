@@ -1,0 +1,22 @@
+# Thème pour les présentations
+#
+extends: ./theme-pdf.yml
+
+page:
+  size: [160mm, 90mm]
+  margin: [5mm, 5mm, 5mm, 5mm]
+
+# ne sert à rien si le type de document n’est pas book
+heading:
+  chapter:
+    break-before: always
+  part:
+    break-before: always
+
+role:
+  Math:
+    font-size: 12
+
+footer:
+  font_size: 5
+  height: 6mm

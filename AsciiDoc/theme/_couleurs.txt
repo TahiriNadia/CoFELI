@@ -1,0 +1,11 @@
+# couleur AsciiDoc  #BA3925 -- ?
+# couleur Akademia  #003776 -- bleu marin
+# couleur CoFELI    #AC1E44 -- bordeaux
+# couleur CoLOED    #184B42 -- vert sapin, valeur cutilisée au 2024-03-10
+# couleur CoLOED    #1B5C54 -- vert sapin, serait-ce nmieux ?
+# couleur GRIIS     #5C90B9 -- bleu «moderne»
+# couleur ICAM      #EE8208 -- orange brulée
+# couleur Metis     #850087 -- améthyste
+# couleur UCAC-ICAM #EE8208 -- orange brulée
+# couleur UCAC-ULC  #EE8208 -- orange brulée
+# couleur UdeS      #107839 -- vert 56

@@ -1,0 +1,2 @@
+// Paramétrage d'attributs spécifiques à Matawin
+// Néant

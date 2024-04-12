@@ -1,0 +1,7 @@
+# Metis
+extends: ../CoLOED/theme-pdf.yml
+
+lead-font-color: #850087
+subtitle-font-color: #850087
+heading-font-color: #850087
+caption-font-color: #850087

@@ -1,0 +1,275 @@
+# CoLOED
+extends: default-for-print-with-fallback-font
+
+# Les polices sont stockées dans le répertoire désigné par pdf-fontsdir.
+# Elles doivent toutes téléchargeables et incorporables librement (sans droits).
+
+# Rappel - selon https://docs.asciidoctor.org/pdf-converter/latest/theme/font-support/#bundled
+# Les polices suivantes sont préalablement prédéfinies et incluses
+# * M+ 1mn
+# * M+ 1p
+# * Noto Serif
+# * Noto Sans
+# * Noto Emoji
+
+font:
+  catalog:
+    merge: true
+    AnonymousPro:
+      normal: AnonymousPro/AnonymousPro.ttf
+      bold: AnonymousPro/AnonymousPro_B.ttf
+      italic: AnonymousPro/AnonymousPro_I.ttf
+      bold_italic: AnonymousPro/AnonymousPro_BI.ttf
+    Arial:
+      normal: Arial/Arial.ttf
+      bold: Arial/ArialBold.ttf
+      italic: Arial/ArialBoldItalic.ttf
+      bold_italic: Arial/ArialItalic.ttf
+    DejaVuSansMono:
+      normal: DejaVuSansMono/DejaVuSansMono.ttf
+      bold: DejaVuSansMono/DejaVuSansMono-Bold.ttf
+      italic: DejaVuSansMono/DejaVuSansMono-Oblique.ttf
+      bold_italic: DejaVuSansMono/DejaVuSansMono-Bold.ttf
+    Didot: Didot/Didot.ttc
+    DroidSansFull: DroidSans/DroidSansFull.ttf
+    DroidSansMono: DroidSans/DroidSansMono.ttf
+    FiraGO:
+      normal: FiraGO/FiraGO-Regular.ttf
+      bold: FiraGO/FiraGO-Bold.ttf
+      italic: FiraGO/FiraGO-Italic.ttf
+      bold_italic: FiraGO/FiraGO-BoldItalic.ttf
+    JetBrainsMono:
+      normal: JetBrainsMono/JetBrainsMono-Regular.ttf
+      bold: JetBrainsMono/JetBrainsMono-Bold.ttf
+      italic: JetBrainsMono/JetBrainsMono-Italic.ttf
+      bold_italic: JetBrainsMono/JetBrainsMono-BoldItalic.ttf
+    Menlo: Menlo/Menlo.ttc
+    Monaco: Monaco/Monaco.ttf
+    NotoSerif:
+      normal: NotoSerif/NotoSerif-Regular.ttf
+      bold: NotoSerif/NotoSerif-Bold.ttf
+      italic: NotoSerif/NotoSerif-Italic.ttf
+      bold_italic: NotoSerif/NotoSerif-BoldItalic.ttf
+    OpenSans:
+      normal: OpenSans/OpenSans-Regular.ttf
+      bold: OpenSans/OpenSans-Bold.ttf
+      italic: OpenSans/OpenSans-Italic.ttf
+      bold_italic: OpenSans/OpenSans-BoldItalic.ttf
+#  Polices .ttc et .otf sont-elles vriament prises en charge ?
+#  En attendant d'éclaircir la question, nous utiliserons uniquement les .ttf
+#    Palatino: Palatino/Palatino.ttc
+#    STIXGeneral:
+#      normal: STIXGeneral/STIXGeneral-Regular.otf
+#      bold: STIXGeneral/STIXGeneral-Bold.otf
+#      italic: STIXGeneral/STIXGeneral-Italic.otf
+#      bold_italic: STIXGeneral/STIXGeneral-BoldItalic.otf
+#    STIXTwoMath: STIXTwoMath/STIXTwoMath.otf
+#    STIXTwoText:
+#      normal: STIXTwoText/STIXTwoText-Regular.otf
+#      bold: STIXTwoText/STIXTwoText-Bold.otf
+#      italic: STIXTwoText/STIXTwoText-Italic.otf
+#      bold_italic: STIXTwoText/STIXTwoText-BoldItalic.otf
+#    STIXTwoTextI: STIXTwoText/STIXTwoText-Italic.otf
+    STIXTwoMath: STIXTwoMath/STIXTwoMath.ttf
+    STIXTwoText:
+      normal: STIXTwoText/STIXTwoText-Regular.ttf
+      bold: STIXTwoText/STIXTwoText-Bold.ttf
+      italic: STIXTwoText/STIXTwoText-Italic.ttf
+      bold_italic: STIXTwoText/STIXTwoText-BoldItalic.ttf
+    STIXTwoTextI: STIXTwoText/STIXTwoText-Italic.ttf
+    TimesNewRoman:
+      normal: TimesNewRoman/TimesNewRoman.ttf
+      bold: TimesNewRoman/TimesNewRomanBold.ttf
+      italic: TimesNewRoman/TimesNewRomanBoldItalic.ttf
+      bold_italic: TimesNewRoman/TimesNewRomanItalic.ttf
+  fallbacks: [ STIXTwoMath, M+ 1p Fallback, Noto Emoji ]
+# fallbacks: [ STIXTwoMath, NotoSerif, OpenSans, M+ 1p Fallback, JetBrainsMono, Noto Emoji ]
+police:
+  titre: Arial
+  texte: STIXTwoText
+  code: DroidSansMono
+
+page:
+  numbering:
+    start-at: toc
+  layout: portrait
+  size: Letter
+  margin: [10mm, 20mm, 20mm, 20mm]
+
+title-page:
+  font:
+    color: #000000
+    family: $police-texte
+    size : 13
+  text:
+    align: center
+  logo:
+    top: 0%
+    align: center
+  authors:
+    margin-top: 100
+  revision:
+    margin-top: 200
+  title:
+    top: 25%
+    font-size: 28
+    font-style: bold
+    align: center
+    text-align: center
+
+toc:
+  font-size: 12
+  pdf-page-offset: 2
+
+base:
+  font-color: #000000
+  font-family: $police-texte
+  font-size: 11
+  line-height-length: 11.5
+  line-height: $base-line-height-length / $base-font-size
+
+codespan:
+  font-family: $police-code
+  font-size: 9
+
+role:
+  small:
+    font-size: 10
+  big:
+    font-size: 14
+  removed:
+    font-style: italic
+    text-decoration: line-through
+    text-decoration-color: #6ea1c5
+  lead:
+    font-style: bold_italic
+    font-color: #1B5C54
+    font-size: 12
+    line-height: 1.15
+    margin-bottom: 8
+  subtitle:
+    font-style: bold_italic
+    font-color: #1B5C54
+    font-size: 11
+    line-height: 1.15
+    margin-bottom: 8
+  TutorialD:
+    font-color: #2D80C7
+    font-family: Courier
+  Discipulus:
+    font-color: #E3AD14
+    font-family: TimesNewRoman
+  SQL:
+    font-color: #C00300
+    font-family: Monaco
+    font-size: 10
+  Math:
+    # Ce qu’on désire ici, c’est STIXTwoMath, mais l’engin PDF semble incapable de l’utiliser :
+    # un certain code 25 semble utilisé par la police, mais est réservé par l’engin (en PDF, pas en HTML!!!)
+    #   /opt/local/lib/ruby3.0/gems/3.0.0/gems/ttfunk-1.7.0/lib/ttfunk/table/cff/dict.rb:163:in `parse!': dict byte value 25 is reserved (TTFunk::Error)
+    # On s’est rabattu sur ensuite sur STIXTwoText style italic, mais encore c'est trop demandé :
+    # certains caractères ne sont plus retrouvés
+    #  `≜' (\u225c)
+    #  `∊' (\u220a)
+    # et le fallback ne fonctionne pas si le style est italic!!!
+    # Il a donc fallu enlever aussi l’italique !!!!
+    # On a donc triché et défini la police STIXTwoTextI associé au fichier italique pour tous ses styles.
+    # Misère.
+    # FIXED 2024-04-01 (LL01) Cela semble corrigé. J'ai donc rétabli la spécification originale.
+    #   * Je conserve néanmoins le commentire, je demeure circonspect.
+    font-color: #424242
+    font-family: STIXTwoMath
+    font-size: 11
+    font-style: italic
+  Code:
+    font-color: #021990
+    font-family: DroidSansMono
+    font-size: 9
+
+heading:
+  font-color: #1B5C54
+  h1-font-size: 14
+  h2-font-size: 14
+  h3-font-size: 13
+  h4-font-size: 12
+  h5-font-size: 11
+  h6-font-size: 11
+  font-family: $police-titre
+  font-style: bold
+  line-height: 1.15
+  margin-bottom: 6
+  min-height-after: auto
+
+caption:
+  font-style: italic
+  font-color: #1B5C54
+  font-size: $base-font-size
+  line-height: 1.15
+  margin-inside: 2
+
+link:
+  font-color: #002FA7
+
+list:
+  indent: $base-font-size * 1.5
+  item-spacing: 2
+
+ulist:
+  marker:
+    disc:
+      content: "•"
+    circle:
+      content: "°"
+    square:
+      content: "-"
+#   checked:
+#     content: "✓"
+#   unchecked:
+#     content: "❍"
+
+prose:
+  margin-bottom: 3
+
+table:
+  align: center
+  font-size: 9
+  line-height: 0.9
+  grid-width: 0.25
+  caption:
+    align: inherit
+    text-align: inherit
+    max-width: none
+  cell:
+    line-height: 1.0
+    padding: [0, 2]
+
+image:
+  align: center
+  caption:
+    align: inherit
+    text-align: inherit
+    max-width: none
+
+code:
+  font-family: $police-code
+  font-size: 9
+  line-height: 1.1
+
+footer:
+  border-color: #FFFFFF
+  font_size: 8
+  height: 10mm
+  recto:
+    left:
+      content: © {docyear}, {organisation} [CC BY-NC-SA 4.0]
+    right:
+      content: '{page-number} / {page-count}'
+  verso:
+    left:
+      content: $footer-recto-left-content
+    right:
+      content: $footer-recto-right-content
+
+admonition:
+  margin-left: 10
+  border-color: #FFFFFF

@@ -1,0 +1,7 @@
+# CoFELI
+extends: ../CoLOED/theme-pdf.yml
+
+lead-font-color: #AC1E44
+subtitle-font-color: #AC1E44
+heading-font-color: #AC1E44
+caption-font-color: #AC1E44
