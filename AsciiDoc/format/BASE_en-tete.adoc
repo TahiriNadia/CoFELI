@@ -1,0 +1,67 @@
+// Base du paramétrage du composant AsciiDoc au sein de CoLOED
+// Répertoires déterminants pour le bon fonctionnement du composant et
+// normalement déjà définis
+ifndef::rep_racine[:rep_racine: /Users/Shared/DGS]
+ifndef::rep_CoLOED[:rep_CoLOED: {rep_racine}/CoLOED]
+ifndef::rep_AsciiDoc[:rep_AsciiDoc: {rep_CoLOED}/AsciiDoc]
+
+// Caractéristiques du document, prescrites par CoLOED et normalement déjà
+// définies au sein document.
+// En cas d’indéfinition, une valeur identifiante leur est attribuée afin de
+// faciliter la mise au point
+ifndef::sigle[:sigle: «sigle»]
+ifndef::titre[:titre: «titre»]
+ifndef::sous_titre[:sous_titre: «sous_titre»]
+ifndef::organisation[:organisation: «organisation»]
+ifndef::entrepot[:entrepot: «entrepot»]
+ifndef::depot[:depot: «depot»]
+// ifndef::branche[:branche: «branche»]    // {branche} est désormais facultatif
+
+// Attributs normalement définis par le document ou l’application constructrice
+// À défaut, des valeurs relatives au composant AsciiDoc de référence sont
+// utilisées.
+ifndef::rep_format[:rep_format: {rep_AsciiDoc}/format]
+ifndef::rep_image[:rep_image: {rep_AsciiDoc}/image]
+ifndef::rep_theme[:rep_theme: {rep_AsciiDoc}/theme]
+
+// Attributs normalement liés à l’emplacement du dépôt (ou l’entrepôt) du document
+// À défaut, des valeurs relatives à ColoED sont utilisées
+ifndef::rep_entrepot[:rep_entrepot: {rep_CoLOED}]
+ifndef::rep_depot[:rep_depot: {rep_entrepot}/Scriptorum]
+ifndef::rep_glossaire[:rep_glossaire: {rep_depot}/doc/_glo]
+ifndef::rep_reference[:rep_reference: {rep_depot}/doc/_ref]
+ifndef::rep_consultation[:rep_consultation: {rep_depot}/pub]
+
+// Valeur implicite des attributs dont le sens est prédéfini par AsciiDoc
+// (mais pouvant être redéfinis par l’application constructrice ou le document)
+:encoding: utf-8
+:toc: macro
+:toclevels: 2
+:sectnumlevels: 4
+:outlinelevels: 2
+:lang: fr
+:toc-title: Table des matières
+:!chapter-signifier:
+:!appendix-caption:
+
+// Pour les images
+ifndef::imagesdir[:imagesdir: {rep_image}]
+
+// Pour les icônes
+ifndef::iconsdir[:iconsdir: {rep_image}/icons/]
+ifndef::icons[:icons: font]
+ifndef::iconstype[:iconstype: png]
+ifndef::iconfont-name[:iconfont-name: STIX Two Text]
+
+// Pour asciidoctor-diagram, en particulier PlantUML
+ifndef::imagesoutdir[:imagesoutdir: {rep_depot}/temp/AsciiDoc/image]
+ifndef::diagram-cachedir[:diagram-cachedir: {rep_depot}/temp/AsciiDoc/cache]
+
+// Paramètres spécifiques à l'organisation
+include::{rep_theme}/{organisation}/param.adoc[]
+:docinfodir: {rep_theme}/{organisation}
+:docinfo: shared
+
+// Définitions auxiliaires sur la base des précédentes
+:description: {titre} — {sous_titre}
+:outline-title: {sigle} — {description}

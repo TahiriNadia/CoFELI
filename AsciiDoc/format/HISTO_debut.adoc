@@ -1,0 +1,17 @@
+// Amorce de l’historique
+// Impossible de ramener l’historique à gauche dans les pdf!!!
+
+:table-caption!:
+
+ifeval::["{backend}" != "html5"]
+:table-caption-align-old: {table-caption-align}
+:table-caption-align: left
+:table-caption-text-align-old: {table-caption-text-align}
+:table-caption-text-align: left
+[.left]
+endif::[]
+.[.big.text-left]#Historique#
+[cols="3,2,18"]
+[.small]
+|===
+| diffusion | resp. | description

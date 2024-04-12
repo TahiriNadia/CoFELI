@@ -1,0 +1,8 @@
+|===
+
+:table-caption: Tableau
+ifeval::["{backend}" != "html5"]
+:table-caption-align: {table-caption-align-old}
+:table-caption-text-align: {table-caption-text-align-old}
+endif::[]
+

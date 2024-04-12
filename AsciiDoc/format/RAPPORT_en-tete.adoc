@@ -1,0 +1,5 @@
+include::BASE_en-tete.adoc[]
+:logo_inc: true
+ifndef::logo_tete_width[:logo_tete_width: 100]
+ifndef::logo_pied_width[:logo_pied_width: 50]
+include::TETE.adoc[]

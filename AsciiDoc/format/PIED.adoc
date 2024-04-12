@@ -1,0 +1,16 @@
+// Tout texte pertinent à placer en fin de document (dont un éventuel colophon),
+// normalement terminé par un cul-de-lampe
+// -- en conséquence ceci doit être inclus en tout dernier
+
+[%unbreakable]
+--
+[.text-center]
+[.small]
+— +
+Produit le {localdatetime}
+
+ifdef::logo_inc[image::{rep_theme}/{organisation}/logo.png[width={logo_pied_width},align=center]]
+[.text-center]
+[.small]
+*{organisation}*
+--

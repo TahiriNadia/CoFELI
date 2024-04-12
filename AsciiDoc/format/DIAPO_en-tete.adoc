@@ -1,0 +1,53 @@
+include::BASE_en-tete.adoc[]
+
+// Options pour reveal.js (testées)
+////
+= {titre} ({revnumber})
+:docinfo: shared
+:revealjsdir: {rep_AsciiDoc}/reveal_js_501_ll
+:revealjs_width: 1600
+:revealjs_height: 900
+:revealjs_margin: 0.2
+:revealjs_theme: white
+:revealjs_controls: true
+:revealjs_controlsTutorial: true
+:revealjs_progress: true
+:revealjs_slideNumber: c/t
+:revealjs_showSlideNumber: all
+:revealjs_keyboard: true
+:revealjs_hash: true
+:revealjs_history: true
+:revealjs_center: false
+:revealjs_previewLinks: true
+:revealjs_viewDistance: 3
+:revealjs_showNotes: false
+:revealjs_pdfSeparateFragments: true
+:revealjs_pdfmaxpagesperslide: 2
+////
+
+// Options pour reveal.js à explorer (non testées)
+////
+ifdef::execution_locale[]
+:revealjsdir: {rep_AsciiDoc}//reveal_js_xxx_ck
+endif::execution_locale[]
+ifndef::execution_locale[]
+:revealjsdir: //cdn.jsdelivr.net/npm/reveal.js
+endif::execution_locale[]
+////
+
+// Options pour pdf (testées)
+// * Il faudrait voir si :doctype: book est vraiment utile :
+//   - Il permet le saut de page implicite pour les parties et les chapitres,
+//     mais pas pour les sections
+//   - Il induit des comportements implicites encore mal documentés pour le moment.
+//   - L'automatisation de la production de la page titre n’est pas utilisée, à tort ?
+//   - Pourrions-nous y avoir recours pour format_TEXTE et format_NOTE ?
+//
+// :doctype: book
+// :toc-max-pagenum-digits: 2
+:toclevels: 1
+:toc-title: Plan
+:logo_inc: true
+ifndef::logo_tete_width[:logo_tete_width: 50]
+ifndef::logo_pied_width[:logo_pied_width: 50]
+include::TETE.adoc[]

@@ -1,0 +1,2 @@
+include::BASE_en-pied.adoc[]
+include::PIED.adoc[]

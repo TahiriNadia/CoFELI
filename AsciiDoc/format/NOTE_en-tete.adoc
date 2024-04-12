@@ -1,0 +1,3 @@
+include::BASE_en-tete.adoc[]
+:!logo_inc:
+include::TETE.adoc[]
