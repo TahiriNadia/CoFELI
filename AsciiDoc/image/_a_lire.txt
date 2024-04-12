@@ -1,0 +1,17 @@
+Les dossiers callouts, colorsvg et icons proviennent de la distribution 1.8.3 de AscidocFX.
+Ils ne semblent pas avoit été modifiés jusqu'à la version 1.8.8.
+
+Envisager d’ajotuer les polices suivantes provenant également de AsciidocFX :
+ * 'DejaVu Sans Mono', 'Everson Mono', FreeMono, 'Menlo', 'Terminal', monospace
+
+Style sheet :
+
+  /Users/lavl1905/.AsciidocFX-1.8.8/css/asciidoctor-default.css
+
+Style sheet overrides :
+
+  /Users/lavl1905/.AsciidocFX-1.8.8/css/asciidoctor-default-overrides.css
+
+MathJax
+
+  /Applications/AsciidocFX/conf/public/mathjax/MathJax.js
