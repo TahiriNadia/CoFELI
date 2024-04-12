@@ -1,0 +1,5 @@
+== AsciiDoc
+Collection de ressources communes relatives à AsciiDoc
+
+La définition de ces ressources repose sur un  modèle documentaire défini
+sur la base des catégories suivantes.
