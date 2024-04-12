@@ -1,0 +1,3 @@
+ACID::
+Acronyme désignant conjointement les propriétés d’atomicité, de cohérence,
+d’isolation et rémanence (ou _durability_ en anglais).

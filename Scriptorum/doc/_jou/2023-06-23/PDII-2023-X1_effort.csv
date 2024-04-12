@@ -1,0 +1,17 @@
+module;titre;total;ects;cna
+INFO111;Éléments de programmation;115.00;4.38;2.56
+MATH111;Logique et mathématiques discrètes;115.00;4.38;2.56
+GINF211;Éléments d’électronique [MATH111];135.00;5.14;3.00
+GLOG211;Conception logicielle [MATH111,INFO111];115.00;4.38;2.56
+INFO211;Structures de données [MATH111,INFO111];115.00;4.38;2.56
+INFO221;Éléments de bases de données [MATH111,INFO111];115.00;4.38;2.56
+GINF331;Initiation aux réseaux informatiques [GINF211];135.00;5.14;3.00
+INFO331;Interfaces personne-machine [GLOG211];115.00;4.38;2.56
+PDII_P1;Projet d’intégration en génie informatique 1;100.00;3.81;2.22
+FHS_IN1;Semaine d’intégration 1;35.00;1.33;0
+FHS_SU1;Suivi 1;34.00;1.30;0
+FHS_FO1;Formation 1;119.00;4.53;0
+FHS_DD1;Développement durable 1;34.00;1.30;0.76
+FHS_CO1;Formation complémentaire 1;68.00;2.59;1.51
+PDII_S1;Stage humanitaire;225.00;8.57;0
+"";TOTAL;1575.00;59.99;25.85

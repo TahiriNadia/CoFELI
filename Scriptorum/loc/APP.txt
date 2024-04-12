@@ -1,0 +1,7 @@
+
+http://oas.ccdmd.qc.ca/app/scenario.php?demande=accueil
+https://aide.ccdmd.qc.ca/oas/fr
+https://aide.ccdmd.qc.ca/oas/fr/premiers-pas
+https://app.unisciel.org
+https://app.unisciel.org/guides-app/
+https://enseigner.uqam.ca

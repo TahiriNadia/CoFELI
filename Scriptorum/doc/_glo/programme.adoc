@@ -1,0 +1,4 @@
+programme::
+Ensemble structuré d’instructions et d’opérations
+* décrivant les étapes et les calculs menant à la solution d’un problème,
+* codé dans un langage donné.

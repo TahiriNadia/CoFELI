@@ -1,0 +1,2 @@
+activité::
+Ensemble d’actions, d’opérations et de tâches visant un but déterminé.

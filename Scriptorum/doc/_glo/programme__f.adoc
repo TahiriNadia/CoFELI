@@ -1,0 +1,9 @@
+include::programmation.adoc[]
+include::programme.adoc[]
+include::programmer.adoc[]
+
+////
+include::{rep_Scriptorum}/doc/_glo/programmation[]
+include::{rep_Scriptorum}/doc/_glo/programme[]
+include::{rep_Scriptorum}/doc/_glo/programmer[]
+////

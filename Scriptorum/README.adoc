@@ -1,0 +1,102 @@
+== Site du CoFELI.
+Collectif francophone pour l’enseignement libre de l’informatique.
+
+Le CoFELI se veut un lieu d’échange et de développement de matériel de formation
+en informatique, rédigé en français, ouvert et libre de droits.
+
+=== Vision
+* Cibler le savoir-faire en se reposant sur le raisonnement et des connaissances dument organisées.
+* Intégrer les aspects éthiques (dont le développement durable).
+* Développer le matériel indépendamment de la méthode pédagogique.
+* Organiser le matériel de façon modulaire et reconfigurable.
+* Organiser le matériel afin de faciliter la reconnaissance d’acquis.
+* Apporter un soutien didactique.
+
+=== Structure du Dépôt
+.Dossiers communs
+Les dossiers récurrents sont présents à la racine du dépôt et ont pour vocation
+de factoriser des éléments communs aux autres dossiers tout en les classant
+de la façon suivante :
+
+`_configuration`::
+Fichiers de configuration des outils utilisés pour la rédaction, la vérification,
+la validation et la publication des contenus.
+(analogue à «configuration» dans [STD-ENV]).
+
+`_definition`::
+Définitions de termes spécialisés utilisées dans le dépôt, à raison d’un fichier par définition.
+Chaque fichier doit être au format `.adoc`.
+La composition de la définition doit être uniforme et conforme au choix
+documenté dans `_configuration`.
+
+`_figure`::
+Figures utilisées dans le dépôt, à raison d’un sous-dossier par figure.
+Chaque sous-dossier comporte les fichiers requis conformément aux formats
+retenus et documentés dans `_configuration`.
+
+`_publication`::
+Artéfacts produits en vue d’une diffusion publique ;
+ces artéfacts ne sont pas conservés par la gestion des versions, mais le sont
+par la gestion des configurations, en particulier lors de la préparation
+de «packages» de diffusion
+(analogue à «publication» dans [STD-ENV]).
+
+`_reference`::
+Références utilisées dans le dépôt, à raison d’un fichier par référence.
+Chaque fichier doit être au format `.adoc`.
+La composition de la référence doit être uniforme et conforme au choix documenté dans le dossier _configuration.
+
+`_temp`::
+Artéfacts *ne devant pas* être pris en compte
+par la gestion des versions ni la gestion des configurations --  en ce sens,
+ce sont des artéfacts éphémères souvent produits par les outils et les
+scripts, et nécessaires à leur bon déroulement ; il appartient aux outils
+et aux scripts d’en bien gérer la structure interne et l’utilisation des
+fichiers qui y sont déposés.
+(analogue à «art. temporaires» dans [STD-ENV]).
+
+`_vrac`::
+Fichiers en attente de classement, préservés par la gestion des versions,
+mais pas celle des configurations.
+(analogue à «expérimentation» dans [STD-ENV]).
+
+Ces dossiers communs peuvent se retrouver dans les sous-dossiers des dossiers
+spécifiques pour y jouer le même rôle (recenser et catégoriser les éléments
+communs).
+Il importe toutefois de ne pas en abuser et de privilégier les dossiers communs
+à la racine du dépôt afin de maintenir un maximum de simplicité
+(la simplicité étant vue ici comme une mise en commun ne souffrant pas d’exception locale)
+tout en maintenant la cohérence et la spécificité.
+
+Il est convenu de faire commencer le nom d’un dossier commun par un tiret bas
+fin de distinguer les dossiers communs des dossiers spécifiques.
+
+.Dossiers spécifiques
+Activite::
+Chaque dossier est dédié au matériel propre à une activité de formation spécifique conçue par le CoFELI.
+Ce matériel est le plus souvent composé, pour l’essentiel, d’éléments de contenu
+puisé dans les contenus disciplinaires du co-dossier Discipline.
+Les activités sont identifiées par un code composé d’un sigle (trois lettres) suivi d’un numéro (trois chiffres). Au besoin, les activités de même sigle peuvent être regroupées dans un même dossier dénoté par le sigle seulement.
+
+Discipline::
+Chaque sous-dossier est dédié au matériel propre à une discipline de l’informatique.
+
+Document_externe::
+Documents généraux destinés à une diffusion publique.
+Comprend des glossaires, bibliographies, notes techniques, guide d’utilisation, manuel de référence, etc.
+
+Document_interne::
+Documents généraux destinés aux seuls membres du CoFELI.
+Comprend rapports internes, revues internes, études préliminaires, etc.
+
+Rencontre::
+Ordre du jour et comptes rendus des rencontres de travail du CoFELI.
+Normalement, l’ordre du jour se transforme en compte rendu après la tenue de la rencontre.
+
+[reference]
+== Références
+
+[STD-ENV]::
+Groupe Μῆτις (2023).
+_Proposition d’une structure de dépôt de produit logiciel_
+Note technique METIS_STD-ENV-01, Université de Sherbrooke.

@@ -1,0 +1,2 @@
+programmer::
+Élaborer et coder une suite (d’instructions et) d’opérations formant un programme.

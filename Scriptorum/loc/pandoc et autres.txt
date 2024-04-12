@@ -1,0 +1,13 @@
+
+INPUT_ADOC=my_input_file.adoc
+asciidoctor --backend docbook --out-file - $INPUT_ADOC| \
+pandoc --from docbook --to docx --output $INPUT_ADOC.docx
+
+# On the Mac, this will open the generated file in MS Word
+open $INPUT_ADOC.docx
+
+# convert AsciiDoc 'my-document.adoc' to DocBook 'my-document.xml'
+asciidoctor -b docbook my-document.adoc
+# convert DocBook 'my-document.xml' to DOCX 'my-document.docx'
+pandoc -r docbook -t docx -o my-document.docx my-document.xml
+

@@ -1,0 +1,120 @@
+:sigle: CR-2023-06-23
+:description: Rencontre du 2023-06-23
+:keywords: vision, CoFELI, modélisation de données, conception de bases de données, exploitation de bases de données, analyse de données, ICAM, ULC-ICAM, UCAC-ICAM, UdeS
+:revnumber: 0.1.0a
+:revdate: 2023-06-24
+:branche:
+:repAdoc: ../../_configuration/Asciidoc/
+include::{repAdoc}NOTE_en-tete.adoc[]
+
+.Participants
+* Christina, Nadia, Luc
+
+.Objet
+* Jeter les bases du collectif
+
+== Plan et compte rendu
+
+* Contexte
+* UdeS (Sherbrooke, Longueuil)
+  - Présenté par Luc.
+* ICAM (Douala, Kinshasa)
+  - Présenté par Luc.
+* Nom du collectif
+  - Les noms envisagés lors de la rencontre étant déjà utilisés dans GitHub,
+    Christina et Luc ont temporairement utilisé CoFELI
+    (Collectif francophone pour l’enseignement libre de l’informatique)
+
+[NOTE]
+====
+Lors de la prochaine rencontre, il faudra adopter un nom pérenne,
+puis trouver un logo et un cul-de-lampe !
+====
+
+== Approche générale
+* Cibler le savoir-faire en se reposant sur les connaissances.
+* Intégrer les aspects éthiques (dont le développement durable).
+* Apporter un soutien didactique.
+* Développer le matériel indépendamment de la méthode pédagogique.
+* Organiser le matériel de façon modulaire et reconfigurable.
+* Organiser le matériel afin de faciliter la reconnaissance d’acquis.
+
+== Outils de travail à considérer
+Dans tous les cas, privilégier les normes, standards, formats, logiciels
+ouverts et libres de droits.
+
+* Documents (modules, exercices, énoncés de travaux, évaluations, etc.)
+  - Suggestion : évaluer les notations à balisage léger aussi riche que possible
+    (tout en permettant que le document balisé demeure lisible sans traduction).
+  - Candidats initiaux : Markdown, Asciidoc, reStructuredText.
+* Présentations
+  - Évaluer prioritairement la même solution que pour les documents.
+  - Considérer l’outil _reveal.js_.
+* Exemples (logiciel de saisie)
+  - Il n’apparait pas utile de privilégier un outil particulier.
+  - Par contre, il apparait nécessaire de fixer un format.
+  - Proposition : encodage UTF8 avec fins de lignes « à la Unix » (LF).
+* Projets (ateliers)
+  - Il n’apparait pas utile de privilégier un atelier en particulier.
+  - Par contre, il apparait nécessaire de fixer un langage de commande unique.
+  - Candidats initiaux : bash, zsh, maven, gradle.
+* Figures et diagrammes
+  - Considérer PlantUML, Graphviz et DrawIO.
+* Gestion documentaire et diffusion
+  - Un accord est intervenu sur GitHub.
+* SGBD
+  - Au moins deux SGBD (dont PostgreSQL).
+
+== Architecture des connaissances
+Dans un premier temps, les connaissances liées aux données seront privilégiées
+(conception de bases de données, exploitation de bases de données,
+modélisation de données, analyse de données, etc.) tout prenant en considération
+les connaissances fondamentales (mathématiques) et colatérales (algorithmique et
+programmation).
+
+Par exemple :
+
+* ALG101 -- Éléments de programmation
+            (UdeS_IFT159, ICAM_INFO111)
+* ALG201 -- Éléments d'algorithmique et de structures de données
+            (UdeS_IFT339, ICAM_INFO311)
+* MAT101 -- Éléments de logique et de mathématiques discrètes
+            [Logique, théorie des ensembles, langages et expressions rationnelles]
+            (UdeS_MAT115, ICAM_MATH111)
+* MAD101 -- Éléments de bases de données relationnelles
+            (voir UdeS_IFT187 et ICAM_INFO221)
+* MAD102 -- Éléments de bases de données documentaires
+            (en partie dans UdeS_IFT287)
+* MAD201 -- Administration et exploitation de SBGD
+            (voir ICAM_INFO321)
+* MAD202 -- Développement d’applications utilisant des bases de données
+            (en partie dans UdeS_IFT287 et ICAM_INFOxxx)
+* MAD301 -- Modélisation de données
+            (ICAM_INFO421 et en partie UdeS_IGE487)
+* MAD302 -- Architecture et mise en oeuvre des SGBD
+            (en partie dans UdeS_IGE487)
+* MAD401 -- Sciences des données [forage, inférence, méta-indexation, méta-recherche]
+            (UdeS_IFT599)
+* MAD601 -- Sujets choisis en modélisation de données
+            (UdeS_IFT723)
+* MAD602 -- Sujets choisis en science des données
+            (UdeS_IFT799)
+* MAD603 -- Ontologies appliquées
+            (UdeS_IFT789)
+
+== Premier cas d’étude
+* Éléments de base de données
+  - INFO221 -- X1 à Douala (UCAC-ICAM) et Kinshasa (ULC-ICAM).
+  - IFT187 -- première année à Sherbrooke (UdeS) et à Longueuil (UdeS).
+
+:efforts_tableau: pass:[1,12,>1,>1,>1]
+:appendix-caption:
+[appendix]
+== Composition de la X1 à Douala
+[.small]
+[format="csv", separator=";", options="header", cols="{efforts_tableau}"]
+|===
+include::PDII-2023-X1_effort.csv[]
+|===
+
+include::{repAdoc}NOTE_en-pied.adoc[]

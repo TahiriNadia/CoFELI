@@ -1,0 +1,4 @@
+activité de formation::
+Activité visant à permettre l’acquisition de connaissances
+(savoir, savoir-faire, savoir-être)
+telle que conférence, exercice, atelier (_workshop_), projet, PROSIT, etc.

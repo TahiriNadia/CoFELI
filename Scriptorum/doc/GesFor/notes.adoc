@@ -1,0 +1,6 @@
+----
+* module  TOT : (LM, TD, TP, TE)
+* IFT187  135 : (39, 21, 30, 45) (où les 6 heures d'examens sont-il comptabilisés ?)
+* INFO221 124 : (36, 25, 39, 24) (comparer 2022 et 2024; ajouter 6 pour les examens ?)
+* INFO323 117 : (12, 18, 54, 33) (les examens sont compris dans les TD - 4,5 heures)
+----

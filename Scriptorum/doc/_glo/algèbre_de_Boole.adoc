@@ -1,0 +1,10 @@
+algèbre de Boole::
+« L’algèbre de Boole, ou calcul booléen, est la partie des mathématiques qui
+s’intéresse à une approche algébrique de la logique, vue en termes de variables,
+d’opérateurs et de fonctions sur les variables logiques, ce qui permet d’utiliser
+des techniques algébriques pour traiter les expressions à deux valeurs du calcul
+des propositions.
+Elle fut lancée en 1854 par le mathématicien britannique George Boole.
+Aujourd’hui, l’algèbre de Boole trouve de nombreuses applications en informatique
+et dans la conception des circuits électroniques. » +
+ [Source : https://fr.wikipedia.org/wiki/Algèbre_de_Boole_(logique), 2024-04-01]

@@ -1,0 +1,15 @@
+=== local
+
+Fichiers utilisés et gérés localement, mais associés au module de
+façon généralement éphémère ; ces fichiers ne sont pas pris en compte par la
+gestion de versions ni par celle des configurations -- ce répertoire se
+distingue de `temp` dont le contenu est «géré» par les processus de développement,
+d’intégration, etc. ; en distinguant les deux répertoires, on évite les conflits
+qui pourraient entrainer la destruction non souhaitée de fichiers localement
+sur le poste du développeur.
+
+[note]
+====
+  * NON soumis à la gestion des sources (versions).
+  * NON soumis à la gestion des artefacts (configurations).
+====

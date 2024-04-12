@@ -1,0 +1,191 @@
+:sigle: Base de données de graphes
+:titre: Neo4j
+:sous_titre:
+:organisation: CoFELI
+:entrepot: CoFELI
+:!branche:
+:description: {titre} — {sous_titre}
+:outline-title: α — {description}
+:keywords: rédaction technique, documentation technique, Convention matawine
+:revnumber: 1.0.0.a
+:revdate: 2024-01-26
+:version-label: document de travail, ne pas citer
+:author: Christina Khnaisser
+:email: Christina.Khnaisser@usherbrooke.ca
+:stem: latexmath
+
+// Contexte de support du document
+include::../../../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Format du document
+include::{rep_format}/RAPPORT_en-tete.adoc[]
+
+ifdef::diapo[<<<]
+toc::[]
+ifdef::diapo[<<<]
+== Introduction
+
+image::../../_fig/neo4j-logo.svg[neo4j,200,100,float="bottom"]
+
+Une base de données de graphes.
+
+* Première version en 2010
+* Écrit en Java et Scala
+* Version source libre et version payante
+* Language de programmation : Cypher
+
+ifndef::diapo[]
+Neo4j est une base de données qui permet de représenter des données selon
+le modèle de graphe de propriétés.
+endif::diapo[]
+
+== Syntaxe
+
+=== Langage de requêtes
+
+Voici les mots clé pour définir une requête.
+[source, bnf]
+----
+MATCH
+[WHERE]
+[OPTIONAL MATCH [WHERE]]
+[WITH  [ORDER BY] [SKIP] [LIMIT] [WHERE]]
+RETURN [ORDER BY] [SKIP] [LIMIT]
+----
+
+ifdef::diapo[<<<]
+=== Langage de manipulation
+
+Voici les mots clé pour créer des objets.
+[source, bnf]
+----
+[CREATE]
+[MERGE [ON CREATE ...] [ON MATCH ...]]
+[WITH [ORDER BY] [SKIP] [LIMIT] [WHERE]]
+[SET]
+[DELETE]
+[REMOVE]
+[RETURN [ORDER BY] [SKIP] [LIMIT]]
+----
+
+ifdef::diapo[<<<]
+== Requête
+
+Pour explorer ou extraire des objets dans le graphe.
+
+.Décompte d'entités
+[source, cypher]
+----
+match (n)
+return count(*);
+----
+
+.Décompte d'étiquettes d'association
+[source, cypher]
+----
+match [r]
+return count(*);
+----
+
+ifdef::diapo[<<<]
+.Décompte d'associations
+[source, cypher]
+----
+match ()-->()
+RETURN count(*);
+----
+
+.Lister des étiquettes d'entités
+[source, cypher]
+----
+match (n)
+return distinc label(r);
+----
+
+.Lister des étiquettes d'associations
+[source, cypher]
+----
+match ()-[r]->()
+return distinc type(r);
+----
+
+ifdef::diapo[<<<]
+[WARNING]
+Neo4J est sensible à la case.
+Par exemple, l'étiquette d'une entité `:Film` n'est pas équivalente à `:film`.
+
+ifdef::diapo[<<<]
+== Manipulation des objets
+
+Pour créer, mettre à jour ou supprimer des objets dans le graphe.
+
+.Création d'une entité
+[source, cypher]
+----
+create (n:Label)
+----
+
+.Création d'une entité avec une propriété
+[source, cypher]
+----
+create (n:Label  {nom: valeur})
+----
+
+ifdef::diapo[<<<]
+.Création d'une association
+[source, cypher]
+----
+create (n:Label)-[r:TYPE]->(m:Label)
+----
+
+.Création d'une association avec une propriété
+[source, cypher]
+----
+create (n:Label)-[r:TYPE {name : valeur}]->(m:Label)
+----
+
+ifdef::diapo[<<<]
+.Mise à jour d'une entité
+[source, cypher]
+----
+merge (n:Label  {nom: valeur})
+on create set
+  n.created = timestamp()
+on match set
+  n.counter = coalesce(n.counter, 0) + 1,
+  n.accessTime = timestamp()
+----
+
+ifdef::diapo[<<<]
+.Supprimer une (des) association(s)
+[source, cypher]
+----
+match (n:Label)-[r]->(m:Label)
+delete r
+----
+
+.Supprimer une entité et ses associations
+[source, cypher]
+----
+match (n:Label)
+where n.id = 123
+detach delete n
+----
+
+ifdef::diapo[<<<]
+[bibliography]
+== Références
+Neo4j documentation
+https://neo4j.com/docs
+
+Neo4j - Cypher Manual
+https://neo4j.com/docs/cypher-manual/
+
+Neo4j - Cypher Cheat sheet
+https://neo4j.com/docs/cypher-cheat-sheet/5/neo4j-enterprise/
+
+Neo4j - APOC Documentation
+https://neo4j.com/labs/apoc/4.3/installation/
+
+// ====================================== FIN =================================
+include::{rep_format}/RAPPORT_en-pied.adoc[]

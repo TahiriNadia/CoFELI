@@ -1,0 +1,33 @@
+== 2024
+
+Une année pour établir les bases.
+
+=== 2024-01
+Journal non tenu.
+
+=== 2024-02
+Journal non tenu.
+
+Harmonisation avec CoLOED:AsciiDOc.
+
+=== 2024-03
+
+Développement prévu :
+
+* PDII_INFO323
+* PDII-P1
+* MCED_Base (IFT187, INFO221, etc.)
+
+=== 2024-04
+
+.Question pour CK et NT
+* Commentaires sur les conventions AsciiDoc
+  - dimension des diapositives
+  - usage du glossaire (Scriptorum/doc/_glo)
+  - usage des références (Scriptorum/doc/_ref)
+  - usage des images (Scriptorum/doc/_ima) et leurs formats (svg, png, jpg)
+  - ...
+* Commentaires sur les conventions mathématiques de AsciiDoc
+  - Voir différents essais dans CoFELI:Scriptorum/MCED/TMR_02-Theorie_relationnelle.adoc
+* Commentaires sur la structure des entrepôts et dépôts
+

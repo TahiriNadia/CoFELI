@@ -1,0 +1,3 @@
+algorithme::
+Suite finie de règles et d’opérations élémentaires sur un nombre fini de données
+qui permet de résoudre une classe de problèmes. Voir également _programme_.

@@ -1,0 +1,146 @@
+// Signature du document
+:sigle: MCED_SGBD_04
+:titre: Système de gestion de bases de données
+:sous_titre: Stratégies, techniques et outils de gestion des versions
+:organisation: CoFELI
+:entrepot: CoFELI
+:depot: Scriptorum
+:branche: v101
+:keywords: système de gestion de bases de données, développement, évolution, exploitation, essais, gestion des versions
+:revnumber: 0.1.0.b
+:revdate: 2024-04-01
+:version-label: document de travail, ne pas citer
+// :author: Christina KHNAISSER
+// :email: christina.khnaisser@usherbrooke.ca
+:author: Luc LAVOIE
+:email: luc.lavoie@usherbrooke.ca
+
+// Contexte de support du document
+include::../../../../rep_CoLOED_AsciiDoc.adoc[]
+:rep_Scriptorum: {rep_racine}/CoFELI/Scriptorum
+
+// Document bimodal PDF (texte, diaporama) et HTML5 (hypertexte).
+// Les attributs format_DIAPO, format_TEXTE et format_HYPER
+// permettent de particulariser le document au besoin.
+
+ifndef::format_effectif[:format_effectif: RAPPORT]
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-tete.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-tete.adoc[]]
+
+ifndef::format_DIAPO[]
+<<<
+include::{rep_format}/SOMMAIRE.adoc[]
+Introduction aux stratégies, techniques et outils de gestion des versions
+des systèmes de gestion de bases données.
+
+include::{rep_format}/MISE_EN_GARDE.adoc[]
+Le présent document est en cours d’élaboration ;
+en conséquence, il est incomplet et peut contenir des erreurs.
+
+include::{rep_format}/HISTO_debut.adoc[]
+
+| 2024-04-01
+| LL
+| Ébauche initiale selon les formats contenus dans CoLOED:AsciiDoc.
+
+include::{rep_format}/HISTO_fin.adoc[]
+endif::format_DIAPO[]
+
+<<<
+toc::[]
+
+// Corps du document
+<<<
+[introduction]
+== Introduction
+
+Stratégies, techniques et outils de gestion des versions de bases de données
+
+* Problématique
+* Solutions par différenciation incrémentale
+* Solutions par différentiation terminale
+
+Fréquemment le développement de DB est assimilé à celui des logiciels
+(services et applications) en général.
+Les contraintes particulières liées
+
+* à la rémanence des données (le fameux «D» des propriétés ACID),
+* à l’impact de tout changement apporté au modèle sur un nombre parfois
+  considérable de logiciels (par ailleurs souvent non identifiés),
+* au maintien du service en cours d’évolution
+  (ou, à défaut, de la minimisation du temps hors service)
+
+Le présent document met donc l’accent sur la gestion des versions
+lors du développement évolutif (dont la maintenance) et l’exploitation.
+
+// L’inclusion suivante apour but de forcer le chargement des polices dans le
+// contexte des diaporamas (en raison d’une erreur dans le logiciel asciidoctor).
+// Est-elle encore requise ?
+ifdef::format_DIAPO[* aux bonnes pratiques apprises chez Μητις 😀]
+
+ifndef::format_DIAPO[]
+.Évolution du document
+Le présent document ...
+La première version du document a été établie sur les bases suivantes :
+
+* a ;
+* b ;
+* c.
+
+.Travail en cours ou projeté
+* Rédiger la section 1...
+* Rédiger la section 2...
+* Rédiger la section 3...
+
+.Contenu des sections
+* La section 1 présente...
+* La section 2 présente...
+* La section 3 présente...
+endif::format_DIAPO[]
+
+
+<<<
+== Section 1
+
+ifdef::format_DIAPO[<<<]
+== Section 2
+
+ifdef::format_DIAPO[<<<]
+== Section 3
+
+
+<<<
+[conclusion]
+== Conclusion
+
+Merci aux membres de CoLOED, CoFELI et Μητις 😀
+
+<<<
+[references]
+== Références
+PG::
+`[fr]` https://docs.postgresql.fr/16/index.html (2024-04-01) +
+`[en]` https://www.postgresql.org/docs/16/index.html (2024-04-01)
+
+<<<
+[glosssary]
+== Glossaire
+
+----
+Sources consultées en juin et juillet 2023
+
+* Antidote : Antidote 11 v4.2 (2023), voir https://www.antidote.info
+* Larousse : https://www.larousse.fr/dictionnaires/francais
+* Le Robert : https://dictionnaire.lerobert.com
+* Wikipédia : https://fr.wikipedia.org/wiki
+----
+
+include::{rep_Scriptorum}/doc/_glo/ACID.adoc[]
+include::{rep_Scriptorum}/doc/_glo/base_de_données.adoc[]
+include::{rep_Scriptorum}/doc/_glo/programme__f.adoc[]
+include::{rep_Scriptorum}/doc/_glo/SGBD.adoc[]
+include::{rep_Scriptorum}/doc/_glo/SGBDR.adoc[]
+include::{rep_Scriptorum}/doc/_glo/SQL.adoc[]
+
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-pied.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-pied.adoc[]]

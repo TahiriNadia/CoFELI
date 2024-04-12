@@ -1,0 +1,987 @@
+// Signature du document
+:sigle: TMR_02
+:titre: Modélisation, conception et exploitation de données
+:sous_titre: Théorie relationnelle
+:organisation: CoFELI
+:entrepot: CoFELI
+:depot: Scriptorum
+:branche: v100
+:keywords: bases de données, théorie relationnelle, modèles relationnels
+:revnumber: 0.1.4.c
+:revdate: 2024-04-05
+:version-label: document de travail, ne pas citer
+:author: Christina KHNAISSER
+:email: christina.khnaisser@usherbrooke.ca
+:author2: Luc LAVOIE
+:email2: luc.lavoie@usherbrooke.ca
+
+// Contexte de support du document
+include::../../../../rep_CoLOED_AsciiDoc.adoc[]
+:rep_Scriptorum: {rep_racine}/CoFELI/Scriptorum
+
+// Document bimodal PDF (texte, diaporama) et HTML5 (hypertexte).
+// Les attributs format_DIAPO, format_TEXTE et format_HYPER
+// permettent de particulariser le document au besoin.
+
+ifndef::format_effectif[:format_effectif: RAPPORT]
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-tete.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-tete.adoc[]]
+
+ifndef::format_DIAPO[]
+<<<
+include::{rep_format}/SOMMAIRE.adoc[]
+Le présent module a été rédigé dans le cadre de l’exploration du thème
+« Modélisation, conception et exploitation de données » (MCED)
+par des membres du CoFELI.
+Le module présente l’essentiel de la théorie relationnelle et en fixe la notation
+pour les autres modules du thème.
+Il découle en partie des travaux entrepris au sein des groupes de recherche Μητις et GRIIS.
+Il correspond à des connaissances usuellement couvertes au sein du B. Sc. nord-américain,
+de la licence ou du mastère européen et de certaines écoles d’ingénieur.
+Ce module est destiné aux personnes étudiant les disciplines de l’informatique,
+de l’informatique appliquée et du génie logiciel.
+Nous espérons toutefois qu’il pourra être utile à toute personne curieuse
+d’apprivoiser ce champ de connaissance.
+
+include::{rep_format}/MISE_EN_GARDE.adoc[]
+Le présent document est en cours d’élaboration ;
+en conséquence, il est incomplet et peut contenir des erreurs.
+
+include::{rep_format}/HISTO_debut.adoc[]
+
+| 2023-10-01
+| LL
+| Adaptation au cadre du CoFELI.
+
+| 2023-09-07
+| LL
+| Intégration au CoFELI et encodage à l’aide d’Asciidoc.
+
+| 2023-09-06
+| LL
+| Ajout des critères de réfutabilité et d’éthique. Correction de coquilles.
+
+| 2023-01-11
+| LL
+| Corrections stylistiques.
+
+| 2023-01-10
+| LL
+| Corrections stylistiques - présentation des opérateurs d’agrégation.
+
+| 2022-01-10
+| LL
+| Ajout de la base et de son constructeur.
+
+| 2021-10-24
+| LL
+| Harmonisation avec la présentation BD010 préparée pour Douala.
+
+| 2021-03-19
+| LL
+| Introduction des dénominations « type primitif » et « sous-type » ;
+  distinction de l’union disjointe et de la réunion (ou somme) disjointe.
+
+| 2021-01-26
+| LL
+| Systématisation de la présentation, correction de coquilles, éclaircissements divers,
+  introduction des traductions SQL des opérateurs de base.
+
+| 2020-09-20
+| LL
+| Début de présentation de la notation relative aux couples et aux ensembles
+
+| 2019-07-25
+| LL
+| Correction des coquilles signalées par Maxime Routhier.
+
+| 2019-06-23
+| LL
+| Correction de coquilles.
+
+| 2019-05-01
+| LL
+| Récupération de notes diverses.
+
+include::{rep_format}/HISTO_fin.adoc[]
+
+endif::format_DIAPO[]
+
+<<<
+toc::[]
+
+// Corps du document
+<<<
+[introduction]
+== Introduction
+
+// Objet et portée du document
+Le présent document a pour but de présenter une synthèse de la théorie relationnelle
+proposée par Edgar F. Codd et développée par la suite avec les contributions,
+notamment, de Christopher J. Date, Raymond F. Boyce, Nikos A. Lorentzos et Jeffrey D. Ullman.
+
+La présentation repose sur des bases minimales :
+
+* la logique du premier ordre,
+* la théorie des ensembles,
+* l’arithmétique,
+* les langages rationnels.
+
+// L’inclusion suivante apour but de forcer le chargement des polices dans le
+// contexte des diaporamas (en raison d’une erreur dans le logiciel asciidoctor).
+// Est-elle encore requise ?
+ifdef::format_DIAPO[* un séjour chez Μητις 😀]
+
+ifndef::format_DIAPO[]
+.Évolution du document
+Le présent document tire son origine de l’expérience d’enseignement des auteurs.
+Cette présentation n’a cessé d’évoluer depuis grâce aux étudiants et auxiliaires
+d’enseignement qui ont participé aux cours depuis.
+La rédaction du document a commencé en aout 2012.
+La première version du document a été établie sur les bases suivantes :
+
+* le matériel pédagogique développé par l’auteur dans le cadre de formations relatives
+  aux bases de données assurées entre 1983 et 2022 au Québec, en France, en Tunisie,
+  en Suisse, au Maroc, au Liban et au Cameroun ;
+* des échanges avec de nombreux étudiants et collaborateurs, plus particulièrement
+  Zouhir Abouddaoui, Samuel Dussault, Marc Frappier, Aurélie Ottavi et Maxime Routhier ;
+* les différents travaux publiés par Codd, Darwen, Date, Delobel, Elmasri, Lorentzos,
+  Navathe, Snodgrass et Ullman.
+
+.Travail en cours ou projeté
+* Rédiger la section 2 à partir des présentations BD010 et TMR_01 développés à
+  l’Université de Sherbrooke.
+* Compléter la partie des opérateurs relatifs aux intervalles de la section 3.
+* Compléter les exemples et exercices de la section 3.
+* Rédiger les sections 4, 5 et 6.
+* Ajouter une section portant spécifiquement sur les noyaux de l’algèbre relationnelle.
+* Faire les tableaux d’équivalence Discipulus – TD – SQL.
+
+.Contenu des sections
+* La section 2 présente l’essence de la théorie relationnelle et le modèle qui
+  sera utilisé tout au long de la présentation.
+* La section 3 présente les opérateurs relationnels tant élémentaires que dérivés
+  et composites.
+* La section 4 explicite le lien entre la théorie relationnelle et la logique du premier ordre
+  en développant les correspondances entre relation et prédicat, tuple et proposition.
+* La section 5 intègre le constructeur de type intervalle, les opérateurs de Allen
+  et les opérateurs relationnels qui en tirent parti (tels que proposés par
+  Darwen, Date et Lorentzos).
+* La section 6 présente et compare un sous-ensemble minimal de trois langages de
+  programmation relationnels.
+endif::format_DIAPO[]
+
+<<<
+== Présentation
+La logique et la déduction rationnelle sont les outils privilégiés par la science
+pour encadrer notre perception du monde, le penser et l’expliquer.
+Thalès, Pythagore, Platon, Aristote, Archimède, Pappus, Descartes, Tarski,
+Russell, Whitehead, Wittgenstein, Gödel et Turing sont quelques-uns des penseurs
+qui ont contribué à développer notre compréhension de ces outils et à définir
+ce que sont une théorie, un modèle et un système axiomatique.
+
+Plus récemment, Floyd, Codd, Hoare, Dijkstra, Gries, Date, Ullman et d’autres,
+ont contribué à rendre effectivement calculable un sous-ensemble significatif
+des propriétés des systèmes construits sur les bases établies par leurs prédécesseurs.
+ifdef::format_DIAPO[ ]
+Ces contributions sont presque entièrement intégrées dans la théorie, les modèles
+et les systèmes relationnels que nous décrirons ici et qui sont le fondement des systèmes
+de gestion de bases de données (SGBD) les plus performants développés à ce jour,
+à savoir les SGBD relationnels (SGBDR).
+
+ifdef::format_DIAPO[<<<]
+=== L’intuition à l’origine de la théorie relationnelle
+
+* Le point de départ : un fait ≡ une proposition ≡ un tuple.
+* Des opérations : la logique aristotélicienne bivaluée (dite logique classique).
+* Une généralisation : une catégorie ≡ un prédicat ≡ une relation.
+* Des opérations : la théorie des ensembles.
+* Une limite source de puissance : une vision encapsulée dans un monde fermé.
+* L’informatisation (automatisation du calcul).
+* Von Neuman, la dualité donnée-calcul et son corolaire :
+  la relation est représentable tant par un ensemble de tuples (données) que
+  par une expression (calcul).
+
+ifndef::format_DIAPO[]
+// À mettre aussi dans les notes du présentateur… un jour.
+* Une intuition : permettre les deux façons d’exprimer la relation et
+  laisser l’engin choisir la représentation ; justification de la dualité
+  relation « matérialisée » et relation « virtuelle ».
+endif::format_DIAPO[]
+
+* Coupler la théorie relationnelle à la théorie des types.
+
+ifndef::format_DIAPO[]
+// À mettre aussi dans les notes du présentateur… un jour.
+* Les outils : le générateur de type de relation, le type de relation,
+  la relation, la variable de relation et la fonction de relation.
+endif::format_DIAPO[]
+
+ifdef::format_DIAPO[<<<]
+[TIP]
+====
+.Retour sur la modélisation de la réalité
+Qu’est-ce qui se cache derrière l’approche tri-schématique et ses niveaux :
+
+* conceptuel : modèle déduit du problème et pertinent à l’expression de la
+  solution ;
+* logique : modèle inféré du précédent à l’aide d’un méta-modèle (relationnel)
+  apte à garantir l’intégrité des données et des opérations qui leur sont
+  appliquées tout en permettant leur interprétation sous la forme de propositions
+  logiques ;
+* physique : organisation matérielle des données sur un support physique de
+  façon à optimiser les performances des opérations ; idéalement,
+  cette organisation doit pouvoir être inférée du modèle logique.
+====
+
+ifdef::format_DIAPO[<<<]
+=== Modélisation logique ou conceptuelle ?
+Traditionnellement, les applications sont construites sur la base du modèle logique.
+ifdef::format_DIAPO[ ]
+Certains préfèreraient les construire sur la base du modèle conceptuel.
+ifdef::format_DIAPO[ ]
+Il semble plutôt que le point de départ devrait être le modèle de connaissances
+permettant de déterminer directement le modèle logique ;
+le modèle conceptuel étant plutôt un outil de communication utilisé par
+l’informaticien pour vulgariser le modèle de connaissance aux fins de validation
+du modèle logique.
+
+ifdef::format_DIAPO[<<<]
+=== Pourquoi le modèle relationnel ?
+Pour sa capacité à fonder formellement
+
+* la description automatisable du calcul du raisonnement et
+* plusieurs des critères d’adéquation d’une solution en regard d’au problème.
+
+ifdef::format_DIAPO[<<<]
+.Équivalence avec la logique du premier ordre
+* nécessitant l’équivalence des « faits » (proposition, variable, prédicat) ;
+* nécessitant l’équivalence des opérateurs (relationnels et logiques) ;
+* nécessitant l’égalité ;
+* utilisant la notion d’ensemble ;
+* utilisant des attributs dénotationnels plutôt que positionnels ;
+* soutenant une algèbre complète au sens de Turing.
+
+ifdef::format_DIAPO[<<<]
+.Adéquation
+* valide – est conforme au modèle ;
+* efficace – est conforme aux attentes (besoins, exigences…) ;
+* cohérent – ne comporte pas de contradiction ;
+* évolutif – peut « aisément » être adapté aux changements ;
+* efficient – utilise « bien » les ressources ;
+* complet – offre une couverture « suffisante » du problème ;
+* réfutable – apte à permettre la validation et, corolairement, l’invalidation ;
+* éthique – conforme aux principes et règles de conduite d’une société humaine de référence.
+
+ifdef::format_DIAPO[<<<]
+== Structure relationnelle
+La théorie relationnelle peut être construite sur la seule base de la logique
+du premier ordre et de la théorie des ensembles.
+ifdef::format_DIAPO[ ]
+En pratique, il faut aussi ajouter un modèle de typage.
+ifdef::format_DIAPO[ ]
+Finalement, il est également utile d’y ajouter l’arithmétique et les langages rationnels
+afin de rendre compte de certaines propriétés fondamentales et d’intégrer
+les nombres et les textes aux types primitifs.
+
+ifdef::format_DIAPO[<<<]
+=== Logique
+Nous utiliserons les opérateurs suivants pour les expressions logiques
+(adaptation libre de https://fr.wikipedia.org/wiki/Portail:Logique,
+consulté les 2021-10-24 et 2024-04-07) :
+
+ifdef::format_DIAPO[<<<]
+[%unbreakable]
+--
+.Opérateurs de la logique du premier ordre
+[%autowidth]
+|===
+|Symbole |Spécification
+
+| ¬ A   | Négation de A. Non A.
+| A ∧ B | Conjonction. A et B.
+| A ∨ B | Disjonction (inclusive). A ou B.
+| A ⇒ B | Implication. Si A alors B.
+| A ⇔ B | Équivalence. A est équivalent à B ; on dit aussi : A si et seulement si B.
+| Γ ⊢ A | Déduction. De l’ensemble de formules Γ on déduit A.
+| M ⊩ A | Réalisabilité. M réalise A, on dit aussi que M « force » A.
+| M ⊨ A | Modélisation. M est un modèle de A ; on dit aussi A est vraie dans M.
+| ⊢ A   | Théorème. Notion syntaxique.
+| ⊨ A   | Tautologie. Notion sémantique.
+
+|===
+--
+
+ifdef::format_DIAPO[<<<]
+=== Ensemble
+Dans le cadre de la théorie relationnelle, les éléments d’un ensemble sont toujours
+contraints par un type associé à l’ensemble lui-même – ce type est désigné comme
+le « type de référence » de l’ensemble et noté
+[.Math]#typeref(e)# où [.Math]#e# est un ensemble.
+
+Cette association peut être explicite (par voie de déclaration) ou déduite
+grâce au contexte.
+
+ifdef::avec_annotations[////]
+////
+[%hardbreaks.maroon]
+TODO 2022-10-01 (LL01) : distinction générale entre valeur et dénotation
+  Il y a ici confusion entre le type de référence et l’ensemble de référence.
+  À tout type est associé un ensemble de valeurs, le type lui-même est une dénotation
+  d’un ensemble de valeurs. Bref, ne faudrait-il pas deux fonctions, l’une pour
+  l’identifiant du type et l’autre pour l’ensemble de valeurs du type ?
+  Je n’arrive pas à résoudre la circularité entre ensemble et type.
+    * Opérer le détour suivant : ensemble, type, ensemble typé ?
+    * Ou encore : type scalaire, type non scalaire, type structuré
+      (donc possédant une structure ET donnant accès à celle-ci) ?
+  Les types structurés minimaux de la TR (tuple, relation, base) utilisent
+  un même « mécanisme d’accès », une liste d’identifiants comprise dans la
+  définition du type (effectif).
+  Certains pourraient utiliser un type ordinal (en bijection avec un intervalle
+  d’entiers non négatifs), comme le tableau. Etc.
+ifdef::avec_annotations[////]
+////
+
+ifdef::format_DIAPO[<<<]
+==== Cas général
+
+Les ensembles sont simples, ils ne possèdent qu’un constructeur et une propriété.
+ifdef::format_DIAPO[ ]
+Le nombre d’opérateurs est toutefois considérables.
+ifdef::format_DIAPO[ ]
+Nous n’en présenterons que quelques-uns.
+
+ifdef::format_DIAPO[<<<]
+.Dénotation des valeurs et propriétés
+--
+{}::
+  l’ensemble vide.
+{ z }::
+  l’ensemble comprenant une seule valeur dénotée par l’expression z +
+  (synonyme : singleton).
+{ z~1~, z~2~, …,  z~n~ }::
+  l’ensemble comprenant les seules valeurs dénotées par les expressions z~i~. +
+  [.small]#Le point-virgule « ; » peut être utilisé indifféremment en
+  lieu et place de la virgule « , ».#
+# e::
+  la cardinalité de l’ensemble e.
+--
+
+ifdef::format_DIAPO[<<<]
+.Opérateurs usuels
+--
+a = b::
+  égalité de a et b.
+a ≠ b::
+  inégalité de a et b.
+z ∈ e::
+  appartenance (d’un élément z à un ensemble e)
+z ∉ e::
+  non-appartenance (d’un élément z à un ensemble e)
+e ∋ z::
+  appartenance (d’un élément z à un ensemble e)
+e ∌ z::
+  non-appartenance (d’un élément x à un ensemble e)
+e~1~ ⊂ e~2~::
+  e~1~ est un sous-ensemble strict de e~2~
+e~1~ ⊃ e~2~::
+  e~2~ est un sous-ensemble strict de e~1~
+e~1~ ⊄ e~2~::
+  e~1~ n’est pas un sous-ensemble strict de e~2~
+e~1~ ⊅ e~2~::
+  e~2~ n’est pas un sous-ensemble strict de e~1~
+e~1~ ⊆ e~2~::
+  e~1~ est un sous-ensemble de e~2~
+e~1~ ⊇ e~2~::
+  e~2~ est un sous-ensemble de e~1~
+e~1~ − e~2~::
+  la différence de e~2~ moins e~1~
+e~1~ ∪ e~2~::
+  l’union de e~1~ et e~2~
+e~1~ ∩ e~2~::
+  l’intersection de e~1~ et e~2~
+e~1~ × e~2~::
+  le produit cartésien de e~2~
+--
+
+////
+.Opérateurs moins usuels
+* ⩁ ⨃ ⨄ ⩂ ⩀ ⩃
+////
+
+ifdef::format_DIAPO[<<<]
+.Raccourcis
+Dans la mesure où tous les ensembles ont un type de référence, l’opérateur « \ »
+permet de calculer le complément d’un sous-ensemble par rapport à son type de référence.
+
+\ e ≜ typeref(e) – e::
+  où [.Math]#e# est une expression dont la valeur est un ensemble typé.
+
+_Note_ :
+en Tutorial D, cet opérateur n’est utilisable que dans un contexte de
+dénotation explicite des valeurs, ainsi [.TutorialD]#{ALL BUT e~1~, …, e~n~}#
+dénote [.Math]#\{ e~1~, …, e~n~ }#.
+ifdef::format_DIAPO[ ]
+On aurait souhaité, la syntaxe plus générale suivante [.TutorialD]#ALL BUT exp#,
+où [.TutorialD]#exp# dénote toute expression ensembliste typée.
+ifdef::format_DIAPO[ ]
+En Discipulus, la syntaxe générale est utilisée et les expressions d’ensemble
+(en particulier d’ensembles d’identifiants d’attributs) sont dénotables.
+
+ifdef::format_DIAPO[<<<]
+==== Couple
+Le couple, aussi appelé la paire, est la formation d’une nouvelle entité (ou élément)
+à partir de deux autres.
+ifdef::format_DIAPO[ ]
+Il serait possible de reformuler le couple en termes d’ensemble,
+son utilisation au titre de construction propre relève donc uniquement de la commodité.
+
+ifdef::format_DIAPO[<<<]
+.Dénotation des valeurs et propriétés
+--
+(x ; y)::
+  pour x et y des expressions dénotant des valeurs appropriées.
+--
+
+_Note_ :
+la virgule « , » est souvent utilisée en lieu et place du point-virgule « ; »
+lorsqu’elle n’entraine pas d’ambigüité (e.a. en présence de nombres rationnels
+représentés en notation fractionnaire décimale).
+
+ifdef::format_DIAPO[<<<]
+.Opérateurs usuels
+--
+@1(x ; y) = x::
+  l’élément gauche du couple ;
+@2(x ; y) = y::
+  l’élément droit du couple.
+--
+
+ifdef::format_DIAPO[<<<]
+=== Type
+Si la théorie relationnelle peut s’accommoder de plusieurs modèles de typage,
+certaines exigences doivent être respectées.
+ifdef::format_DIAPO[ ]
+Malheureusement, il n’y a pas de consensus relativement à ces exigences
+(notamment, celles du comité ISO 9075 diffèrent de celles énoncées par Codd et
+développées par Date et Darwen).
+ifdef::format_DIAPO[ ]
+Nous nous en tiendrons donc ici à un modèle de typage très simple,
+également acceptable en regard des jeux d’exigences les plus courants.
+
+Une donnée est une valeur associée à deux représentations
+(l’une interne, apte à être traitée par ordinateur ;
+l’autre externe, apte à être utilisée au sein d’un langage formel).
+
+ifndef::format_DIAPO[]
+[TIP]
+====
+Un langage formel apte à être traité « commodément » par un ordinateur.
+😀
+====
+endif::format_DIAPO[]
+
+ifdef::format_DIAPO[<<<]
+Une représentation est une suite de signaux (un signal est un phénomène physique
+mesurable, donc suffisamment stable pour être mesuré).
+
+Dans le cadre de la théorie minimaliste de typage utilisée dans le présent document,
+un type est soit un type de base, soit un sous-type.
+
+Un type de base (appelé aussi type racine ou domaine) est un ensemble fini de valeurs propres
+(c’est-à-dire que les valeurs d’un type de base n’appartiennent à aucun autre type de base).
+Une valeur est donc un élément d’un type de base.
+
+Un sous-type (appelé aussi type dérivé) est un sous-ensemble d’un type,
+sous-ensemble déterminé par une contrainte explicite
+(qui restreint les valeurs acceptées dans le sous-ensemble).
+
+ifdef::format_DIAPO[<<<]
+[TIP]
+====
+La finitude des types suscite encore de nombreux débats.
+ifdef::format_DIAPO[ ]
+À telle enseigne que Date lui-même l’a retiré de sa définition depuis 2016,
+moins par conviction selon nous, mais plutôt pour éviter un débat peu productif.
+ifdef::format_DIAPO[ ]
+N’ayant pas sa notoriété ni son influence, nous pouvons nous permettre de la maintenir,
+et de l’utiliser, dans le présent document.
+ifdef::format_DIAPO[ ]
+S’il est vrai que la structure mathématique,
+et plus particulièrement algébrique du modèle relationnel, ne repose pas sur la finitude
+des types, son application pratique, elle, repose sur cette hypothèse - du moins,
+tant que nous ne bénéficierons pas de machine de calcul (ordinateur) dotée
+d’une mémoire infinie.
+😀
+====
+
+ifdef::format_DIAPO[<<<]
+=== Attribut
+Un attribut est un couple formé d’un identifiant a et d’un type D, noté a:D.
+ifdef::format_DIAPO[ ]
+Par abus de langage, lorsque le contexte le permet, il est usuel de désigner
+l’attribut par son seul identifiant ; ainsi peut-on écrire « l’attribut a ».
+
+[TIP]
+====
+C’est-à-dire que le contexte permet de déterminer de façon univoque et non ambigüe
+le type associé à l’identifiant au sein de l’attribut.
+====
+
+ifdef::format_DIAPO[<<<]
+[NOTE]
+====
+La mise en page des expressions formelles des trois prochaines sous-sections
+(tuple, relation, base) varie d’une sous-section à l’autre. C’est volontaire.
+Nous y expérimentons trois mécanismes différents mis à disposition par AsciiDoc
+pour ce faire.
+ifdef::format_DIAPO[ ]
+Nous désirons recueillir ainsi les commentaires de nos lecteurs, afin de choisir
+ce qui convient le mieux.
+Malheureusement, le résultat n’est pleinement appréciable qu’au format PDF.
+L’adaptation au format HTML5 ne sera réalisée que pour le type de mise en forme retenu.
+====
+
+ifdef::format_DIAPO[<<<]
+=== Tuple
+Un tuple, en tant qu’objet de la théorie relationnelle, est une
+« composition » d’attributs.
+ifdef::format_DIAPO[ ]
+En regard de la théorie des types, il s’agit d’un constructeur de type non scalaire
+applicable à un ensemble d’attributs.
+
+[%unbreakable]
+--
+Soit [.Math]#n# un entier naturel, +
+Soit [.Math]#n# identifiants *distincts* dénotés [.Math]#a~i~ | 1 ≤ i ≤ n#, +
+Soit [.Math]#n# types (pas nécessairement distincts) dénotés [.Math]#D~i~ | 1 ≤ i ≤ n#, +
+Soit [.Math]#n# valeurs (pas nécessairement distinctes) dénotées [.Math]#v~i~ | 1 ≤ i ≤ n#, +
+
+Si [.Math]#(1 ≤ i ≤ n) ⇒ (a~i~ ∈ D~i~)#, alors
+un tuple [.Math]#t# est défini comme suit :
+
+[width=90%, grid=none, frame=none, role=center, halign=center, valign=middle]
+|===
+| [.Math]#t ≜ ({a~i~:D~i~ \| 1 ≤ i ≤ n}; {(a~i~,v~i~) \| 1 ≤ i ≤ n})#
+|===
+
+ou, de façon équivalente, en extension :
+
+[width=90%, grid=none, frame=none, role=center]
+|===
+| [.Math]#t ≜ ({a~1~:D~1~, …, a~i~:D~i~, … , a~n~:D~n~}; {(a~1~,v~1~), …, (a~i~,v~i~), … (a~n~,v~n~)})#
+|===
+--
+
+[%unbreakable]
+--
+Sont également définis
+
+[width=90%, grid=none, frame=none, role=center]
+|===
+| [.Math]#deg(t) = n#                             | degré de t
+| [.Math]#id(t) = {a~i~ \| 1 ≤ i ≤ n}#            | ensemble des identifiants d’attributs de t
+| [.Math]#def(t) = {a~i~:D~i~ \| 1 ≤ i ≤ n}#      | entête de t
+| [.Math]#val(t) = {(a~i~,v~i~) \| 1 ≤ i ≤ n}#    | valeur de t
+| [.Math]#ANTE a ∊ id(t) : def(t, a) = D \| a:D ∊ def(t)#    | type de l’attribut a~i~ de t
+| [.Math]#ANTE a ∊ id(t) : val(t, a) = v \| (a,v) ∊ val(t)#  | valeur de l’attribut a~i~ de t
+|===
+--
+
+ifdef::format_DIAPO[<<<]
+.Observation
+Pourquoi autoriser [.Math]#deg(t) = 0# ?
+
+Le cas [.Math]#deg(t) = 0# correspond à un tuple remarquable [.Math]#({} ; {})#
+souvent désigné par l’identifiant [.Math]#t~0~#.
+
+.Exercice
+Expliquer pourquoi ce tuple est remarquable… et essentiel !
+
+ifdef::format_DIAPO[<<<]
+.Autres dénotations fréquentes
+Parmi les plus fréquentes :
+
+* dénotation des tuples fondée sur l’ordre d’énumération des attributs
+  (les identifiants d’attributs et leurs types étant déterminés par ailleurs) :
+  - [.Math]#<v~1~, v~2~,… , v~n~>#
+* dénotation des attributs au sein d’un tuple, [.Math]#val(t, a)# :
+  - [.Math]#t.a#
+  - [.Math]#a(t)#
+  - [.Math]#t(a)#
+  - [.Math]#a FROM t#
+
+ifdef::format_DIAPO[<<<]
+.Dénotation des constructeurs de types et de valeurs
+Il est important, en pratique et du point de vue du génie logiciel, de différencier
+syntaxiquement le constructeur de types du constructeur de valeurs, ce que Tutorial D
+ne fait pas de façon assez explicite, nous semble-t-il.
+
+Deux solutions sont généralement utilisées,
+
+* des mots-clés différents, par exemple [.CodeS]#TUPLE# et [.CodeS]#TUP# ;
+* un seul mot-clé ([.CodeS]#TUPLE#) mais des parenthèses différentes,
+  par exemple [.CodeS]#{}# et [.CodeS]#[]#.
+
+Discipulus a adopté cette dernière solution… pour le moment.
+Ainsi,
+
+* le type tuple sans attribut est-il dénoté par [.CodeS]#TUPLE {}# ;
+* et la (seule) valeur (possible) d’un tuple sans attribut
+  par [.CodeS]#TUPLE [{} ; {}]#.
+
+ifdef::format_DIAPO[<<<]
+=== Relation
+Une relation, en tant qu’objet de la théorie relationnelle, est un ensemble de tuples.
+ifdef::format_DIAPO[ ]
+En regard de la théorie des types, il s’agit d’un constructeur (de type non scalaire)
+applicable à un ensemble de tuples de même type.
+
+ifdef::format_DIAPO[<<<]
+Soit a~i~ des identifiants distincts, D~j~ des types et t~k~ des tuples, une relation R
+est définie comme suit :
+
+[.text-center]
+[.Math]#R ≜ ({a~1~:D~1~, …, a~i~:D~i~, …, a~n~:D~n~} ; {t~1~, …, t~k~, …, t~m~})#
+
+avec
+
+[.text-center]
+[.Math]#∀ 1 ≤ k ≤ card\(R) : def\(R)=def(t~k~)#
+
+où
+
+[%unbreakable]
+[width=90%, grid=none, frame=none, role=center]
+|===
+| [.Math]#deg\(R) = n#                          |le degré de R
+| [.Math]#card\(R) = m#                         |la cardinalité de R
+| [.Math]#id\(R) = {a~1~, …, a~i~,…, a~n~}#     |l’ensemble des identifiants d’attributs de R
+| [.Math]#val\(R) = {t~1~, …, t~k~, …, t~m~}#   |la valeur de R
+| [.Math]#def\(R) = {a~1~:D~1~, …, a~i~:D~i~, …, a~n~:D~n~}#     |l’entête de R
+| [.Math]#def(R, a~i~) = D~i~#                  |le type de l’attribut a~i~ de R
+|===
+
+ifdef::format_DIAPO[<<<]
+.Prédicat et relation
+Un prédicat peut être défini de deux façons et, corolairement, une relation aussi :
+
+* par énumération (l’ensemble de tous les énoncés vrais et eux seuls) ;
+* par compréhension (la caractérisation nécessaire et suffisante des relations
+  entre les variables).
+
+.Observation
+Pourquoi autoriser [.Math]#deg\(R) = 0# ?
+
+Le cas [.Math]#deg\(R) = 0# correspond à deux (valeurs de) relations remarquables :
+
+* [.Math]#({} ; {})#
+* [.Math]#({} ; t~0~)#
+
+Elles sont très importantes, comme le zéro et le un pour les entiers !
+
+.Exercice
+Expliquer pourquoi !
+
+ifdef::format_DIAPO[<<<]
+.Dénotation des constructeurs de types et de valeurs
+Il est important, en pratique et du point de vue du génie logiciel, de différencier
+syntaxiquement le constructeur de types du constructeur de valeurs, ce que Tutorial D
+ne fait pas de façon assez explicite, nous semble-t-il.
+
+Attendu la solution retenue par Discipulus (voir section précédente),
+les (deux seules) valeurs de relations sans attributs sont représentées par
+
+* [.CodeS]#RELATION [{} ; {}]# et
+* [.CodeS]#RELATION [{} ; {TUPLE [{} ; {}]}]#.
+
+Cela ne rappelle-t-il pas quelque chose aux Bourbakistes parmi vous ?
+
+////
+TODO 2024-04-01 (LL01) Revoir l’explication précédente, elle est vraiment obscure!
+////
+
+ifdef::format_DIAPO[<<<]
+=== Base
+Une base, en tant qu’objet de la théorie relationnelle, est une « composition »
+de relations.
+ifdef::format_DIAPO[ ]
+En regard de la théorie des types, il s’agit d’un constructeur (de type non scalaire)
+applicable à un ensemble de relations.
+
+ifdef::format_DIAPO[<<<]
+Soit v~i~ des identifiants distincts, D~i~ des types de relation et r~i~ des (valeurs de)
+relations, une base (banque) B est définie comme suit :
+
+[.text-center]
+[.Math]#B ≜ ({v~1~:D~1~, …, v~i~:D~i~, …, v~n~:D~n~} ; {r~1~, …, r~i~, …, r~n~})#
+
+avec
+
+[.text-center]
+[.Math]#∀ 1 ≤ i ≤ card(B) : def(B, v~i~)=def(r~i~)#
+
+où
+
+[%unbreakable]
+[width=90%, grid=none, frame=none, role=center]
+|===
+| [.Math]#deg(B) = n#                                        | degré de B
+| [.Math]#id(B) = {v~1~, …, v~i~, …, v~n~}#                  | ensemble des identifiants de B
+| [.Math]#val(B) = {r~1~, …, r~i~, …, r~n~}#                 | valeur de B
+| [.Math]#def(B) = {v~1~:D~1~, …, v~i~:D~i~, …, v~n~:D~n~}#  | entête de B
+| [.Math]#def(B, a~i~) = D~i~#                               | type de ai de B
+|===
+
+ifdef::format_DIAPO[<<<]
+== Opérateurs relationnels
+L’algèbre relationnelle est souvent présentée à l’aide de six opérateurs de base :
+
+ifdef::format_DIAPO[<<<]
+* *renommage*, [.Math]#R ρ a:b#, la relation comprenant tous les tuples formés
+  à partir d’un tuple de [.Math]#R# dont l’attribut de nom [.Math]#a# est remplacé
+  par un attribut de nom [.Math]#b# de même valeur, et rien d’autre ;
+* *restriction*, [.Math]#R σ c#, la relation comprenant tous les tuples de [.Math]#R#
+  satisfaisant la condition [.Math]#c#, et rien d’autre ;
+* *projection*, [.Math]#R π x#, la relation comprenant tous les tuples formés à partir
+  d’un tuple de R dont seuls les attributs dont le nom est parmi [.Math]#x# ont été conservés,
+  et rien d’autre ;
+* *jointure*, [.Math]#R ⋈ S#, la relation comprenant tous les tuples formés
+  des attributs d’un tuple de [.Math]#R# et de ceux d’un tuple de [.Math]#S#
+  dont les attributs de même nom sont de même valeur, et rien d’autre ;
+* *union*, [.Math]#R ∪ S#, la relation comprenant tous les tuples de [.Math]#R#
+  et tous les tuples de [.Math]#S#, et rien d’autre ;
+* *différence*, [.Math]#R – S#, la relation comprenant tous les tuples de [.Math]#R#
+  qui ne sont pas dans [.Math]#S#, et rien d’autre.
+
+ifndef::format_DIAPO[]
+.Note sur le renommage
+Le statut de l’opérateur de renommage est encore discuté au sein de la
+communauté scientifique.
+
+1. Il est possible de se passer de l’opérateur de renommage si on intègre une
+   structure de catalogue à la théorie relationnelle, puisque le renommage peut
+   alors être exprimé à l’aide des autres opérateurs relationnels appliqués aux
+   variables de relation appropriées du catalogue.
+2. L’opérateur de renommage découle d’un principe plus général, le principe de substitution.
+   En ce sens, il n’appartient pas à la théorie relationnelle en propre, mais à la
+   formalisation de toute algèbre.
+
+Toutefois, le prix à payer afin d’omettre l’opérateur de renommage est une
+complexification de la formalisation de la théorie et, corolairement,
+des modèles qui en découlent et donc des expressions relationnelles en
+regard de ceux-ci.
+Pour cela, il est usuel de le maintenir dans les opérateurs de base.
+
+Ceci n’empêche pas pour autant l’abandon du principe plus général.
+Une syntaxe spécifique, semblable à celle fréquemment utilisée en mathématique
+pour le même usage ([.Math]#soit x = exp : f(x)#), peut être définie.
+Cet opérateur est par exemple fréquemment présent dans les langages relationnels
+(par exemple, en SQL, [.SQL]#WITH …#).
+
+.Note sur la projection
+Le langage Tutorial D dénote la projection par la juxtaposition d’une
+(dénotation de) relation et d’une (dénotation de) liste d’attributs :
+
+[.TutorialD]#R {a~1~,…, a~n~}# ≡ [.Math]#R π {a~1~,…, a~n~}#
+
+Cet usage peut être vu comme analogue à la dénotation de la multiplication
+en arithmétique par juxtaposition des deux opérandes.
+Par souci de lisibilité, nous éviterons le plus souvent d’utiliser ce raccourci notionnel.
+
+.Note sur le produit cartésien
+Dans ses premières publications, Codd utilisait un ensemble d’opérateurs de base
+comprenant le produit cartésien plutôt que la jointure.
+Sachant que le produit cartésien est un cas particulier de la jointure et
+que la jointure peut être exprimée en combinant le produit cartésien et
+la restriction, les deux ensembles sont donc équivalents.
+Nous préférons la version présentée ici pour des raisons que nous exposerons bientôt.
+
+.Note sur l’algèbre minimale _A_
+On peut réduire l’ensemble des opérateurs de base (c’est-à-dire le noyau minimal)
+aux seuls opérateurs suivants : ⦉NAND⦊ et ⦉REMOVE⦊.
+La démonstration en est faite par Date et Darwen dans le 3^e^ manifeste.
+
+.Plan de la section
+Les prochaines sous-sections présentent la définition formelle des opérateurs de base (3.1),
+puis la construction, à partir de ceux-ci, d’opérateurs usuels (3.2), spécialisés (3.3)
+et de regroupement (3.4).
+
+.Note de LL
+Les prochaines sections présentent un aperçu de la mise en correspondance entre
+les langages proprement relationnels et SQL, le lecteur trouvera un traitement
+plus complet dans [5].
+Une confusion certaine est encore manifeste dans la notation des langages relationnels.
+La notation de l’algèbre relationnelle est fluctuante selon les auteurs
+(ainsi Elmasri, Ullman, Date et Codd utilisent chacun des notations différentes).
+Il en est de même des langages relationnels, tels que
+Discipulus
+(langage en cours de définition au sein du groupe Μητις – ici composé en
+[.Discipulus]#STIX Two Text de couleur ocre#) et
+Tutorial D
+(langage défini par Date, mais toujours en évolution – ici composé en
+[.TutorialD]#Courier de couleur verte#).
+Quant à SQL
+(ici composé en [.SQL]#Droid Sans Mono de couleur pourpre#),
+nous nous référons à la syntaxe prescrite par la norme ISO/IEC 9075:2016
+(qu’aucun SGBD ne propose sans variation dialectale plus ou moins importante).
+endif::format_DIAPO[]
+
+ifdef::format_DIAPO[<<<]
+=== Opérateurs de base
+Définition relativement à la théorie des ensembles et à la représentation précédente
+(au modèle, à la structure).
+
+// À développerLes équivalences sont données…
+
+ifdef::format_DIAPO[<<<]
+==== Renommage
+[%unbreakable]
+--
+[%hardbreaks]
+Soit [.Math]#R# une relation,
+soit [.Math]#a# et [.Math]#b# deux identifiants :
+[.Discipulus]#R ρ a:b# ≡
+[.TutorialD]#R RENAME {a AS b}# ≡
+[.SQL]#select a~1~, …, a as b, …, a~n~ from R# ≡
+[.Math]#ANTE a ∈ id\(R) ⋀ b ∉ id\(R) :#
+[.Math]#  SOIT E := def(R,a) ; Z := def\(R) - {a:E} ∪ {b:E} :#
+[.Math]#    (Z ; {(Z ; val(t) - {(a,val(t,a))} ∪ {(b,val(t,a))}) | t ∈ val\(R)})#
+--
+
+.Corolaires
+* [.Math]#card\(R) = card(R ρ a:b)#
+* [.Math]#∀ t ∈ val\(R) : (Z ; val(t) - {(a,val(t,a))} ∪ {(b,val(t,a)) ∈ R ρ a:b#
+* [.Math]#a ∉ id(R ρ a:b) ⋀  b ∈ id(R ρ a:b)#
+* [.Math]#R = ((R ρ a:b) ρ b:a)#
+
+ifdef::format_DIAPO[<<<]
+==== Projection
+[%unbreakable]
+--
+[%hardbreaks]
+Soit [.Math]#w# une expression ayant pour valeur une liste d’identifiants d’attribut [.Math]#{w~0~,…, w~n~}# :
+[.Discipulus]#R π w# ≡
+[.TutorialD]#R {w~0~, …, w~n~}# ≡
+[.SQL]#select w~1~, …, w~n~ from R# ≡
+[.Math]#ANTE w ⊆ id\(R) :#
+[.Math]#  SOIT Z := {a:D | a ∈ id \(R) ⋀ a ∈ w} :#
+[.Math]#    (Z ; {(Z ; {(a,v) | (a,v) ∈ val(t) ⋀ a ∈ w}) | t ∈ val\(R)})#
+--
+
+.Remarque
+* En Tutorial D et en SQL, la liste doit être explicite.
+
+ifdef::format_DIAPO[<<<]
+==== Jointure
+[%unbreakable]
+--
+[%hardbreaks]
+Soit [.Math]#R# et [.Math]#S# deux relations :
+[.Discipulus]#R ⋈ S# ≡
+[.TutorialD]#R JOIN S# ≡
+[.SQL]#select * from R natural join S# ≡
+[.Math]#SOIT X := id\(R) ∩ id(S) :#
+[.Math]#  ANTE ∀ a ∈ X : a:D ∈ def\(R) ⋀ a:D ∈ def(S) :#
+[.Math]#    SOIT Z := def\(R) ∪ def(S) :#
+[.Math]#      (Z ; {(Z ; val(t1) ∪ val(t2)) |#
+[.Math]#        t1∈val\(R) ⋀ t2∈val(S) ⋀ (∀ a∈X : (a,v)∈val(t1) ⋀ (a,v)∈val(t2))})#
+--
+
+ifndef::format_DIAPO[]
+.Remarque
+* La jointure naturelle n’est pas commutative en SQL en raison de l’ordonnancement
+  des attributs dans un tuple, puisque le tuple y est défini comme une liste ordonnée
+  d’attributs et non comme un ensemble d’attributs.
+endif::format_DIAPO[]
+
+ifdef::format_DIAPO[<<<]
+==== Restriction
+[%unbreakable]
+--
+[%hardbreaks]
+Soit [.Math]#R# une relation,
+soit [.Math]#c#, une condition (expression booléenne),
+soit [.Math]#id(c)#, l’ensemble des identifiants d’attribut utilisés par [.Math]#c# :
+[.Discipulus]#R σ c# ≡
+[.TutorialD]#R WHERE c# ≡
+[.SQL]#select * from R where c# ≡
+[.Math]#ANTE id(c) ⊆ id\(R) :#
+[.Math]#  (def\(R) ; {t | t ∈ val\(R) ⋀ c(t)})#
+--
+
+ifdef::format_DIAPO[<<<]
+==== Union
+[%unbreakable]
+--
+[%hardbreaks]
+Soit [.Math]#R# et [.Math]#S# deux relations :
+[.Discipulus]#R ∪ S# ≡ +
+[.TutorialD]#R UNION S# ≡ +
+[.SQL]#select * from R union select * from S# ≡
+[.Math]#ANTE def\(R) = def(S) :#
+[.Math]#  (def\(R) ; val\(R) ∪ val(S))#
+
+.Remarque
+* L’antécédent doit être aménagé en cas de relaxation de la compatibilité.
+--
+
+ifdef::format_DIAPO[<<<]
+==== Différence
+[%unbreakable]
+--
+[%hardbreaks]
+Soit [.Math]#R# et [.Math]#S# deux relations :
+[.Discipulus]#R − S# ≡
+[.TutorialD]#R MINUS S# ≡
+[.SQL]#select * from R except select * from S# ≡ +
+[.Math]#ANTE def\(R) = def(S) :#
+[.Math]#  (def\(R) ; val\(R) − val(S))#
+
+.Remarque
+* L’antécédent doit être aménagé en cas de relaxation de la compatibilité.
+--
+
+ifdef::format_DIAPO[<<<]
+=== Opérateurs usuels
+
+*_!!! À retranscrire depuis le document d’Akademia !!!_*
+
+=== Opérateurs spécialisés
+
+*_!!! À retranscrire depuis le document d’Akademia !!!_*
+
+=== Opérateurs de regroupement
+
+*_!!! À retranscrire depuis le document d’Akademia !!!_*
+
+<<<
+[conclusion]
+== Conclusion
+
+Merci aux membres de CoLOED, CoFELI et Μητις 😀
+
+<<<
+[references]
+== Références
+PG::
+`[fr]` https://docs.postgresql.fr/16/index.html (2024-04-01) +
+`[en]` https://www.postgresql.org/docs/16/index.html (2024-04-01)
+
+<<<
+[glosssary]
+== Glossaire
+
+----
+Sources consultées en juin et juillet 2023
+
+* Antidote : Antidote Antidote 11 v4.2 (2023), voir https://www.antidote.info
+* Larousse : https://www.larousse.fr/dictionnaires/francais
+* Le Robert : https://dictionnaire.lerobert.com
+* Wikipédia : https://fr.wikipedia.org/wiki
+----
+
+include::{rep_Scriptorum}/doc/_glo/ACID.adoc[]
+
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-pied.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-pied.adoc[]]

@@ -1,0 +1,6 @@
+== Sous-répertoire _glo
+
+Définitions de termes spécialisés, à raison d’un fichier par définition.
+Chaque fichier doit être au format .adoc.
+La composition de la définition doit être uniforme et conforme au choix documenté
+dans le fichier _regula.adoc.

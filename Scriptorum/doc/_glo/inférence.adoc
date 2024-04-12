@@ -1,0 +1,42 @@
+inférence::
+Opération logique qui consiste à admettre une vérité en vertu de sa liaison avec
+d’autres vérités déjà admises.
+
+inférence abductive::
+Raisonnement par lequel la vraisemblance d’une hypothèse est augmentée par l’ajout de nouveaux faits
+(syn.: raisonnement abductif, raisonnement par abduction logique).
+
+inférence déductive::
+Raisonnement mettant en rapport plusieurs propositions pour aboutir à une conclusion logique
+(syn.: raisonnement déductif, raisonnement par déduction logique).
+
+inférence inductive::
+Raisonnement par lequel on tire des règles générales à partir de faits particuliers
+(syn.: raisonnement inductif, raisonnement par induction logique).
+
+moteur d’inférence::
+Informatique – Dans un système expert, logiciel qui interprète des données
+(généralement organisées selon un modèle logique ou un modèle de connaissances) et
+leur applique des méthodes de raisonnement en vue de la résolution d’un problème posé.
+
+règle d’inférence::
+Dans une théorie déductive, chacune des règles permettant de conclure à la vérité
+d’une proposition à partir d’autres propositions prises comme hypothèses.
+
+raisonnement abductif::
+Voir inférence abductive.
+
+raisonnement déductif::
+Voir inférence déductive.
+
+raisonnement inductif::
+Voir inférence inductive.
+
+raisonnement par abduction logique::
+Voir inférence abductive.
+
+raisonnement par déduction logique::
+Voir inférence déductive.
+
+raisonnement par induction logique::
+Voir inférence inductive.

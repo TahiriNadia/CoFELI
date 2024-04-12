@@ -1,0 +1,147 @@
+// Signature du document
+:sigle: MCED_SGBD_02
+:titre: Système de gestion de bases de données
+:sous_titre: Indexation
+:organisation: CoFELI
+:entrepot: CoFELI
+:depot: Scriptorum
+:branche: v100
+:keywords: système de gestion de bases de données, indexation, représensation interne, représentation externe, accès mémoire interne, accès mémoire externe, B-tree, B+-tree, B*-tree, adressage dispersé, hash coding, arborescence de recherche
+:revnumber: 1.0.0.a
+:revdate: 2023-11-01
+:version-label: document de travail, ne pas citer
+:author: Christina KHNAISSER
+:email: christina.khnaisser@usherbrooke.ca
+:author2: Luc LAVOIE
+:email2: luc.lavoie@usherbrooke.ca
+
+// Contexte de support du document
+include::../../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Document bimodal PDF (texte, diaporama) et HTML5 (hypertexte).
+// Les attributs format_DIAPO, format_TEXTE et format_HYPER
+// permettent de particulariser le document au besoin.
+
+ifndef::format_effectif[:format_effectif: RAPPORT]
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-tete.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-tete.adoc[]]
+
+ifndef::format_DIAPO[]
+<<<
+include::{rep_format}/SOMMAIRE.adoc[]
+Introduction aux techniques d’indexation au sein du thème «Système de gestion de bases de données»
+incluant une présentation de critères de caractérisation des index en regard de la théorie relationnelle.
+
+include::{rep_format}/MISE_EN_GARDE.adoc[]
+Le présent document est en cours d’élaboration ;
+en conséquence, il est incomplet et peut contenir des erreurs.
+
+include::{rep_format}/HISTO_debut.adoc[]
+
+| 2023-11-01
+| LL
+| Ébauche initiale.
+
+include::{rep_format}/HISTO_fin.adoc[]
+
+endif::format_DIAPO[]
+
+<<<
+toc::[]
+
+// Corps du document
+<<<
+[introduction]
+== Introduction
+
+<<<
+== Indexation
+
+=== Index de projection
+
+==== Index (clés, non clés)
+
+==== Index (ordonnés, non ordonnés)
+
+=== Index de restriction
+
+==== Index (ouverts, fermés)
+
+* fermés : les classes sont connues à l’avance (dont le nombre est typiquement bas)
+* ouverts : elles ne le sont pas (si ce n’est pas l’entremise d’un type à cardinalité élevée)
+
+Seuil entre bas et élevé ? Je propose 1024 !
+
+==== Index (ordonnés, non ordonnés)
+
+
+=== Selon Elmasri et Navathe
+* Index primaire (_primary index_) : index clé ordonné
+* Index secondaire (_secondary index_) : index clé non ordonné
+* Index de classification (_clustering index_) : index non clé (ordonnée ou non)
+
+ifdef::format_DIAPO[<<<]
+== Techniques d’indexation
+
+=== Arborescence de recherche
+
+* AVL
+* B-Tree
+* B+-Tree
+* B*-Tree
+
+=== Adressage dispersé
+
+* AD
+* AD avec liste ordonnée
+* Skiplist
+
+=== Autres
+
+* ?
+* ??
+
+ifdef::format_DIAPO[<<<]
+== Techniques d'optimisation
+
+=== Restriction
+
+=== Projection
+
+=== Jointure, produit cartésien et intersection
+
+=== Union et différence
+
+<<<
+[conclusion]
+== Conclusion
+
+<<<
+[glosssary]
+== Glossaire
+
+----
+Sources consultées en juin et juillet 2023
+
+* Antidote : Antidote 11 v4.2 (2023), voir https://www.antidote.info
+* Larousse : https://www.larousse.fr/dictionnaires/francais
+* Le Robert : https://dictionnaire.lerobert.com
+* Wikipédia : https://fr.wikipedia.org/wiki
+----
+
+ACID::
+Acronyme désignant conjointement les propriétés d’atomicité, de cohérence,
+d’isolation et rémanence (ou _durability_ en anglais).
+
+SGBD (Système de gestion de bases de données)::
+Système informatique permettant…
+
+SGBDR (Système de gestion de bases de données relationnelles)::
+Système informatique permettant…
+
+SQL _(Structure Query Language)_::
+Langage de programmation axiomatique fondé sur le modèle relationnel. +
+Norme applicable, ISO 9075:2016.
+
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-pied.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-pied.adoc[]]

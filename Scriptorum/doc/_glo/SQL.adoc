@@ -1,0 +1,4 @@
+SQL _(Structure Query Language)_::
+Langage de programmation axiomatique fondé sur un modèle inspiré de la théorie
+relationnelle proposée par E. F. Codd. +
+ [Normes applicables : ISO 9075:2016, ISO 9075:2023]

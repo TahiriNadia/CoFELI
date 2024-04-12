@@ -1,0 +1,475 @@
+// Signature du document
+:sigle: MCED_TMR_01
+:titre: Modélisation, conception et exploitation de données
+:sous_titre: Introduction
+:organisation: CoFELI
+:entrepot: CoFELI
+:depot: Scriptorum
+:branche: v100
+:keywords: bases de données, information, caractérisation, problème
+:revnumber: 1.0.0.a
+:revdate: 2023-10-01
+:version-label: document de travail, ne pas citer
+:author: Christina KHNAISSER
+:email: christina.khnaisser@usherbrooke.ca
+:author2: Luc LAVOIE
+:email2: luc.lavoie@usherbrooke.ca
+
+// Contexte de support du document
+include::../../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Document bimodal PDF (texte, diaporama) et HTML5 (hypertexte).
+// Les attributs format_DIAPO, format_TEXTE et format_HYPER
+// permettent de particulariser le document au besoin.
+
+ifndef::format_effectif[:format_effectif: RAPPORT]
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-tete.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-tete.adoc[]]
+
+ifndef::format_DIAPO[]
+<<<
+include::{rep_format}/SOMMAIRE.adoc[]
+Introduction générale au thème «Modélisation, conception et exploitation de données»
+incluant une présentation de critères de caractérisation des problèmes qui en découlent
+et des critères de sélection des solutions envisagées.
+
+include::{rep_format}/MISE_EN_GARDE.adoc[]
+Le présent document est en cours d’élaboration ;
+en conséquence, il est incomplet et peut contenir des erreurs.
+
+include::{rep_format}/HISTO_debut.adoc[]
+
+| 2023-10-01
+| LL
+| Adaptation au cadre du CoFELI.
+
+| 2023-08-20
+| LL
+| Première tentative d’intégration à Matawin.
+
+| 2023-07-24
+| LL
+| Ébauche initiale.
+
+include::{rep_format}/HISTO_fin.adoc[]
+
+endif::format_DIAPO[]
+
+<<<
+toc::[]
+
+<<<
+== L’information, les données et leur traitement
+
+L’informatique est la science du traitement automatique et rationnel de l’information.
+Son objet est donc l’information et son traitement.
+
+* Mais pourquoi rationnel ?
+* Pourquoi automatique ?
+* Pourquoi restreindre à l’intersection des deux (rationnel et automatique) ?
+
+// [.notes]
+ifndef::format_DIAPO[]
+Probablement parce qu’une des motivations sous-jacentes à l’étude de l’informatique
+est de pouvoir proposer des solutions adéquates à des problèmes nécessitant le
+traitement d’informations. Il est raisonnable de croire que cette motivation
+sera mieux servie par une approche scientifique (donc rationnelle). Par ailleurs,
+en limitant les traitements à ceux qui sont automatisables, on contraint les traitements
+à être décrits de façon explicite, détaillés, non ambigus.
+En outre, ces deux conditions (la rationalité et l’automatisabilité) faciliteront
+tantôt la définition arbitrable du concept d’adéquation, permettant ainsi de
+caractériser, d’évaluer et de comparer diverses solutions à un même problème.
+
+En contrepartie, ces deux conditions imposent que l’information soit tangible.
+En pratique, la seule information considérée sera celle qui est représentée sous
+la forme de données.
+
+Même si les données numériques (donc discrétisées) prennent une place
+prépondérante dans l’histoire de l’informatique et dans les technologies présentement
+utilisées, la « science informatique » ne s’y limite pas. Elle a d’ailleurs
+permis de développer dans le passé des théories, des modèles, des langages
+et des calculateurs analogiques. Qui sait si cette voie ne sera pas reprise un
+jour prochain ?
+endif::[]
+
+ifdef::format_DIAPO[<<<]
+=== Conséquences
+
+De la rationalité et de l’automatisabilité, découlent également certains fondements :
+
+* la logique,
+* la théorie des ensembles,
+* l’arithmétique.
+
+Du choix de représenter l’information à l’aide de données numériques découle
+d’autres fondements :
+
+* la théorie des automates (plus particulièrement, les automates à états finis),
+* la théorie des langages (premier chef, les langages rationnels).
+
+Par la suite, plusieurs disciplines et domaines de connaissances seront mis
+à contribution la nature de l’information à traiter.
+
+ifdef::format_DIAPO[<<<]
+== Principe d’adéquation
+
+Un traitement (un programme, une application, un service, une logithèque,
+un modèle de données, une base de données, etc.) est adéquat
+s’il répond aux sept propriétés suivantes :
+
+ifdef::format_DIAPO[<<<]
+.Propriétés absolues
+1. cohérence (en regard de la théorie)
+2. validité (en regard du modèle)
+3. efficacité (en regard du traitement)
+
+ifdef::format_DIAPO[<<<]
+.Propriétés relatives
+[start=4]
+4. complétude (subordonnée à la cohérence)
+5. efficience (subordonnée à la validité et l’efficacité)
+6. évolutivité (subordonnée à l’efficience)
+
+ifdef::format_DIAPO[<<<]
+.Méta-propriété
+[start=7]
+7. réfutabilité (aptitude à permettre la validation et, corolairement, l’invalidation)
+8. acceptabilité éthique (conforme aux règles de conduite propres à une société)
+
+
+ifdef::format_DIAPO[<<<]
+=== Propriétés des propriétés !
+
+Les propriétés absolues découlent (essentiellement ?) des exigences fonctionnelles.
+
+Les propriétés relatives découlent (principalement ?) des exigences non fonctionnelles.
+
+Les meta-propriétés découlent de l’épistémologie et de l’éthique.
+
+Les huit propriétés doivent être confirmées par
+
+* la preuve (si possible),
+* les tests (selon les moyens) et
+* la revue (dans tous les cas).
+
+// [.notes]
+ifndef::format_DIAPO[]
+L’inclusion de l’acceptabilité éthique porte parfois à débat.
+Elle semble toutefois difficilement contournable,
+tant en biologie qu’en informatique, étant donné
+le lien direct entre certaines de leurs sous-disciplines
+(biologie humaine, écologie, systèmes d’information, intelligence artificielle, etc.)
+et l’espèce humaine ainsi que l’impact potentiel sur ses individus.
+En fait, n’en serait-il pas de même pour la physique (nucléaire) et la chimie (pétrolière) ?
+Les mathématiques y échappent-elles parce que les statistiques en ont été séparées ?
+
+Bonne réflexion et bon débat !
+endif::[]
+
+ifdef::format_DIAPO[<<<]
+== Caractérisation d’un problème de traitement de données
+
+Pourquoi parler du problème ?
+
+* Parce qu’on veut parler de (trouver une) solution !
+
+  - Comment savoir si une solution a été trouvée... si elle n’a pas été caractérisée ?
+
+    *** Comment caractériser une solution, si le problème n’a pas lui-même été caractérisé ?
+
+Alors quand et comment caractériser un problème ?
+
+ifdef::format_DIAPO[<<<]
+=== Comment parler du problème ?
+
+La caractérisation du problème, puis des solutions relève du génie logiciel,
+plus particulièrement de l’ingénierie des exigences.
+
+Nous ne présenterons sommairement donc ici que deux méthodes applicable aux (modèles de) données :
+
+* L’approche descriptive des 7V
+* La hiérachisation des modèles
+
+ifdef::format_DIAPO[<<<]
+=== L’approche descriptive des 7V
+
+* volume +
+  (quantité de données devant être stockées)
+* variété +
+  (diversité et complexité des types utilisés par le modèle)
+* vélocité +
+  (caractérisation du débit de données entrantes et sortantes)
+* variabilité +
+  (relativité des données : temps, espace, agent)
+* valeur +
+  (richesse analytique des données, mais aussi valeur économique, politique, sociale ou sociétale)
+* virtualité +
+  (distribution des sources de données)
+* vertu +
+  (gouvernance des données)
+
+ifdef::format_DIAPO[<<<]
+=== La hiérarchisation des modèles
+
+Prenons le problème à l’envers
+
+* Modèle physique
+* Modèle logique
+* Modèle conceptuel
+* Modèle de connaissances
+
+Et reprenons maintenant le problème à l’endroit...
+
+ifdef::format_DIAPO[<<<]
+==== Modèle de connaissances
+
+* Le plus souvent informel (il est _dans la tête_ des experts et des parties prenantes).
+* Les ontologies appliquées ont connu de très beaux succès dans le domaine scientifique.
+* Il vaut toujours mieux un modèle (formel), même mauvais, que pas de modèle !
+
+[.notes]
+--
+À développer
+--
+
+ifdef::format_DIAPO[<<<]
+==== Modèle conceptuel (ou modèle d’information)
+
+* Celui-ci est fondé un modèle de connaissance et un contexte.
+* ...
+* Bien décrit, il permet la génération quasi-automatique et quasi-complète
+  d’un modèle logique.
+
+// [.notes]
+ifndef::format_DIAPO[]
+Quant à la génération quasi-automatique et quasi-complète, elle est avérée
+initialement dans plusieurs cas réels, mais simples. Par contre, le modèle
+conceptuel qui est issu est souvent difficile à faire évoluer, de moins en
+moins efficient au fil de l’évolution.
+
+Par ailleurs, une génération par des humains permet le plus souvent de
+faire une revue de qualité qui détectera souvent des incomplétudes,
+voir des incohérences dans le modèle conceptuel. Il n’est pas rare que cette
+revue soulève également des problèmes d’efficacité et d’éthique.
+endif::[]
+
+ifdef::format_DIAPO[<<<]
+[IMPORTANT]
+====
+Et le contexte ? On a pas parlé du contexte !
+
+Non ! On ne fera pas ici le cours d’IE (ingénierie des exigences)... mais
+vous ne perdez rien pour attendre !
+====
+
+ifdef::format_DIAPO[<<<]
+==== Modèle logique
+
+(ou modèle de données)
+
+* x
+* y
+
+////
+[.notes]
+--
+À développer
+--
+////
+
+ifdef::format_DIAPO[<<<]
+==== Modèle physique
+
+* x
+* y
+
+////
+[.notes]
+--
+À développer
+--
+////
+
+ifndef::format_DIAPO[]
+==== Hiérarchisation tri-schématique
+
+(ou modèle tri-schématique)
+
+À l'origine, trois niveaux seulement : physique, logique et conceptuel.
+
+Référence au DoD
+endif::[]
+
+ifdef::format_DIAPO[<<<]
+== Structure générale d’un système de gestion de bases de données
+
+=== Qu’est-ce qu’une base de données (BD) ?
+
+* multiples définitions possibles
+* il faut donc y revenir
+
+=== Qu’est-ce qu’un système de gestion (SG) ?
+
+* multiples définitions possibles
+* il faut donc y revenir
+
+ifdef::format_DIAPO[<<<]
+=== Qu’est-ce qu’un système de gestion de bases de données (SGBD) ?
+
+* Commençons par observer et décrire… comme si on était des scientifiques
+* On pourra ensuite adopter une ou plusieurs approches (méthodes)
+  - théorique
+  - constructiviste
+  - statistique
+  - …
+
+* Établir la différence entre une SGBD et un système d'information (SI)
+
+[%notitle]
+=== Représentation graphique d’un SGBD
+
+Le titre 4.4 ne devrait pas apparaitre dans le texte (pdf) ni l’hypetexte (html),
+en raison de sa préfixation par `[%notitle]`.
+Est-ce le cas ?
+
+ifdef::format_DIAPO[<<<]
+[glosssary]
+== Glossaire
+
+----
+Sources consultées en juin et juillet 2023
+
+* Antidote : Antidote Antidote 11 v4.2 (2023) https://www.antidote.info
+* Larousse : https://www.larousse.fr/dictionnaires/francais
+* Le Robert : https://dictionnaire.lerobert.com
+* Wikipédia : https://fr.wikipedia.org/wiki
+----
+
+ACID::
+Acronyme désignant conjointement les propriétés d’atomicité, de cohérence,
+d’isolation et rémanence (ou _durability_ en anglais).
+
+EA::
+Acronyme désignant les modèles conceptuels de données fondés sur la théorie entité-association.
+
+SGBDR (Système de gestion de bases de données relationnelles)::
+Système informatique permettant…
+
+SQL _(Structure Query Language)_::
+Langage de programmation axiomatique fondé sur le modèle relationnel. +
+Norme applicable, ISO 9075:2016.
+
+mécanique::
+Branche de la physique étudiant le mouvement et l’équilibre des corps
+ainsi que les forces qu’ils exercent les uns sur les autres.
+
+physique::
+Science qui a pour objet d’étudier les propriétés générales de la matière,
+de l’espace, du temps et d’établir les lois qui rendent compte des phénomènes
+matériels (tangibles ? réels ? mesurables ? observables ?).
+
+mathématiques::
+* Antidote :
+  Science étudiant par raisonnement déductif les concepts tels que les nombres,
+  les ensembles et les figures.
+* Larousse :
+  Science qui étudie par le moyen du raisonnement déductif les propriétés d’êtres abstraits
+  (nombres, figures géométriques, fonctions, espaces, etc.) ainsi que les relations
+  qui s’établissent entre eux.
+* Le Robert :
+  Ensemble des sciences qui ont pour objet la quantité et l’ordre.
+* Wikipedia :
+  Ensemble de connaissances abstraites résultant de raisonnements logiques appliqués
+  à des objets divers tels que les ensembles mathématiques, les nombres, les formes,
+  les structures, les transformations, etc. ; ainsi qu’aux relations et opérations
+  mathématiques qui existent entre ces objets.
+
+informatique::
+Science du traitement automatique et rationnel de l’information.
+* Informatique théorique : concerne la définition de concepts et modèles.
+* Informatique pratique : s’intéresse aux techniques concrètes de mise en oeuvre.
+* Informatique appliquée : s’intéresse à l’utilisation de l’informatique pour
+  la résolution de problèmes formulés en regard d’autres domaines
+  (que l’informatique).
+
+logique::
+* Antidote :
+  Science qui a pour objet l’étude des méthodes de raisonnement, de pensée,
+  par lesquelles on peut atteindre la vérité.
+* Larousse :
+  Science du raisonnement en lui-même, abstraction faite de la matière à laquelle
+  il s’applique et de tout processus psychologique.
+* Le Robert :
+  Étude scientifique, surtout formelle, des normes de la vérité.
+* Wikipedia :
+  Étude des règles formelles que doit respecter toute argumentation correcte.
+
+géométrie::
+Branche des mathématiques qui a pour objet d’étudier les relations entre points,
+droites, courbes, surfaces et volumes de l’espace.
+
+algèbre::
+Branche des mathématiques qui étudie les structures abstraites en employant
+les lois de composition.
+
+éthique::
+* Antidote :
+  1. Branche de la philosophie qui étudie les fondements des moeurs et de la morale.
+  2. Ensemble des règles de conduite propres à une société, à un groupe.
+* Larousse :
+  1. Partie de la philosophie qui envisage les fondements de la morale.
+  2. Ensemble des principes moraux qui sont à la base de la conduite de quelqu’un.
+* Le Robert :
+  1. Science de la morale.
+  2. Ensemble des conceptions morales de quelqu’un, d’un milieu.
+* Wikipedia :
+  1. Discipline philosophique portant sur les jugements moraux.
+  2. N. D.
+
+philosopie::
+* Antidote :
+  Ensemble des études, des recherches visant à réfléchir sur les êtres,
+  les causes premières et les valeurs humaines envisagées au niveau le plus général.
+* Larousse :
+  Ensemble de conceptions portant sur les principes des êtres et des choses,
+  sur le rôle de l’homme dans l’univers, sur Dieu, sur l’histoire et,
+  de façon générale, sur tous les grands problèmes de la métaphysique.
+* Le Robert :
+  Ensemble des questions que l’être humain peut se poser sur lui-même
+  et examen des réponses qu’il peut y apporter ; vision systématique et générale
+  (mais non scientifique) du monde.
+* Wikipedia :
+  1. Science des premiers principes et des premières causes.
+  2. Démarche de réflexion sur les savoirs à disposition.
+
+science::
+* Antidote :
+  Ensemble cohérent de connaissances relatives à des faits ou des phénomènes
+  obéissant à des lois et vérifiées par des méthodes expérimentales.
+* Larousse :
+  Ensemble cohérent de connaissances relatives à certaines catégories de faits,
+  d'objets ou de phénomènes obéissant à des lois et/ou vérifiés par les méthodes
+  expérimentales.
+* Le Robert :
+  Ensemble de connaissances, de travaux d'une valeur universelle,
+  ayant pour objet l'étude de faits et de relations vérifiables,
+  selon des méthodes déterminées (comme l'observation, l'expérience, ou
+  les hypothèses et la déduction).
+* Wikipedia :
+  xx
+
+épistémolgie::
+* Antidote :
+  Branche de la philosophie qui fait une étude critique des sciences
+  ayant pour objet de déterminer leur origine logique, leur valeur et leur portée.
+* Larousse :
+  Discipline qui prend la connaissance scientifique pour objet.
+* Le Robert :
+  Étude critique des sciences, destinée à déterminer leur origine logique,
+  leur valeur et leur portée (théorie de la connaissance).
+* Wikipedia :
+  Étude critique d’une science particulière, quant à son évolution, sa valeur,
+  et sa portée scientifique et philosophique
+
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-pied.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-pied.adoc[]]

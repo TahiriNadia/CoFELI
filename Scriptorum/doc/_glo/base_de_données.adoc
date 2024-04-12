@@ -1,0 +1,21 @@
+base de données::
+Dépôt de données dont l’organisation permet l’accès (consultation, insertion et retrait)
+aux données de façon concurrente par plusieurs agents tout en garantissant que
+ces accès (aussi appelées transactions) sont réalisés en maintenant les propriétés
+ACID (atomicité, cohérence, isolation et rémanence).
+En outre, le dépôt doit offrir des services de sauvegarde, de copie de sécurité
+et de journalisation.
+Certains systèmes de gestion de bases de données (SGBD) permettent un déploiement
+distribué ou réparti des bases de données.
+Parmi les principaux modes d’organisation, on note : les arbres, les graphes,
+les réseaux, les fonctions et les relations.
+Ce dernier mode d’organisation est largement prédominant, ses fondements théoriques
+ayant été établis par E. F. Codd en 1969.
+Le développement des technologies associées a connu un essor soutenu depuis
+1972 jusqu’à présent.
+La qualification du mode d’organisation (ici relationnel) se rapporte à la base
+(le mode d’organisation des données).
+Les mêmes données auraient pu être organisées autrement.
+Il s’agit donc d’une « ((base relationnelle) de données) » bien que l’usage
+prédominant est d’utiliser l’expression « base de données relationnelle »
+(au grand désarroi des correcteurs orthographiques).

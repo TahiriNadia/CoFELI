@@ -1,0 +1,245 @@
+:sigle: Base de données de graphes 
+:titre: Modèles de graphe
+:sous_titre: 
+:organisation: CoFELI
+:entrepot: CoFELI
+:!branche:
+:description: {titre} — {sous_titre}
+:outline-title: α — {description}
+:keywords: rédaction technique, documentation technique, Convention matawine
+:revnumber: 1.0.0.a
+:revdate: 2024-01-26
+:version-label: document de travail, ne pas citer
+:author: Christina Khnaisser
+:email: Christina.Khnaisser@usherbrooke.ca
+:stem: latexmath
+
+// Contexte de support du document
+include::../../../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Format du document
+include::{rep_format}/RAPPORT_en-tete.adoc[]
+
+ifdef::diapo[<<<]
+toc::[]
+ifdef::diapo[<<<]
+== Introduction
+
+Cete section présente une surval des concepts de construction d'une requête sur
+un modèle de graphe. Nous allons utilisé le language Cypher pour faire des exemples.
+
+ifdef::diapo[<<<]
+=== Motifs
+* Motif
+* Expression régulière
+
+ifndef::diapo[]
+Une requête dans un modèle de graph est basé sur le concept de motif (_pattern_)
+L'idée de base est de trouver les données qui correspondent au motif spécifié.
+
+Un motif est une expression régulière calculable sur les étiquettes.
+endif::diapo[]
+
+ifdef::diapo[<<<]
+=== Requête de base 
+
+==== Définition
+* Information sur les entités
+* Information sur les associations
+
+ifndef::diapo[]
+Une requête de base permet de trouver des informations sur les entités ou les associations existant (ou pas) dans un graphe. 
+Avec un graphe de propriétés, nous ponvons préciser l'entité ou l'association d'intérêt
+en utilisant les étiquettes (ex. :Etudiant, :Professeur, :Inscription). 
+De plus, graçe au propriété nous pouvons restreindre notre
+recherche avec des conditions booléenes (ex. age > 60).
+
+Vu l'absence de schéma, une recherche avec toutes étiquettes est possible. 
+S'il y a aucune entité, association ou propriété qui corresponds à l'expression fournie, 
+le résultat sera vide.
+Ce qui diffère des autres language de définition de requêtes comme SQL.
+endif::diapo[]
+
+ifdef::diapo[<<<]
+==== Cypher
+* Requête sur une entité  
+[source,cypher]
+----
+match (n:Expert)
+return n
+----
+* Requête sur une entité avec sélection d'une propriété
+[source,cypher]
+----
+match (n:Expert)
+return n.naissance, n.salaire
+----
+ifdef::diapo[<<<]
+* Requête sur une entité avec restriction
+[source,cypher]
+----
+match (n:Expert)
+where n.salaire > 2000
+return m.nom, n.naissance
+----
+* Requête sur une association connu
+[source,cypher]
+----
+match (n:Novice)-[r:connaitre]->(e:Expert)
+return n.nom, e.nom
+----
+* Requête sur une association inconnu
+[source,cypher]
+----
+match (n:Novice)-[r]->(e:Expert)
+return n.nom, type(r), e.nom
+----
+ifdef::diapo[<<<]
+* Requête sur une association avec restriction
+[source,cypher]
+----
+match (n:Novice)-[r:connaitre]->(e:Expert)
+where r.depuis > 2000
+return n.nom, e.nom
+----
+
+ifndef::diapo[]
+Avec Cypher les parenthèses `()` désigne une entité (_node_),  
+,les crochets `[]` désigne une association (_relationship_)
+et les accolades `{}` désigne une propriété.
+
+Une requête possède minimalement deux instructions : 
+
+* `MATCH` désigne une projection sur le graphe 
+* `RETURN` désigne une selection sur les objets collecter 
+endif::diapo[]
+
+ifdef::diapo[<<<]
+=== Requête de chemin régulier
+
+==== Définition
+* Paires d'entités liées
+* Séquence des étiquettes d'association qui correspond à motif
+
+ifndef::diapo[]
+Une requête de chemin régulier (_Regular path queries [RQP]_) consiste à obtenir toutes les paires d'entités liés par au moins un chemin où la séquence des étiquettes des association le long du chemin forme un mot dans le langage d'une expression régulière donnée sur les étiquettes des associations du graphe.
+
+Une paire d'entité fait partie de la réponse d’une requête 
+ssi les entités sont liées dans le graphe par un chemin conforme au motif.
+
+Une requête de chemin régulier s'exprime comme suite :
+endif::diapo[]
+
+* si 𝑎 ∈ ℒ      alors latexmath:[𝑎 ∈ 𝑅𝑄𝑃]
+* si 𝑒 ∈ 𝑅𝑄𝑃    alors latexmath:[(𝑒)^- ∈ 𝑅𝑄𝑃] (inverse) 
+* si 𝑒,𝑓 ∈ 𝑅𝑄𝑃  alors latexmath:[(𝑒)/(𝑓) ∈ 𝑅𝑄𝑃] (séquence)
+* si 𝑒,𝑓 ∈ 𝑅𝑄𝑃  alors latexmath:[(e)+(f) ∈ 𝑅𝑄𝑃] (union)
+* si 𝑒 ∈ 𝑅𝑄𝑃    alors latexmath:[(𝑒)^+ ∈ 𝑅𝑄𝑃] (fermeture transitive)
+
+ifdef::diapo[<<<]
+==== Cypher
+* Requête avec une inverse 
+[source,cypher]
+----
+match (n:Expert)<-[r:connaitre]-(e)
+return n.nom as expert, labels(e)
+----
+* Requête avec une séquence déterminé
+[source,cypher]
+----
+match (n)-[r1:connaitre]->(x)-[r2:travaillerPour]->(y)-[r3:connaitre]->(e)
+return n, e
+----
+ifdef::diapo[<<<]
+* Requête avec une séquence avec distance entre 1 et 5
+[source,cypher]
+----
+match (n:Novice)-[r:connaitre]-{1,5}(e)
+return n, e
+----
+* Requête avec une union
+[source,cypher]
+----
+match (n:Novice)
+where n.salaire = 1000
+return id(n)
+union
+match (n:Apprenti)
+where n.salaire = 1000
+return id(n)
+----
+ifdef::diapo[<<<]
+* Trouver la listes des connaissances directes et indirectes de Mathieu.
+[source,cypher]
+----
+match (jason) 
+where jason.nom = 'Mathieu'
+match (jason)-[:connaitre*]->(connaissance)
+return collect(distinct id(connaissance))
+----
+
+ifdef::diapo[<<<]
+[NOTE]
+====
+Opérateur prédéfini dans Neo4j :
+
+* `id` : obtenir l'identité d'une entité 
+* `label` : obtenir l'étiquette d'une entité
+* `type`  : obtenir l'étiquette d'une association
+====
+
+ifdef::diapo[<<<]
+=== Requête d'aggrégation
+
+==== Définition
+* Décompte
+* Somme
+* Minimum
+* Maximun
+* List
+* ... et d'autres fonctions statistiques.
+
+ifdef::diapo[<<<]
+==== Cypher
+* Requête avec décompte
+----
+match (n:Expert)
+return count(n) as nbExpert
+----
+* Requête avec somme
+----
+match (n:Expert)
+return sum(n.salaire) as budget
+----
+ifdef::diapo[<<<]
+* Requête avec minimum
+----
+match (n:Expert)
+return min(n.salaire) as salaireMin
+----
+* Requête avec maximum
+----
+match (n:Expert)
+return max(n.salaire) as salaireMax
+----
+* Requête avec liste 
+----
+match (n:Expert)
+return collect(n.salaire) as SalaireList
+----
+
+ifdef::diapo[<<<]
+[bibliography]
+== Références
+
+Bonifati, Angela, George Fletcher, Hannes Voigt, Nikolay. Yakovets, et H. V. Jagadish. 
+Querying Graphs. Chapitre 3. Morgan & Claypool, 2018. +
+https://ieeexplore.ieee.org/servlet/opac?bknumber=8481009.
+
+Neo4j - Cypher Manuel 
+https://neo4j.com/docs/cypher-manual/current/functions/
+
+//Linked Data Benchmark Council (LDBC) + https://ldbcouncil.org
+
+// ====================================== FIN =================================
+include::{rep_format}/RAPPORT_en-pied.adoc[]

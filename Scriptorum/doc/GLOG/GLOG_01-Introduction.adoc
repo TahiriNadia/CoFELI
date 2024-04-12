@@ -1,0 +1,272 @@
+// Signature du document
+:sigle: GLOG_PROC_01
+:titre: Procédés du génie logiciel
+:sous_titre: Introduction
+:organisation: CoFELI
+:entrepot: CoFELI
+:depot: Scriptorum
+:branche: v100
+:keywords: bases de données, information, caractérisation, problème
+:revnumber: 0.1.0.a
+:revdate: 2024-4-11
+:version-label: document de travail, ne pas citer
+:author: Christina KHNAISSER
+:email: christina.khnaisser@usherbrooke.ca
+:author2: Luc LAVOIE
+:email2: luc.lavoie@usherbrooke.ca
+
+// Contexte de support du document
+include::../../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Document bimodal PDF (texte, diaporama) et HTML5 (hypertexte).
+// Les attributs format_DIAPO, format_TEXTE et format_HYPER
+// permettent de particulariser le document au besoin.
+
+ifndef::format_effectif[:format_effectif: RAPPORT]
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-tete.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-tete.adoc[]]
+
+ifndef::format_DIAPO[]
+<<<
+include::{rep_format}/SOMMAIRE.adoc[]
+Introduction générale aux procédés du génie logiciel.
+
+include::{rep_format}/MISE_EN_GARDE.adoc[]
+Le présent document est en cours d’élaboration ;
+en conséquence, il est incomplet et peut contenir des erreurs.
+
+include::{rep_format}/HISTO_debut.adoc[]
+
+| 2024-04-11
+| LL
+| Ébauche initiale.
+
+include::{rep_format}/HISTO_fin.adoc[]
+
+endif::format_DIAPO[]
+
+<<<
+toc::[]
+
+// Corps du document
+<<<
+[introduction]
+== Introduction
+
+<<<
+== Cycle de vie
+
+...
+
+ifdef::format_DIAPO[<<<]
+== Jalons majeurs
+
+* Attentes
+* Besoins
+* Exigences
+* Critères
+
+* Architecture
+* Conception globale
+* Conception détaillée
+* Réalisation (programmation, codage, etc.)
+
+* Modélisation
+  - cognitive
+  - conceptuelle
+  - logique
+  - physique
+
+L’informatique est la science du traitement automatique et rationnel de l’information.
+Son objet est donc l’information et son traitement.
+
+* Mais pourquoi rationnel ?
+* Pourquoi automatique ?
+* Pourquoi restreindre à l’intersection des deux (rationnel et automatique) ?
+
+// [.notes]
+ifndef::format_DIAPO[]
+Probablement parce qu’une des motivations sous-jacentes à l’étude de l’informatique
+est de pouvoir proposer des solutions adéquates à des problèmes nécessitant le
+traitement d’informations. Il est raisonnable de croire que cette motivation
+sera mieux servie par une approche scientifique (donc rationnelle). Par ailleurs,
+en limitant les traitements à ceux qui sont automatisables, on contraint
+les traitements à être décrits de façon explicite, détaillés, non ambigus.
+En outre, ces deux conditions (la rationalité et l’automatisabilité) faciliteront
+tantôt la définition arbitrable du concept d’adéquation, permettant ainsi de
+caractériser, d’évaluer et de comparer diverses solutions à un même problème.
+
+En contrepartie, ces deux conditions imposent que l’information soit tangible.
+En pratique, la seule information considérée sera celle qui est représentée sous
+la forme de données.
+
+Même si les données numériques (donc discrétisées) prennent une place
+prépondérante dans l’histoire de l’informatique et dans les technologies présentement
+utilisées, la « science informatique » ne s’y limite pas. Elle a d’ailleurs
+permis de développer dans le passé des théories, des modèles, des langages
+et des calculateurs analogiques. Qui sait si cette voie ne sera pas reprise un
+jour prochain ?
+endif::[]
+
+ifdef::format_DIAPO[<<<]
+== Autre sujet
+
+<<<
+[conclusion]
+== Conclusion
+
+<<<
+[glosssary]
+== Glossaire
+
+----
+Sources consultées en juin et juillet 2023
+
+* Antidote : Antidote Antidote 11 v4.2 (2023) https://www.antidote.info
+* Larousse : https://www.larousse.fr/dictionnaires/francais
+* Le Robert : https://dictionnaire.lerobert.com
+* Wikipédia : https://fr.wikipedia.org/wiki
+----
+
+ACID::
+Acronyme désignant conjointement les propriétés d’atomicité, de cohérence,
+d’isolation et rémanence (ou _durability_ en anglais).
+
+EA::
+Acronyme désignant les modèles conceptuels de données fondés sur la théorie entité-association.
+
+SGBDR (Système de gestion de bases de données relationnelles)::
+Système informatique permettant…
+
+SQL _(Structure Query Language)_::
+Langage de programmation axiomatique fondé sur le modèle relationnel. +
+Norme applicable, ISO 9075:2016.
+
+mécanique::
+Branche de la physique étudiant le mouvement et l’équilibre des corps
+ainsi que les forces qu’ils exercent les uns sur les autres.
+
+physique::
+Science qui a pour objet d’étudier les propriétés générales de la matière,
+de l’espace, du temps et d’établir les lois qui rendent compte des phénomènes
+matériels (tangibles ? réels ? mesurables ? observables ?).
+
+mathématiques::
+* Antidote :
+  Science étudiant par raisonnement déductif les concepts tels que les nombres,
+  les ensembles et les figures.
+* Larousse :
+  Science qui étudie par le moyen du raisonnement déductif les propriétés d’êtres abstraits
+  (nombres, figures géométriques, fonctions, espaces, etc.) ainsi que les relations
+  qui s’établissent entre eux.
+* Le Robert :
+  Ensemble des sciences qui ont pour objet la quantité et l’ordre.
+* Wikipedia :
+  Ensemble de connaissances abstraites résultant de raisonnements logiques appliqués
+  à des objets divers tels que les ensembles mathématiques, les nombres, les formes,
+  les structures, les transformations, etc. ; ainsi qu’aux relations et opérations
+  mathématiques qui existent entre ces objets.
+
+informatique::
+Science du traitement automatique et rationnel de l’information.
+* Informatique théorique : concerne la définition de concepts et modèles.
+* Informatique pratique : s’intéresse aux techniques concrètes de mise en oeuvre.
+* Informatique appliquée : s’intéresse à l’utilisation de l’informatique pour
+  la résolution de problèmes formulés en regard d’autres domaines
+  (que l’informatique).
+
+logique::
+* Antidote :
+  Science qui a pour objet l’étude des méthodes de raisonnement, de pensée,
+  par lesquelles on peut atteindre la vérité.
+* Larousse :
+  Science du raisonnement en lui-même, abstraction faite de la matière à laquelle
+  il s’applique et de tout processus psychologique.
+* Le Robert :
+  Étude scientifique, surtout formelle, des normes de la vérité.
+* Wikipedia :
+  Étude des règles formelles que doit respecter toute argumentation correcte.
+
+géométrie::
+Branche des mathématiques qui a pour objet d’étudier les relations entre points,
+droites, courbes, surfaces et volumes de l’espace.
+
+algèbre::
+Branche des mathématiques qui étudie les structures abstraites en employant
+les lois de composition.
+
+éthique::
+* Antidote :
+  1. Branche de la philosophie qui étudie les fondements des moeurs et de la morale.
+  2. Ensemble des règles de conduite propres à une société, à un groupe.
+* Larousse :
+  1. Partie de la philosophie qui envisage les fondements de la morale.
+  2. Ensemble des principes moraux qui sont à la base de la conduite de quelqu’un.
+* Le Robert :
+  1. Science de la morale.
+  2. Ensemble des conceptions morales de quelqu’un, d’un milieu.
+* Wikipedia :
+  1. Discipline philosophique portant sur les jugements moraux.
+  2. N. D.
+
+philosopie::
+* Antidote :
+  Ensemble des études, des recherches visant à réfléchir sur les êtres,
+  les causes premières et les valeurs humaines envisagées au niveau le plus général.
+* Larousse :
+  Ensemble de conceptions portant sur les principes des êtres et des choses,
+  sur le rôle de l’homme dans l’univers, sur Dieu, sur l’histoire et,
+  de façon générale, sur tous les grands problèmes de la métaphysique.
+* Le Robert :
+  Ensemble des questions que l’être humain peut se poser sur lui-même
+  et examen des réponses qu’il peut y apporter ; vision systématique et générale
+  (mais non scientifique) du monde.
+* Wikipedia :
+  1. Science des premiers principes et des premières causes.
+  2. Démarche de réflexion sur les savoirs à disposition.
+
+science::
+* Antidote :
+  Ensemble cohérent de connaissances relatives à des faits ou des phénomènes
+  obéissant à des lois et vérifiées par des méthodes expérimentales.
+* Larousse :
+  Ensemble cohérent de connaissances relatives à certaines catégories de faits,
+  d'objets ou de phénomènes obéissant à des lois et/ou vérifiés par les méthodes
+  expérimentales.
+* Le Robert :
+  Ensemble de connaissances, de travaux d'une valeur universelle,
+  ayant pour objet l'étude de faits et de relations vérifiables,
+  selon des méthodes déterminées (comme l'observation, l'expérience, ou
+  les hypothèses et la déduction).
+* Wikipedia :
+  xx
+
+épistémolgie::
+* Antidote :
+  Branche de la philosophie qui fait une étude critique des sciences
+  ayant pour objet de déterminer leur origine logique, leur valeur et leur portée.
+* Larousse :
+  Discipline qui prend la connaissance scientifique pour objet.
+* Le Robert :
+  Étude critique des sciences, destinée à déterminer leur origine logique,
+  leur valeur et leur portée (théorie de la connaissance).
+* Wikipedia :
+  Étude critique d’une science particulière, quant à son évolution, sa valeur,
+  et sa portée scientifique et philosophique
+
+ingénierie::
+* Antidote :
+  1. A.
+  2. B.
+* Larousse :
+  1. A.
+  2. B.
+* Le Robert :
+  1. A.
+  2. B.
+* Wikipedia :
+  1. A.
+  2. B.
+
+ifdef::format_DIAPO[include::{rep_format}/DIAPO_en-pied.adoc[]]
+ifndef::format_DIAPO[include::{rep_format}/{format_effectif}_en-pied.adoc[]]

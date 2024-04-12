@@ -1,0 +1,19 @@
+https://www.dunod.com/entreprise-et-economie/ingenierie-exigences-methodes-et-bonnes-pratiques-pour-construire-et
+
+Outils pour CK ?
+
+https://postgrespro.com/products/download
+
+* mesure : https://github.com/postgrespro/mamonsu
+
+Metis
+x un ou plusieurs groupes : un
+x _base_commune, principe_ok ;
+x gen versus temp (build)
+
+
+le procédé d'analyse     (orienté processus, orienté usager, orienté problème, orienté objet, etc.)
+
+apostrophe opt-maj-è ’  
+
+Rome2RIO

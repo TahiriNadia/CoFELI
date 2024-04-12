@@ -1,0 +1,173 @@
+:sigle: Base de données de graphes
+:titre: Modèles de graphe
+:sous_titre:
+:organisation: CoFELI
+:entrepot: CoFELI
+:!branche:
+:description: {titre} — {sous_titre}
+:outline-title: α — {description}
+:keywords: rédaction technique, documentation technique, Convention matawine
+:revnumber: 1.0.0.a
+:revdate: 2024-01-26
+:version-label: document de travail, ne pas citer
+:author: Christina Khnaisser
+:email: Christina.Khnaisser@usherbrooke.ca
+:stem: latexmath
+
+// Contexte de support du document
+include::../../../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Format du document
+include::{rep_format}/RAPPORT_en-tete.adoc[]
+
+ifdef::diapo[<<<]
+toc::[]
+ifdef::diapo[<<<]
+== Introduction
+
+=== Théorie des graphes
+
+==== Graphe
+[latexmath]
+++++
+G = (V, E)
+++++
+
+ifndef::diapo[]
+Un graphe [G] est une paire `(V, E)` où V est un ensemble fini de sommets et
+E est un ensemble fini de couples de sommets.
+endif::diapo[]
+
+* V : ensemble fini de symboles nommé sommets
+* `E ⊆ V x V` : ensemble fini de couples de sommets nommés arêtes
+
+Graphe orienté::
+Un graphe orienté est un graphe où les couples de sommets sont ordonnés (nommée les arcs).
+Un couple ordonné de G relie deux sommets latexmath:[e_i = (n, m)] où _n_ est l’extrémité initiale,
+et _m_ est l’extrémité terminale.
+
+Graphe non orienté::
+Un graphe non orienté est un graphe où les couples de sommets sont non ordonnés (nommée les arêtes).
+Dans ce cas, on s’intéresse à l’existence (ou non) d’un lien entre deux sommets.
+
+Boucle::
+Une boucle est un arc dont les extrémités coïncident.
+
+Graphe simple::
+Un graphe simple est un graphe sans boucle et pour lequel il n’y a jamais plus qu’une arête entre
+deux sommets donnés.
+
+Multigraphe::
+Un multigraphe est un graphe pour lequel il peut exister plusieurs arêtes entre deux sommets donnés.
+
+ifdef::diapo[<<<]
+==== Graphe de propriétés
+
+[latexmath]
+++++
+G = (V, E, 𝜂, 𝜆, 𝑣)
+++++
+
+* O un ensemble d’objets;
+* L un ensemble fini d’étiquettes;
+* K un ensemble de noms de propriétés (propriétés);
+* N un ensemble de valeurs de propriétés (instances).
+
+ifndef::diapo[]
+Un graphe de propriétés est un multigraphe orienté et attribué
+ayant la structure `(V, E, 𝛈, 𝛌, 𝛎)` où
+endif::diapo[]
+
+* V : ensemble fini d’objets nommé sommets;
+* E : ensemble fini d’objets nommé arcs;
+* `𝜂 : 𝐸→𝑉 × 𝑉` fonction de définition des arcs (définis un couple ordonné de sommets) ;
+* `𝜆 : 𝑉 ∪ 𝐸 → Ρ(ℒ)` fonction qui assigne un ensemble fini d’étiquette pour un sommet ou un arc;
+* `𝑣 : 𝑉 ∪ 𝐸 → × 𝒦 → 𝒩` fonction partielle qui assigne des valeurs aux propriétés des objets.
+
+ifdef::diapo[<<<]
+=== Modèle de graphe de propriétés
+
+ifndef::diapo[]
+Un modèle de graphe de propriétés est un multigraphe avec des sommets et des arcs étiquetés
+qui peuvent posséder des propriétés.
+endif::diapo[]
+
+Étiquette::
+Une étiquette [:l] est une chaine de caractère qui décrit un rôle qu’un élément (sommet ou arc) peut avoir.
+Une étiquette permet de grouper les sommets (et les arcs) qui ont des propriétés communes.
+
+Entité::
+Une entité [v] (un concept) d’un domaine d’application est un sommet étiqueté.
+Une entité est définie par un ensemble d’étiquettes (peut être vide) et un ensemble de propriétés (peut être vide).
+
+[WARNING]
+Deux entités distinctes ayant le même ensemble d’étiquettes peuvent ne pas être avoir des clés de propriétés identiques.
+
+Association::
+Une association [e] est un arc étiqueté qui représente une action ou un processus entre deux entités du domaine d’application.
+Une association est définie par *une* étiquette, un ensemble de propriétés (peut être vide) et
+deux entités : entité source et entité destination.
+
+[WARNING]
+Deux arcs distincts ayant la même étiquette peuvent ne pas avoir des clés de propriétés identiques.
+
+Propriété::
+Une propriété est une paire (nom = valeur) qui décrit les données d’un sommet ou d’un arc.
+* nom est une chaine de caractère qui représente le sens de la donnée
+* valeur *peut* appartenir à un domaine.
+
+ifdef::diapo[<<<]
+[TIP]
+====
+Il y a une équivalence entre le modèle de relation et le modèle de graphe de propriétés :
+
+* Sommet >> Tuple d’une relation.
+* Arc >> Tuple construit par une relation de jointure.
+* Propriété >> Attribut : Valeur
+* Étiquettes >> Identifiant d’une relation.
+====
+
+ifdef::diapo[<<<]
+=== Opérateurs de base
+[frame=none, grid=none, cols="1,4"]
+|===
+|in(v)  | L’ensemble des arcs entrant d’un sommet v.
+|out(v) | L’ensemble des arcs sortant d’un sommet v.
+|adj(v) | L’ensemble de tous les arcs adjacents d’un sommet v (équivalent à `in(v) ∪ out(v)`)
+|src(e) | le sommet source de l’arc e
+|trg(e) | le sommet destination de l’arc e
+|===
+
+ifdef::diapo[<<<]
+.Un graphe de propriétés de l’exemple Companie.
+====
+[plantuml, Evaluation-schema_gp, svg]
+....
+include::{rep_racine}/CoFELI/Exemple/Companie/doc/_fig/Companie-instance_bdg.puml[]
+....
+====
+ifdef::diapo[<<<]
+Dans cet exemple nous avons :
+
+* 3 entités (sommet : 10, 11, 12)
+* 3 associations (arc : 20, 21, 22) +
+𝜂(20) = (10,11), 𝜂(21) = (11, 11), 𝜂(22) (11, 12)
+* 3 étiquettes de sommet : Novice et Expert et Apprenti +
+𝜆(10) = :Novice, 𝜆(11) = :Expert, 𝜆(12) = :Apprenti
+* 2 étiquettes d’arc : connaitre et travaillerPour +
+𝜆(20) = :connaitre, 𝜆(21) = :travillerPour, 𝜆(22) = :connaitre
+* 15 proprétés +
+ex. 𝑣(10, salaire) = 1000, 𝑣(12, niveau) = 'A'
+
+ifdef::diapo[<<<]
+[bibliography]
+== Références
+
+Bonifati, Angela, George Fletcher, Hannes Voigt, Nikolay. Yakovets, et H. V. Jagadish. Querying Graphs. Chapitre 2. Morgan & Claypool, 2018. +
+https://ieeexplore.ieee.org/servlet/opac?bknumber=8481009.
+
+Gondran, Michel, et Michel Minoux. Graphes et algorithmes. 4e éd. revue et Augmentée. Collection EDF R&D. Paris: Éd. Tec & doc, 2009.
+ISBN 978-2-7430-1035-5.
+
+// ====================================== FIN =================================
+include::{rep_format}/RAPPORT_en-pied.adoc[]

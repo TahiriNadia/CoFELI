@@ -1,0 +1,27 @@
+informatique::
+1. Science
+  a. Science du traitement de l’information.
+  b. Science du traitement automatique et rationnel de l’information.
+
+2. Technique
+  - Ensemble des techniques de la collecte, du tri, de la mise en mémoire, du stockage, de la transmission, et de l’utilisation des informations traitées automatiquement à l’aide de logiciels mis en oeuvre sur des ordinateurs.
+
+[.note]
+====
+L'information ne peut être traitée automatiquement que si elle est représentée par des données, elles-mêmes réalisées sous la forme d'un phénomène tangible (physique).
+
+Par ailleurs, l'information est notamment relative à l'espace-temps et à l'agent.
+
+D'autre part, le traitement est décrit par des procédés et rendu effectif par des processus dont les actions atomiques doivent être dénombrable. Si, en pratique, il est utile de pouvoir leur associer une durée, la mesure temps n'est pas pour autant requise.
+
+En conséquence,
+
+* le coeur de métier réside dans la modélisation (de l'information et du traitement) -- dans le cas du traitement, il est suffisant d'étudier (de modéliser) les seuls procédés de traitement de l'information, par contre, par définition, la modélisation de l'information doit s'appliquer à tout type d'information, dont toute information relative à l'univers physique ;
+* (toutes) les grandeurs physiques
+doivent donc être prises en compte (même si pour l'information non connotée physiquement, il pourrait être jugé suffisant de se limiter à
+l'espace et au temps -- c'est le cas en informatique théorique ;
+* une grandeur propre à l'informatique doit dependant être ajoutée aux grandeurs physiques afin de mesurer l'information : le bit (une autre unité sera peut-être requise pour l'information quantique).
+* débat : le bit mesure-t-il l'information, la donnée, une représentation spécifique de la donnée ?
+* débat : les unités mesures (et leur définition) du temps et de l'espace utilisée informatique doivent-elles être les mêmes qu'en physique ?
+* débat : en fait, cela est très débattu dans le cas du temps... en physique et en informatique ! Le temps est-il discret ou continu ? Est-il borné (dans le passé, dans le futur) ? Est-il cyclique ? Le moment de référence du 1^er^ janvier 1970 doit-il être à midi ou à minuit ? Le temps doit-il être coordonné ou pas ? Faut-il adopter une notation qui s'affranchit complètement des calendriers (comme la mesure de la longueur s'est affranchie de la morphologie humaine et celle de la masse, d'un étalon).
+====

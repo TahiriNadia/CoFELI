@@ -1,0 +1,4 @@
+acquis d’apprentissage::
+Au sein de la méthode pédagogique APP, assertion qui décrit de manière précise
+ce que les apprenants sont en mesure de savoir, de savoir-faire et de savoir-être
+au terme d’une activité d’apprentissage.
