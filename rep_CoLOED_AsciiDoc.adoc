@@ -1,0 +1,5 @@
+// Contexte de support requis par la composante AsciiDoc de CoLOED
+ifndef::rep_racine[:rep_racine: /Users/Shared/DGS]
+ifndef::rep_CoLOED[:rep_CoLOED: {rep_racine}/CoLOED]
+ifndef::rep_AsciiDoc[:rep_AsciiDoc: {rep_CoLOED}/AsciiDoc]
+ifndef::rep_format[:rep_format: {rep_AsciiDoc}/format]
