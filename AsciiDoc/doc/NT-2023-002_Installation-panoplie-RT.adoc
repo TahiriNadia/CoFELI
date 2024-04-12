@@ -1,0 +1,482 @@
+// Signature du document
+:sigle: NT-2023-002
+:titre: Installation de la panoplie AsciiDoc de CoLOED
+:sous_titre: Installation d’une panoplie logicielle pour la rédaction technique basée sur AsciiDoc
+:organisation: CoLOED
+:entrepot: CoLOED
+:depot: AsciiDoc
+:!branche:
+:description: {titre} -- {sous_titre}
+:outline-title: {sigle} — {description}
+:keywords: AsciiDoc
+:revnumber: 0.1.2a
+:revdate: 2024-02-19
+:version-label: Ne pas citer, en cours de rédaction
+
+// Contexte de support du document
+include::../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Format du document
+include::{rep_format}/RAPPORT_en-tete.adoc[]
+
+// Préliminaires du document (sommaire, mise en garde, table des matières, etc.)
+
+include::{rep_format}/SOMMAIRE.adoc[]
+Le présent document tente de documenter l’installation des outils d’aide à
+la rédaction technique retenus dans le cadre du CoLOED. Les outils considérés
+sont en relation avec le langage AsciiDoc, choisi comme référence.
+
+include::{rep_format}/MISE_EN_GARDE.adoc[]
+Le présent document est en cours d’élaboration ;
+en conséquence, il est incomplet et peut contenir des erreurs.
+
+include::{rep_format}/HISTO_debut.adoc[]
+
+| 2024-02-19
+| LL
+| Revue pour diffusion interne.
+
+| 2024-01-24
+| LL
+| Revue mineure.
+
+| 2023-07-24
+| LL
+| Ébauche initiale.
+
+include::{rep_format}/HISTO_fin.adoc[]
+
+<<<
+toc::[]
+
+// Corps du document
+<<<
+[introduction]
+== Introduction
+
+Le présent document est issu de l’activité de sélection des outils d’édition
+du projet CoFELI.
+Le document est en cours de rédaction.
+
+Il a pour but de recenser
+
+* les solutions envisagées,
+* les critères de sélection,
+* les résultats d’expérimentation,
+* diverses considérations pouvant s’avérer utiles pour la suite du projet.
+
+Après discussion au sein du groupe, un premier essai est en cours avec AsciiDoc.
+
+== AsciiDoc -- une courte introduction
+
+AsciiDoc est un langage de balisage léger principalement conçu pour la rédaction
+de documents techniques.
+Le langage peut être utilisé pour produire des gabarits :
+(dont article, note, rapport, manuel et diaporama)
+selon une variété de formats de sortie
+(dont HTML5, PDF et EPUB),
+à partir d’un même (fichier de type) texte comprenant le contenu et des
+instructions concises (et réputées peu voyantes) permettant de prendre
+connaissance du contenu sans pré-traitement.
+
+Si le texte peut être rédigé en se limitant à l’ASCII (d’où le nom du langage),
+il peut être encodé UTF-8 de façon à donner accès à l’ensemble de l’Unicode
+(dont les caractères accentués, l’alphabet grec, les symboles mathématiques et les émojis)
+dans la mesure où les polices spécifiées le permettent.
+
+«AsciiDoc» est le nom du langage alors que
+«asciidoctor» est le nom d’un groupe d’outils de traitement de textes destinés
+aux documents encodés en langage AsciiDoc.
+
+Pour plus d’informations :
+
+include::Asciidoc_info.adoc[]
+
+Les logiciels «asciidoctor» sont toujours en cours de développement et de stabilisation.
+Certains choix technologiques sont par ailleurs discutables dans la
+perspective du développement d’un produit stable, efficace et fiable.
+Le recours (immodéré) à des langages tels que Ruby et JavaScript
+ne sont étrangers au fait qu’aucune version livrée jusqu’à présent
+n’est exempte d’erreurs de syntaxe dans les sources, entrainant
+des exceptions pas toujours prises en charge et des résultats parfois étonnants.
+Le choix de travailler en interne avec l’encodage de caractères Windows-1252
+(plutôt qu’un des encodages compatibles avec Unicode)
+entraine son lot de problèmes, de corruption des rendus et d’erreurs
+non récupérées (voir NT2023-001).
+
+=== La solution simple
+
+Utiliser un atelier où tout est déjà encapsulé, configuré et prêt à l’emploi :
+
+* AsciidocFX, un éditeur spécialisé dans la saisie de texte au format asciidoctor ;
+* Eclipse, le bien connu, dont le langage privilégié pour la documentation
+  technique est AsciiDoc ;
+* les ateliers JetBrains (dont Datagrip et IntelliJ) ;
+* l’atelier Visual Code de Microsoft ;
+* plusieurs autres.
+
+En général, le paramétrage est minimal, le rendu HTLM5 est très bon, mais
+les rendus PDF et la conversion vers DOCX sont plutôt décevants. Il n’est pas
+possible de prescrire des formats adaptés aux présentations.
+
+Par ailleurs, l’automatisation de la production et de la mise à jour de corpus de textes
+(particulièrement lorsque des outils tels que gradle sont intégrés à l’atelier)
+nécessitent en pratique le recours à la solution plus complète.
+
+=== La solution plus complète
+
+// Développer CoLOED_AsciiDoc_modele.adoc, le placer en annexe et réduire
+// conséquemment la section Motivation
+
+==== Motivation
+Une solution plus complète (mais plus lourde) semble devoir être nécessaire
+si les fonctionnalités suivantes sont requises :
+
+* automatiser la production de documents à l’aide de commandes et de scripts ;
+* produire, depuis une même source, plusieurs documents
+  (variant selon le gabarit, le type ou le format) ;
+* développer et paramétrer des gabarits de documents :
+  - PRE : présentation,
+  - NDC : notes de cours,
+  - NT  : note technique,
+  - RT  : rapport technique,
+  - MT  : manuel technique ;
+* développer et paramétrer des types de documents  :
+  - doc.num : document (statique) à diffuser,
+  - doc.imp : document (statique) à imprimer,
+  - doc.pro : document (dynamique) à projeter,
+  - hypertexte : document (dynamique) à diffuser,
+  - site : site web;
+* modifier et paramétrer les formats de documents requis :
+  - HTML5,
+  - PDF.
+* modifier et paramétrer les formats de documents souhaitables :
+  - DOCX,
+  - EPUB.
+
+Toutes les combinaisons (gabarit, type, format) ne sont pas requises.
+Typiquement
+
+* PDF sera privilégié pour les documents statiques,
+* HTML5 pour les documents dynamiques et les sites web,
+* EPUB pour la diffusion sur tablettes de lecture,
+* DOCX pour la convertibilité vers les suites bureautiques populaires.
+
+Il ne semble pas exister un outil unique, ni même un ensemble d’outils intégrés,
+pour ce faire.
+Il faut installer et configurer une panoplie d’outils de diverses provenances.
+
+Voir cependant Antora (à la section suivante), qui nécessite toutefois
+l’installation de plusieurs des outils étudiés dans la présente section.
+
+[NOTE]
+====
+* Le «doc.imp» se distingue du «doc.num»
+  (qui peut être non seulement affiché sur écran, mais aussi être imprimé)
+  par la prise en compte de caractéristiques spécifiques à l’impression
+  (le format du support d’impression, les marges, le mode recto verso,
+  les entêtes et pieds de page, les filigranes, la calibration des couleurs, etc.)
+====
+
+Le tableau suivant dresse l’inventaire de ceux considérés jusqu’à présent.
+L’inventaire est donc incomplet, il pourra être enrichi au besoin.
+
+[%unbreakable]
+--
+.Inventaire des outils AsciiDoc considérés
+[%autowidth]
+|===
+|Outil    |Environnement |num |imp |pro |HTML5 |PDF |DOCX |EPUB | AUTRE
+
+|asciidoctor       |Ruby |TB  |B   |non |TB    |non |non  |non  |non
+|asciidoctor-epub3 |Ruby |oui |??  |??  |non   |non |non  |oui  |non
+|asciidoctor-pdf   |Ruby |non |TB  |non |non   |TB  |non  |non  |non
+|asciidoctorJ      |Java |TB  |B   |non |TB    |non |non  |non  |non
+|asciidoctorJ-epub3|Java |TB  |B   |non |non   |non |non  |oui  |non
+|asciidoctorJ-pdf  |Java |TB  |TB  |non |non   |TB  |non  |non  |non
+|asciidoctor.js    |JS   |TB  |B   |non |TB    |non |non  |non  |non
+|reveal.js         |JS   |??  |??  |oui |??    |oui |??   |non  |oui (1)
+|pandoc            |??   |oui |??  |??  |??    |oui |??   |??   |non
+|fop               |??   |oui |??  |??  |??    |oui |??   |non  |non
+|===
+--
+
+[%unbreakable]
+--
+.Légende
+* EX  : excellent (répond pleinement à toutes les exigences et à toutes attentes)
+* TB  : très bien (répond pleinement à toutes les exigences et même à certaines
+        attentes hors exigences)
+* B   : bien (répond minimalement à toutes les exigences)
+* P   : passable (ne répond pas toutes les exigences, mais, à défaut d’autre chose,
+        peut être utilisé)
+* oui : pris en charge (mais l’évaluation des exigences n’a pas été faite)
+* non : non pris en charge
+* ??  : non encore expérimenté
+* SO  : sans objet
+
+.Notes
+* (1) format HTML5+JS pour site dynamique faisant office de présentation
+--
+
+==== Problématique
+
+Différents environnements d’exécution
+(au moins trois) sont requis pour utiliser ces outils,
+ces environnements devant eux-mêmes être installés et configurés.
+Or, même quand deux outils partagent un même environnement, ils ne partagent
+généralement pas la même version, il faut donc les installer tous les deux,
+ce qui n’est pas sans causer des problèmes supplémentaires.
+
+La solution d’ajouter un gestionnaire de conteneur ne résout que partiellement
+le problème, car il est souvent nécessaire d’installer plusieurs gestionnaires
+de conteneurs différents... et rebelote.
+Bref, pourquoi faire simple quand on peut faire compliqué ?
+Pas étonnant qu’une part grandissante des utilisateurs se tourne vers de silos
+propriétaires virtualisés.
+Le logiciel ouvert et libre de droits creuse sa tombe.
+
+En conclusion, pour le moment, il faudra vraisemblablement installer (au moins)
+trois environnements d’exécution différents :
+
+* sous Ruby (la version 2.7 ou supérieure est requise)
+* sous Java (je ne connais pas la version minimale requise)
+* sous JavaScript (je ne connais pas la version minimale requise)
+
+.Pourquoi les trois ?
+
+* Parce que le meilleur outil pour produire du HTML5 et des sites web
+  (et aussi le plus efficient)
+  est programmé en Java
+  (asciidoctorJ est utilisé notamment par Eclipse, JetBrains et AsciidoctorFX).
+* Parce que le meilleur outil (sinon le seul pleinement fonctionnel) pour
+  produire des PDF de qualité est sous Ruby (ascidoctor-pdf).
+* Parce que le seul outil capable de produire des présentations semble être reveal.js
+  (qui requière un environnement JavaScript).
+
+==== Configuration
+
+La configuration des processus de mise en forme et de plusieurs choix typographiques
+est établie via un paramétrage des applications. Ce paramétrage peut être réalisé
+par différents mécanismes (variables d’environnement, paramètres d’application,
+fichiers de configuration, instructions dans la source du document elle-même, etc.).
+En général, il faut recourir à plusieurs de ces mécanismes conjointement, car
+certains paramètres ne sont pas modifiables que par un sous-ensemble des mécanismes
+(voire un seul).
+
+Par ailleurs, la configuration peut requérir des ressources (polices, textes
+conventionnels, etc.) qu’il est également préférable de factoriser et de partager.
+
+Il est donc important de factoriser
+cette configuration tant pour uniformiser les choix pour un ensemble de documents
+donnés (typiquement ceux d’un même entrepôt) que pour en assurer l’évolutivité.
+
+Cependant, une certaine redondance ne peut être évitée : le format des fichiers,
+la nomenclature des paramètres, voire la disponibilité ou les effets d’un
+paramètre peut varier selon le logiciel considéré ET du format de sortie.
+
+Par exemple, dans la famille de produit `asciidoctor`, les fichiers de
+configuration varient en format selon celui de la sortie :
+
+* HTML5 : .css ;
+* PDF : .yaml ;
+* EPUB : ???
+
+Par ailleurs, même quand les conventions semblent être les mêmes,
+les prescriptions (nomenclature, disponibilité et effets de paramètres)
+sont différentes pour `reveal.js`, `pandoc` et `fop`.
+
+En pratique, nous ne retiendrons donc pour le moment que la seule suite asciidoctor
+(qui ce qui comprend asciidoctor-pdf).
+
+== Installations
+
+=== Installation de `asciidoctor` et cie
+
+==== Sous macOS
+
+.Utilisation du gestionnaire d’installation MacPorts
+Ce gestionnaire respecte les standards de Darwin (Apple), de BSD Unix et de Linux.
+Il permet donc d’installer des produits conçus pour ces trois environnements,
+et ce, sans compromettre la structure de l’environnement de macOS
+(de BSD Unix ou de Linux).
+
+Il permet en outre d’installer facilement plusieurs versions d’un même produit,
+ce que je n’ai pas été à même de faire avec HomeBrew et RVM (spécifique à Ruby).
+En effet, sous macOS 13.x (Ventura) et 14.y (Sonoma), la version 2.6.1 de Ruby
+est  pré-installée et elle doit demeurer inchangée ;
+or, la version minimale requise pour asciidoctor 2.0.20 est la version 2.7.
+Ces exigences étant appelées à changer indépendamment l’une de l’autre,
+il importe de pouvoir maintenir concurremment plusieurs
+versions d’un même environnement (Ruby, dans le cas présent).
+
+[WARNING]
+====
+*Mise en garde supplémentaire relative à RVM*
+
+Préalablement à l’installation de RVM, il faut installer un gestionnaire de clés
+pgp (ou pgp2, ce n’est pas clair)
+dont la dernière version ne fonctionne pas avec la dernière version de Ruby,
+du moins sur macOS (versions 13.x et 14.y, au 2023-12-01).
+====
+
+Dernière recommandation : minimiser le nombre de gestionnaires de produits,
+car leurs installations entreront vraisemblablement en conflit les unes
+avec les autres, ne serait-ce qu’à travers la variable d’environnement PATH.
+
+.Installation
+* Pour l’installation et la mise à jour de MacPorts, voir +
+  https://guide.macports.org/#using.port.diagnose +
+  https://www.macports.org/install.php
+
+* Il est en général recommandé de s'assurer d'avoir une verion à jour de MacPorts et des composantes :
+
+  sudo port selfupdate
+  sudo port upgrade outdated
+
+* Pour l’installation de Ruby, j’ai privilégié la version 3.0
+  (donc le _package_ ruby30)  :
+
+  sudo port install ruby30
+
+* Pour vérifier l’installation
+  (noter la suffixation des identifiants usuels par _3.0_) :
+
+  ruby3.0 -v
+  which ruby3.0
+
+* Pour l’installation d’asciidoctor, asciidoctor-pdf et ascidoctor-diagram :
+
+  sudo port install asciidoctor
+  sudo gem3.0 install asciidoctor-pdf
+  sudo gem3.0 install asciidoctor-diagram
+
+* Est-il nécessaire de faire de ruby3.0 la version de référence (_default version_) ? LL : Je ne crois pas, si
+cela s'avère être le cas, il suffira d’exécuter la commande suivante :
+
+  sudo port select --set ruby ruby30
+
+.Extensions possibles
+
+* Il faudrait tester dans les meilleurs délais l’extension pour le traitement
+  des fichiers BibTeX, voir https://github.com/asciidoctor/asciidoctor-bibtex.
+
+* D’autres modules (_gem_) peuvent être ajoutés à asciidoctor-pdf
+  (dont asciidoctor-mathematical, rghost et text-hyphen), voir : +
+  https://docs.asciidoctor.org/pdf-converter/latest/install/
+
+* Pour l’installation de `asciidoc-epub3`, voir : +
+  https://docs.asciidoctor.org/epub3-converter/latest/#install-the-published-gem
+
+.Mise en garde
+Par ailleurs, il y a un petit souci avec le _gem_ `asciidoctor-diagram`
+[.small]
+----
+/opt/local/lib/ruby3.0/gems/3.0.0/gems/asciidoctor-diagram-2.2.9/lib/
+  asciidoctor-diagram/barcode/converter.rb:97:
+    warning: ambiguity between regexp and two divisions:
+      wrap regexp in parentheses or add a space after `/’ operator
+----
+
+Plusieurs _gem_ Ruby sont encore encodés en ASCII-8BIT (un encodage propre à Ruby
+que vous ne retrouvez ni dans les normes internationales ni dans les standards
+usuels). Il en découle donc des erreurs au moment de l’utilisation avec un encodage
+UTF-8 utilisé en AsciiDoc (mais pas que).
+
+Voici certaines erreurs «normales» survenant lors de l’installation du
+_gem_ `text-hyphen` version 1.5.0 :
+
+[.small]
+----
+unable to convert "\xE4" from ASCII-8BIT to UTF-8 for lib/text/hyphen/language/1.8/de2.rb, skipping
+unable to convert "\xF1" from ASCII-8BIT to UTF-8 for lib/text/hyphen/language/1.8/es.rb, skipping
+unable to convert "\xE4" from ASCII-8BIT to UTF-8 for lib/text/hyphen/language/1.8/fi.rb, skipping
+unable to convert "\xF3" from ASCII-8BIT to UTF-8 for lib/text/hyphen/language/1.8/ga.rb, skipping
+unknown encoding name "Cork/T1/EC" for lib/text/hyphen/language/1.8/hu2.rb, skipping
+unable to convert "\xE9" from ASCII-8BIT to UTF-8 for lib/text/hyphen/language/1.8/nl.rb, skipping
+unable to convert "\xE4" from ASCII-8BIT to UTF-8 for lib/text/hyphen/language/1.8/sv.rb, skipping
+----
+
+Pour le _gem_ `asciidoctor-mathematical` version 1.6.16,
+ce n’est pas vraiment ça non plus :
+
+[.small]
+----
+#<Thread:0x0000000125923080 /opt/local/lib/ruby3.0/3.0.0/rubygems/request_set.rb:167 run>
+  terminated with exception (report_on_exception is true):
+    /opt/local/lib/ruby3.0/3.0.0/rubygems/remote_fetcher.rb:232:
+      in `fetch_http’: bad response Forbidden 403
+        (https://index.rubygems.org/quick/Marshal.4.8/mathematical-1.6.16.gemspec.rz)
+        (Gem::RemoteFetcher::FetchError)
+          from /opt/local/lib/ruby3.0/3.0.0/rubygems/remote_fetcher.rb:248:in `fetch_path’
+          from /opt/local/lib/ruby3.0/3.0.0/rubygems/source.rb:151:in `fetch_spec’
+          from /opt/local/lib/ruby3.0/3.0.0/rubygems/resolver/api_specification.rb:92:in `spec’
+          from /opt/local/lib/ruby3.0/3.0.0/rubygems/resolver/activation_request.rb:92:in `full_spec’
+          from /opt/local/lib/ruby3.0/3.0.0/rubygems/resolver/activation_request.rb:109:in `installed?’
+          from /opt/local/lib/ruby3.0/3.0.0/rubygems/request_set.rb:173:in `block (2 levels) in install’
+----
+
+On remarque que deux des trois erreurs sont des erreurs statiques détectables
+à l’analyse grammaticale du composant.
+La troisième est détectable au chargement du composant.
+Ça donne confiance (dans le code et dans le processus d’acceptation des livraisons), non ?
+
+Pour le moment, il est donc suggéré de ne pas installer les «gem»
+`asciidoctor-mathematical` et `text-hyphen`.
+
+De même, il est suggéré de ne pas utiliser les graphes de type
+«barcode» de `asciidoctor-diagram`.
+
+==== Sous Linux - Ubuntu
+
+À venir.
+
+==== Sous Linux - Red Hat
+
+À venir.
+
+==== Sous Windows
+
+Je suggère fortement de procéder via l’installation d’une machine virtuelle Linux.
+
+=== Installation de `asciidoctorJ` et cie
+
+Pour le moment, je n’ai utilisé `asciidoctorJ`
+(et ses composants `asciidoctorJ-epub` et `asciidoctorJ-pdf`)
+que via un atelier (AsciidocFX, Eclipse, DataGrip).
+
+Pour une installation indépendante,
+notamment en vue d’une utilisation via gradle ou maven, voir :
+
+* https://docs.asciidoctor.org/asciidoctorj/latest/installation/
+
+=== Installation de `asciidoctor.js` et cie
+
+À venir... au besoin.
+
+Pour le moment, le format DIAPO sous encodage PDF donne des résultats acceptables.
+
+=== Installation de `pandoc` et cie
+
+À venir... au besoin.
+
+=== Installation de `fop` et cie
+
+À venir... au besoin.
+
+== La gestion documentaire intégrée avec Antora
+
+Antora est réputé faire le travail.
+
+* https://antora.org
+
+Non encore expérimenté.
+
+À suivre.
+
+[conclusion]
+== Conclusion
+
+(... À rédiger ...)
+
+include::{rep_format}/RAPPORT_en-pied.adoc[]

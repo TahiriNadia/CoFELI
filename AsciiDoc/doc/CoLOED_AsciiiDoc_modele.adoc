@@ -1,0 +1,69 @@
+== Modèle documentaire du CoLOED transposé en AsciiDoc
+
+=== Le format
+La façon dont le document doit être présenté et consulté :
+
+ * texte -> imprimé ou numérisé -- lecture (attribut `format_TEXTE`) ;
+ * hyper-texte -> mis en ligne -- navigation (attribut `format_HYPER`) ;
+ * diaporama -> projeté ou présenté -- visualisation (attribut `format_DIAPO`).
+
+Un document est souvent conçu en fonction d’un mode précis.
+Toutefois, il est très utile, particulièrement en formation, de pouvoir dériver
+à partir d’une même source des documents de format différent
+(les notes de cours et le diaporama utilisé comme support de présentation en classe).
+
+Pour une même source, tant le contenu que sa représentation doit pouvoir
+varier en fonction du format du document produit.
+
+A priori, le format pourrait être représenté par un attribut tri-valué
+en fonction duquel des éléments seront choisis ou configurés
+dans la composition du document.
+
+En pratique, trois attributs booléens ont été définis (un par mode) en raison
+des règles syntaxiques des conditionnelles d’AsciiDoc
+(voir https://docs.asciidoctor.org/asciidoc/latest/directives/conditionals/) :
+
+* absence d’expression booléenne
+  (en particulier, pas de conjonction ni de disjonction) ;
+* absence du format uniligne pour `ifeval`.
+
+=== Les éléments standardisés
+Les éléments d’un document devant respecter des règles uniformément appliquées
+aux documents d’un même corpus documentaire.
+
+Pour le moment, ce sont
+
+* EN-TETE (page titre)
+* SOMMAIRE (sommaire)
+* MISE-EN-GARDE (mise en garde),
+* HISTORIQUE (historique)
+* EN-PIED (colophème et cul de lampe)
+
+Éléments à être utilisés dans
+Éléments de factorisations utilisés par les premiers
+
+    - format? (BASE, EN-TETE, SOMMAIRE, HISTO, EN-PIED, etc.),
+
+=== Le gabarit
+
+    - gabarit? (note, rapport, manuel, etc.),
+
+=== L’encodage
+
+
+  * encodage : PDF, HTML5, EPUB3, etc. ;
+  * un gabarit vise un format et prend en compte un ou plusieurs mode ;
+
+
+  * le mode détermine un ou plusieurs encodagess selon l’outil et le paramétrage choisi ;
+  * un modèle est la conjonction gabarit+tdm
+    (DDV, EDB, EDF, EDO, SE<a>, SA<a>, SC<a>, SX<a>, PGP, RJP, BFP, MPS, etc.),
+    avec <a> parmi :
+    - S (système, sous-sytème, service),
+    - L (logiciel, application),
+    - C (composant, module, logithèque),
+    - B (MFC, MCD, MLD, BD) ;
+  * opérationnaliser les catégories retenues
+    - les modèles dans le GLOGUS,
+    - les modes, thèmes, formats et gabarits génériques dans CoLOED,
+    - permettre d’adapter les modes, thèmes, formats par organisation, entrepôt, dépôt ?

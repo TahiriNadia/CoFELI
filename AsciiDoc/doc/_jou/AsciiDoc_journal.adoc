@@ -1,0 +1,127 @@
+= Journal de CoLOED:AsciiDoc
+
+== 2023-07
+
+=== 2023-07-26
+.Contexte
+Production de présentations avec AsciiDoc.
+
+.Liste des soucis immédiats
+
+1. Comment faire apparaitre le petit menu que tu avais pour sélectionner une diapo ?
+
+2. Où sont les notes destinées au présentateur ?
+
+3. Comment faire une diapo sans titre (afin d’avoir toute la surface) ?
+
+4. Comment cadre à gauche par défaut (pour le moment c’est centré par défaut et ça oblige d’ajouter une directive reveal.js à peut près partout…) ?
+
+.Information trouvée par Christina
+
+1. Le menu, c’est un « plugin »
+    - voir https://github.com/denehyg/reveal.js-menu.
+    - Il faut l’ajouter à ton installation revealjs et l’initialiser dans le fichier docinfo-footer.html.
+    - voir https://revealjs.com/plugins/
+
+2. Je n’ai pas testé. Mais il y a une doc ici
+    - https://revealjs.com/speaker-view/
+
+3. Ajouter [%notitle] une ligne avant le titre
+
+4. Cadre à gauche il faut changer le css.
+    - LL : ouais, lequel des css :-)
+    - LL : il faudra le faire pour toutes les sortes de «paragraphe» (ouf)
+    - pour les paragraphes <p> :
+
+  .reveal p {
+    margin : 1cm;
+    line-height: 1cm;
+    text-align: left;
+  }
+
+5. Pourquoi arrête-t-il de faire des diapos pour niveau 3 et plus ?
+
+6. Pourquoi la table des matières est-elle doublement numérotée ?
+
+.Réflexions
+
+Il faut approfondir l’initialisation des plugin.
+
+* Est-ce lié à l’attribut :docinfo: ?
+* Placer cela dans un autre fichier html (`docinfo-footer.html`) rend le fichier non auto-portant ; il est vrai que pour l’inclusion des figures, il faut ajouter un sous-dossier puis encapsuler le tout dans un dossier...
+C’est à ça que sert _publication n’est-il pas vrais ? :-)
+* Il faut aussi trouver le lien avec `docinfo.html`, `docinfo-header.html` et `docinfo-footer.html`.
+
+* De façon intéressante, la documentation dans https://docs.asciidoctor.org/reveal.js-converter/latest/converter/docinfo/ spécifie d’autres noms pour ces mêmes fichiers : `docinfo-reveal.js.html`, `docinfo-header-reveal-js.html` et `docinfo-footer-reveal-js.html`.
+
+Je remarque aussi que le visionnement est non seulement dépendant d’une installation locale, mais aussi d’une connexion internet fonctionnelle (à boon débit) et de la disponibilité de certains dont :
+
+* cdn.jsdelivr.net/npm/reveal-plantuml
+* ...
+
+Est-il possible de s’en affranchir ?
+
+.Résultats
+
+À venir.
+
+.Trucs
+
+Pour ajouter une diapositive sans avoir recours à un titre, utiliser la commande
+suivante :
+
+----
+  ifdef::format_DIAPO[=== !]
+----
+
+Pour le moment, j’utilise ce truc, non seulement pour forcer L’ajout d’une
+diapositive, mais aussi pour forcer l’ajout d’une diapositive pour les
+titres de niveau 3 (c’est-à-dire, précédés de 1uatres symboles d’égalité).
+
+À comparer avec les préfixes de paragraphe
+
+  [%canceal]
+
+et
+
+  [%notitle]
+
+== 2024-01
+
+=== 2024-01-27 (LL01)
+
+.Regula
+* Ménage préliminaire
+* Revue initiale et adaptation à AsciiDoc v000
+* Revue initiale de
+* Création d’un journal
+
+.AsciiDoc
+* Ménage préliminaire
+* Revue initiale et adaptation à AsciiDoc v000
+  - NT-2023-001_Choix-encodage-document.adoc
+  - NT-2023-002_Installation-panoplie-RT.adoc
+  - NT-2024-001_Conventions.adoc
+* Mise à jour du journal
+
+== Tâches
+
+include::2023-07.sql[lines=2..-1]
+////
+
+[TIP]
+====
+Normalement, j’aurais directement placé les annotations de tâches (genre todo)
+dans les paragraphes suivants. Malheureusement, depuis quelque temps déjà,
+les produits JetBrains (dont GitLab, mais plus tardivement que d’autres)
+ne répertorie plus les annotations que lorsqu’elles sont en commentaire.
+Or, je veux qu’elles fassent partie du texte Asdiidoc ET qu’elles soient recensées.
+Voici donc mon truc : je place les annotations (en commentaire) dans un
+fichier SQL (elles seront ainsi recensées), puis j’importe ce fichier SQL
+dans le document AsciiDoc en omettant la première ligne
+(qui contient l’ouverture du commentaire).
+Pour éviter d’intégrer dans le texte la fermeture du commentaire
+(normalement en dernière ligne du fichier SQL),
+je le précède d’une ouverture de commentaire AsciiDoc... que je ferme,
+dans le fichier AsciiDoc, après l’inclusion. Clair comme ça ?
+====

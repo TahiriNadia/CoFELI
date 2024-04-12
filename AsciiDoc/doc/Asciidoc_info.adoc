@@ -1,0 +1,8 @@
+* le site officiel :
+  https://asciidoctor.org
+* la présentation officielle :
+  https://docs.asciidoctor.org/asciidoc/latest/
+* la référence officielle :
+  https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+* un tutoriel indépendant :
+  https://www.vogella.com/tutorials/AsciiDoc/article.html

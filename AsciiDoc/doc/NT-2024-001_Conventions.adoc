@@ -1,0 +1,543 @@
+// Signature du document
+:sigle: NT-2024-001
+:titre: Convention d’utilisation d’AsciiDoc au sein de CoLOED
+:sous_titre:
+:organisation: CoLOED
+:entrepot: CoLOED
+:depot: AsciiDoc
+:!branche:
+:description: {titre} — {sous_titre}
+:outline-title: {sigle} — {description}
+:keywords: rédaction technique, documentation technique, Convention matawine
+:revnumber: 1.0.2.b
+:revdate: 2024-02-18
+:version-label: version interne, ne pas citer à l'externe
+
+// Contexte requis par la Convention d’utilisation d’AsciiDoc au sein de CoLOED
+include::../../../rep_CoLOED_AsciiDoc.adoc[]
+
+// Format du document
+ifndef::format_effectif[:format_effectif: RAPPORT]
+include::{rep_format}/{format_effectif}_en-tete.adoc[]
+
+// Préliminaires du document (sommaire, mise en garde, historique, etc.)
+
+include::{rep_format}/SOMMAIRE.adoc[]
+La composante AsciiDoc de CoLOED propose un environnement
+visant à faciliter la production au sein d’une organisation (ou d’un groupe)
+de documents partageant une présentation homogène
+sous différents formats (dont texte, hypertexte et diaporama)
+et différents encodages (donc PDF et HTML5).
+Le présent document a pour but de présenter les règles et conventions minimales
+requises pour l’utilisation de cet environnement.
+Il comprend également une discussion motivant les choix ayant présidé à la
+conception des artéfacts composant l’environnement.
+
+include::{rep_format}/MISE_EN_GARDE.adoc[]
+Le présent document est en cours d’élaboration ;
+en conséquence, il est incomplet et peut contenir des erreurs.
+
+include::{rep_format}/HISTO_debut.adoc[]
+
+| 2024-02-18
+| LL
+| Revue avant diffusion interne.
+
+| 2024-02-05
+| LL+CK
+| Revue interne.
+
+| 2024-01-26
+| LL
+| Généralisation pour MAD et Μῆτις.
+
+| 2023-10-01
+| LL
+| Adaptation pour CoFELI.
+
+| 2023-08-20
+| LL
+| Première tentative d’intégration à Matawin.
+
+| 2023-07-24
+| LL
+| Ébauche initiale.
+
+include::{rep_format}/HISTO_fin.adoc[]
+
+// Table des matières du document
+<<<
+toc::[]
+
+// Corps du document
+<<<
+[introduction]
+== Introduction
+
+(À rédiger)
+
+<<<
+== La recette rapide
+
+.1. Si le langage AsciiDoc n’est pas maitrisé
+
+Consulter les ressources mises à disposition par la communauté, en particulier :
+
+include::Asciidoc_info.adoc[]
+
+.2. Définir le répertoire-racine (`rep_racine`)
+   * Déterminer l’emplacement où se retrouveront l’entrepôt CoLOED et
+     les autres entrepôts clients des artéfacts définis par CoLOED,
+     par exemple `/Users/toto/mes_entrepots`.
+   * Définir le fichier à être inclus (instruction `include::`) dans les
+     documents utilisant les artéfacts de la composante AsciiDoc de CoLOED,
+     par exemple :
+
+[example]
+--
+`rep_CoLOED_AsciiDoc.adoc`
+----
+include::Convention_rep_CoLOED_AsciiDoc.txt[]
+----
+--
+
+   * Définir les variables d’environnement correspondantes pour les
+     interprètes de commandes susceptibles d’être utilisés pour les
+     scripts des composantes et dépôts de CoLOED :
+     (sh -> .shrc, bash -> .bashrc, zsh -> .zshrc, etc.),
+     par exemple :
+
+[example]
+--
+`.bashrc`
+[indent=2]
+----
+include::Convention_bashrc.txt[]
+----
+--
+
+   * Prédéfinir les attributs définis dans `rep_CoLOED_AsciiDoc.adoc` au sein de
+     chacun des ateliers prenant en charge AsciiDoc et susceptibles d’être utilisés
+     (donc Eclipse, DataGrip et AsciidocFX).
+
+.3. Prendre connaissance des documents contenus dans
+   * CoLOED:AsciiDoc/pub
+     - CoLOED_Asciiidoc_modele.pdf _(nécessaire)_
+     - CoLOED_Asciiidoc_convention.pdf _(nécessaire)_
+     - CoLOED_Asciiidoc_installation.pdf _(nécessaire)_
+   * CoLOED:Scriptorum/pub
+     - CoLOED_Scriptorum_STD-ENV-01.pdf _(recommandé)_
+     - CoLOED_Scriptorum_STD-ENV-02.pdf _(facultatif)_
+
+.4. Consulter quelques modèles d’intérêt
+   * CoLOED:Scriptorum/modele/glogus _(recommandé)_
+
+<<<
+== Les secrets de la recette
+
+=== Attributs contextuels requis
+
+Les attributs contextuels visent à permettre de produire des documents
+en utilisant des artéfacts (scripts, formats, images, thèmes, gabarits, etc.)
+développés par la communauté AsciiDoc de CoLOED indépendamment de l’emplacement
+effectif du document et du dépôt contenant ces ressources…
+pour peu que les règles de structuration de dépôt de la _Convention matawine_
+soient respectées.
+
+Il est de plus également souhaitable qu’un rédacteur puisse ponctuellement
+substituer à certains artéfacts de CoLOED des artéfacts (ou groupes d’artéfacts)
+de son choix tout en conservant les autres.
+
+Les deux prochaines rubriques présentent :
+
+* la structure des attributs donnant accès aux ressources communes ;
+* le mécanisme permettant d’établir le point de référence (rep_racine)
+  de toutes les valeurs implicites.
+
+==== Ressources communes
+
+Les ressources communes sont des artéfacts facilitant la mise en forme de
+document AsciiDoc selon la Convention établie par la communauté CoLOED.
+Ces artéfacts sont regroupés dans le dépôt AsciiDoc de CoLOED.
+
+La structure du dépôt AsciiDoc est conforme aux prescriptions de
+la _Convention matawine_ (voir STD-ENV-01).
+Les artéfacts sont répartis dans les sous-répertoires convenus
+(`format`, `image`, `theme`, etc.) et des attributs sont définis afin d’en faciliter
+et d’en permettre le paramétrage.
+La définition de ces attributs de base repose sur la définition préalable
+de l’attribut `rep_AsciiDoc`, qui elle-même repose, par défaut, sur celle de
+l’attribut `rep_CoLOED`. Par exemple :
+----
+  ifndef::rep_CoLOED[:rep_CoLOED: {rep_racine}/CoLOED]
+  ifndef::rep_AsciiDoc[:rep_AsciiDoc: {rep_CoLOED}/AsciiDoc]
+  ifndef::rep_format[:rep_format: {rep_AsciiDoc}/format]
+  ifndef::rep_image[:rep_image: {rep_AsciiDoc}/image]
+  ifndef::rep_theme[:rep_theme: {rep_AsciiDoc}/theme]
+----
+
+Le recours à des définitions conditionnelles permet que chacun des attributs
+puisse être défini grâce à un mécanisme de paramétrage du logiciel de mise en forme,
+par exemple, l’option `-a` du logiciel `asciidoctor`. En pratique, la conditionnelle
+aurait pu être omise en regard de plusieurs logiciels (en particulier asciidoctor),
+mais pas tous !
+
+En pratique, le nombre d’attributs à définir pour les seuls répertoires
+d’artéfacts communs dépasse la dizaine.
+Or il y a plusieurs autres attributs, représentant plutôt des modalités
+de mise en page qui doivent aussi être uniformisées au sein d’un corpus
+documentaire.
+Il serait souhaitable de prendre en charge leur définition usuelle
+tout en permettant d’en changer, à la pièce, au besoin.
+
+Ceci a été réalisé par l’entremise du fichier `BASE_en-tete.adoc` dont
+l’emplacement est donné par l’attribut `rep_format`.
+
+En pratique, il faut donc que la source d’un document référant aux artéfacts de
+la composante AsciiDoc de CoLOED puisse au moins accéder (directement ou indirectement)
+à ce fichier comprenant la définition de tous les attributs utilisés par
+les autres artéfacts (ce fichier est présenté en annexe).
+
+En pratique, le fichier `BASE_en-tete.adoc` est lui-même référé par
+des fichiers plus généraux présidant à la mise en forme de
+notes techniques (`NOTE_en-tete.adoc`),
+de rapports techniques (`RAPPORT_en-tete.adoc`),
+de manuels techniques (`MANUEL_en-tete.adoc`),
+de diaporamas (`DIAPO_en-tete.adoc`),
+etc.
+
+Toutes les valeurs implicites des attributs reposent donc sur le seul
+attribut `rep_racine`.
+Si `rep_racine` est défini au préalable, tout est en ordre, sinon `rep_AsciiDoc`
+doit impérativement l’être.
+
+La façon de déterminer implicitement la valeur de `rep_racine` est présenté
+dans la prochaine sous-section.
+
+==== Définition de `rep_racine` et `rep_AsciiDoc`
+
+Il faut que chaque document (du moins le document principal à la racine de
+tous les autres documents constitutifs inclus) soit à même de définir
+les attributs `rep_racine` et `rep_AsciiDoc` si ceux-ci ne l’ont pas été
+par l’environnement.
+
+Une première solution consiste à placer la définition d’un des attributs,
+`rep_racine` ou `rep_AsciiDoc`,
+au sein d’un fichier contenu dans le dépôt contenant les documents eux-mêmes.
+Ceci permet d’uniformiser la référence au sein du dépôt, ne serait-ce que relativement,
+par l’entremise d’une instruction `include::`, par exemple :
+----
+  include::../../../rep_CoLOED_AsciiDoc.adoc[]
+----
+
+Mais voilà, les emplacements auxquels réfèrera ce fichier ne seront pas forcément
+les mêmes d’un environnement à un autre (variation de système d’exploitation,
+d’utilisateur, de contexte, d’ateliers, de logiciels de mise en forme, etc.) ;
+par exemple, Jean pourrait placer la composante AsciiDoc en
+`/User/Jean/mesDépôts/CoLOED/AsciiDoc` et Béatrice en `/home/bea/infra/AsciiDoc`.
+Indépendamment de cela, le document source doit demeurer inchangé.
+
+Le fichier `rep_CoLOED_AsciiDoc.adoc` ne peut donc pas être *dans* le dépôt.
+Il faut alors convenir d’un emplacement commun, hors dépôt, mais relatif à celui-ci.
+Deux emplacements ont été considérés :
+
+* dans l’entrepôt, au même niveau que le répertoire associé au dépôt ;
+* un niveau au-dessus, soit dans le répertoire contenant (le répertoire associé à) l’entrepôt.
+
+Ce dernier emplacement a été privilégié, car il permet de partager entre plusieurs
+dépôts de plusieurs entrepôts le même fichier `rep_CoLOED_AsciiDoc.adoc`.
+Cet emplacement sera désormais désigné sous le nom de répertoire-racine
+(désigné par l’attribut `rep_racine` et la variable d’environnement du même nom).
+
+Le niveau de l’entrepôt a également été choisi afin de ne pas induire une contrainte
+au-delà de l’espace dédié aux entrepôts.
+Ainsi, dans l’exemple suivant, le fichier est placé immédiatement sous `DGS`,
+au même niveau que les racines (répertoires) des entrepôts `CoLOED` et
+`Entrepot_A` (un entrepôt présumément client de `CoLOED`).
+
+.Exemple de structure d’entrepôts
+[plantuml, format=png, opts="inline"]
+....
+skinparam default {
+ FontName STIXTwoText }
+skinparam Legend {
+	BackgroundColor transparent
+	BorderColor transparent }
+legend
+DGS
+|_ 📄 rep_CoLOED_AsciiDoc.adoc
+|_ 📁 CoLOED
+  |_ 📁 AsciiDoc
+    |_ 📁 doc
+      |_ 📄document1.adoc
+|_ 📁 Entrepot_A
+  |_ 📁 Depot_5
+    |_ 📁 doc
+      |_ 📁 segment
+        |_ 📄 document2.adoc
+end legend
+....
+
+Dans `document1.adoc`, c’est trois niveaux au-dessus
+----
+  :rep_racine: ../../..
+----
+
+Dans `document2.adoc`, c’est quatre !
+----
+  :rep_racine: ../../../..
+----
+
+En conséquence, si la source principale du document (ou une sous-arborescence
+la contenant) est relocalisée à un niveau différent, il faut modifier
+la définition locale de `rep_racine` en conséquence.
+
+Ce qui pourrait être correct _a priori_ si ce n’était de
+la convention utilisée par AsciiDoc pour déterminer
+le répertoire de référence lors d’une inclusion.
+Il s’agit du répertoire contenant le document contenant l’inclusion.
+En définissant `rep_racine` de façon relative à l’emplacement du document source,
+la définition pourrait ne plus être valable au sein d’autres documents référés
+(directement ou non) par le document source.
+Une telle solution n’est donc utilisable que dans le document racine
+(et pas dans les documents qu’il inclut).
+Du fait même, un document racine pourrait ne pas pouvoir être inclus par un autre.
+Or cette situation est fréquente lorsqu’on compose des corpus documentaires
+appelés à être à la fois imprimés, transformés en document PDF,
+utilisés en partie dans un diaporama et inclus dans un site web.
+
+Pour pallier ces inconvénients et limiter le plus possible le recours
+aux emplacements relatifs, la solution consiste donc combiner la conditionnelle
+(pour ne pas masquer une éventuelle définition antérieure de `rep_racine`)
+à l’inclusion d’un document local (unique) établissant statiquement
+et de façon relative l’emplacement local de `rep_racine`.
+
+Le même raisonnement vaut pour `rep_CoLOED`, `rep_AsciiDoc`, `rep_format`, etc.
+
+==== Synthèse
+
+Pour utiliser les artéfacts de la composante AsciiDoc de CoLOED,
+il faut déterminer le répertoire-racine (soit deux niveaux au-dessus du répertoire
+associé au dépôt AsciiDoc) et y créer le fichier `rep_CoLOED_AsciiDoc.adoc`.
+
+Par exemple, soit l’emplacement du répertoire-racine `/Users/toto/mes_entrepots`,
+le contenu du fichier `/Users/toto/mes_entrepots/rep_CoLOED_AsciiDoc.adoc`
+sera le suivant :
+----
+include::Convention_rep_CoLOED_AsciiDoc.txt[]
+----
+
+et le document `/Users/toto/mes_entrepots/Entrepôt_A/doc/manuel.adoc` devra
+contenir l’instruction suivante antérieurement à toute référence à un artéfact
+de la composante AsciiDoc de CoLOED :
+----
+  include::../../../rep_CoLOED_AsciiDoc.adoc[]
+----
+
+.Suggestion
+Pour faciliter l’écriture de scripts de commandes réutilisables,
+inclure la définition des variables d’environnement correspondantes dans le script
+d’amorçage des interprètes de commande utilisés, par exemple `.zshrc` pour zsh
+et `.bashrc` pour bash. Par exemple :
+----
+include::Convention_bashrc.txt[]
+----
+
+De nombreux ateliers logiciels ne prennent toutefois pas
+en compte ces fichiers d’initialisation ni le contexte qui en résulte.
+Il est alors nécessaire de répéter l’opération pour chacun de ces ateliers
+selon des modalités qui lui sont propres…
+ou de le faire au début de chaque séance de travail !
+
+.Généralisation
+Cette solution est généralisable à tout autre dépôt provenant d’un entrepôt
+conforme à la _Convention matawine_ et placé sous le même répertoire-racine.
+
+Le partage du répertoire-racine entre tous les entrepôts n’est pas impératif.
+Tout utilisateur est libre de déployer ses dépôts comme bon lui semble, même hors entrepôt.
+Dans ce cas, pour utiliser les artéfacts de la composante AsciiDoc de CoLOED,
+l’utilisateur doit simplement définir un fichier `rep_CoLOED_AsciiDoc.adoc`
+deux niveaux plus au-dessus relativement à ce dépôt. Par exemple :
+
+Soit un dépôt `/home/bea/infra/depotA`,
+le fichier `/home/bea/infra/depotA/doc/manuel.adoc`
+devra contenir l’instruction
+----
+  include::../../../rep_CoLOED_AsciiDoc.adoc[]
+----
+
+référant au fichier `/home/bea/rep_CoLOED_AsciiDoc.adoc` dont la définition de
+l’attribut `rep_racine` aura été adaptée au contexte, à savoir :
+----
+  ifndef::rep_racine[:rep_racine: /home/bea]
+----
+
+=== Signature du document
+
+La signature d’un document comprend les attributs dont la valeur est propre au document
+(et que l’environnement AsciiDoc de CoLOED ne peut donc établir lui-même).
+
+Ces attributs ont pour objectif de contextualiser et d’identifier le document
+
+.Attributs définis par (la composante AsciiDoc de) CoLOED
+* *:organisation:*
+  organisation sous la responsabilité de laquelle le document est publié.
+  on utilisera le logo ({rep_theme}/{organisation}/logo.png), la légende, etc.
+  de ladite organisation pour la mise en page.
+* *:entrepot:*
+  nom de l’entrepôt («group» au sens de git, donc un ensemble de dépôts)
+  qui contient le dépôt qui contient le document.
+* *:depot:*
+  nom de la structure de gestion de sources («project» au sens de git)
+  qui contient le document ; le dépôt doit être structuré selon les
+  règles prescrites par la _Convention matawine_.
+* *:branche:*
+  nom du référentiel d’une variante du dépôt considérée.
+  Cet attribut est obsolète — il sera remplacé à terme par :variante: et
+  assorti d’un mode de fonctionnement à être défini (différent de celui pressenti
+  pour :branche:).
+* *:sigle:*
+  code désignant uniquement le document au sein de l’organisation.
+* *:titre:*
+  titre officiel du document, de préférence moins de 60 caractères.
+* *:sous-titre:*
+  explicitation du titre, de préférence en moins de 250 caractères.
+
+.Attributs définis par AsciiDoc (voir la documentation d’AsciiDoc)
+* :description:
+* :keywords:
+* :revnumber:
+* :revdate:
+* :version-label:
+* :author:
+  - :author2:, …
+* :email:
+  - :email2:, …
+
+=== Répertoires de référence
+
+Le rôle de ces attributs est de permettre le paramétrage de l’accès aux artéfacts
+tant de la composante AsciiDoc de CoLOED que d’autres sources.
+S’ils sont généralement définis grâce au fichier `rep_CoLOED_AsciiDoc.adoc`,
+ils peuvent l’être par le biais du logiciel de mise en forme (et de son propre paramétrage)
+ou même de façon interne au document par le biais d’instructions AsciiDoc.
+
+À défaut de quoi, le document doit les définir.
+
+.Répertoires relatifs aux artéfacts AsciiDoc proposés par CoLOED
+* *:rep_racine:*
+  le répertoire-racine de CoLOED
+  (idéalement, celui de tous ses entrepôts clients également).
+* *:rep_CoLOED:*
+  le répertoire associé à l’entrepôt CoLOED.
+* *:rep_AsciiDoc:*
+  répertoire associé (au dépôt associé) à la composante AsciiDoc de référence,
+  le répertoire doit être structuré selon la _Convention matawine_ ;
+  par défaut celui de la composante AsciiDoc de CoLOED.
+* *:rep_format:*
+  chemin d’accès aux descriptions de «formats» (conventions de mise en forme,
+  structures de documents, etc.) ;
+  un format est fichier à inclure dans le document (typiquement, via `include::`)
+  à des fins de construction (donc interprétés par le logiciel de mise en forme).
+
+.Répertoires relatifs au document
+* *:rep_entrepot:*
+  chemin d’accès de l’entrepôt contenant le dépôt contenant le document racine
+  à mettre en forme.
+* *:rep_depot:*
+  chemin d’accès au dépôt contenant le document.
+* *:rep_glossaire:*
+  chemin d’accès au glossaire (les définitions et leurs notes complémentaires),
+  structuré selon la _Convention matawine_.
+* *:rep_reference:*
+  chemin d’accès au répertoire contenant les références et leurs notes complémentaires),
+  structuré selon la _Convention matawine_.
+* *:rep_consultation:*
+  URL ou chemin d’accès au répertoire contenant les fichiers qui seront inclus
+  au moment de la consultation du document lorsqu’il sera publié.
+
+.Note
+* La liste n’est pas complète, pour plus de détails voir l’annexe A.
+
+<<<
+== Incongruités, problèmes, contournements et palliatifs
+
+.PATCHED 2024-01-28 (LL01) -- conversion fautive des diagrammes plantuml via Windows-1252
+  * Problème initial 2024-01-28 (LL01) : empêcher la conversion fautive via Windows-1252
+    - `WARNING: The following text could not be fully converted to the Windows-1252 character set: 📁`
+    - voir <<ASCpdf>>.
+  * Analyse 2024-01-30 (LL01)
+    - Le problème n’apparait pas dans le texte, mais plutôt dans les figures produites
+      à l’aide de plantuml. Quant à savoir si le problème provient du pré-traitement
+      par asciidoctor ou de plantuml lui-même, le mystère est entier.
+  * Analyse 2024-02-01 (LL01) — le problème est vraiment du côté de plantuml
+    - Par ailleurs, le problème ne survient pas pour les diagrammes produits
+      au format SVG au sein d’un document AsciiDoc produit au format PDF.
+    - On remarque également que le problème ne se produit pour les diagrammes PNG
+      peu importe le format du document.
+    - Contournement immédiat, produit le diagramme en PNG.
+    - Essai de la première solution proposée dans <<ASC739>>
+      *** Créer un fichier plantuml.conf contenant les paramètres génériques des
+          diagrammes dont la directive «skinparam defaultFontName ...» et référer
+          à ce fichier dans le document (avant la définition du premier diagramme)
+          en définissant à associant le nom du ficher à l’attribut asciidoc
+          :plantumlconfig:
+      *** Cette solution n’a pas fonctionné — soit je n’ai pas su placer le fichier
+          au bon endroit, soit l’attribut n’est pas traité adéquatement.
+    - Essais de la deuxième solution proposée dans <<ASC739>>
+      *** Inclure directement la directive dans le script plantuml
+          «skinparam defaultFontName ...»
+      *** Il n’y a plus de message d’erreur, mais le symbole n’est pas trouvé pour autant.
+          La valeur de substitution est un rectangle - moins mauvais (dans le contexte)
+          que le symbole de négation ;-)
+    - Résultats analogues avec toutes les polices testées, dont
+      *** STIXTwoText, STIXTwoMath, NotoSerif, JetBrainsMono, Noto Serif, M+ 1p Fallback, Noto Emoji.
+  * Solution temporaire 2024-02-01 (LL01) : produire les diagrammes au format PNG
+    - Avec perte de résolution corolaire au passage en mode point.
+
+.PATCHED 2024-01-02 (LL01) -- Les polices au format .ttc et .otf sont-elles vraiment prises en charge ?
+  * En attendant une confirmation, seules polices .ttf sont utilisées dans
+    les fichiers de configuration AsciiDoc, notamment ceux de \{rep_AsciiDoc\}/themes.
+  * Néanmoins, certaines polices au format .otf sont déjà disponibles dans \{rep_AsciiDoc\}/font.
+
+<<<
+[conclusion]
+== Conclusion
+
+(À rédiger)
+
+// Annexes
+<<<
+[appendix]
+== Le fichier BASE.adoc courant
+
+// Comment faire pour inclure le vrai fichier sans faire un pastiche .txt ?
+[source,asciidoc,indent=0]
+----
+include::{rep_format}/BASE_en-tete.adoc[indent=2]
+----
+
+<<<
+[glossary]
+== Glossaire
+
+corpus documentaire::
+ensemble de documents produits par une même organisation et partageant
+une présentation homogène sous différents formats (texte, hypertexte, diaporama, etc.)
+et différents encodages (PDF, HTML5, EPUB, etc.).
+
+<<<
+[bibliography]
+== Références
+
+Pour utiliser BibTeX en AsciiDoc, voir <<ASCref>> et <<ASCbib>>.
+
+* [[[ASCpdf,1]]] https://docs.asciidoctor.org/pdf-converter/latest/theme/font-support/
+
+* [[[ASC739,2]]] https://github.com/asciidoctor/asciidoctor-pdf/issues/739.
+
+* [[[ASCref,3]]] https://docs.asciidoctor.org/asciidoc/latest/sections/bibliography/.
+
+* [[[ASCbib,4]]] https://github.com/asciidoctor/asciidoctor-bibtex.
+
+include::{rep_format}/{format_effectif}_en-pied.adoc[]

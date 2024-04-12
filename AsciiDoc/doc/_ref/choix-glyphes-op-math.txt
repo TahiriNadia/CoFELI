@@ -1,0 +1,29 @@
+Bureau international des poids et mesures (BIPM)
+Conférence internationale des poids et mesures (CIPM)
+Conférence générale des poids et mesures (CGPM)
+
+Glyphes à considérer pour les opérateurs mathématiques
+
+* asterisk 002A
+× multiplication operator 00D7
+∙ bullet operator 2219
+· middle dot 00B7 (écriture inclusive ?)
+⋅ dot operator 22C5 (choix du BIPM)
+
+/ solidus 002F (choix du BIPM)
+÷ division sign 00F7 (à éviter en raison de la polysémie linguistique)
+∕ division slash 2215 (aie! lequel choisir)
+
+https://codepoints.net/U+22C5
+Multiplication (often denoted by the cross symbol ×, by the mid-line dot operator ⋅, by juxtaposition, or, on computers, by an asterisk *) is one of the four elementary mathematical operations of arithmetic, with the other ones being addition, subtraction, and division. The result of a multiplication operation is called a product.
+
+https://codepoints.net/U+00F7
+The division sign (÷) is a symbol consisting of a short horizontal line with a dot above and another dot below, used in Anglophone countries to indicate mathematical division. However, this usage, though widespread in some countries, is not universal; it is used for other purposes in other countries and its use to denote division is not recommended in the ISO 80000-2 standard for mathematical notation.
+
+https://codepoints.net/U+2215
+The slash is an oblique slanting line punctuation mark /. Once used to mark periods and commas, the slash is now used to represent exclusive or inclusive or, division and fractions, and as a date separator. It is called a solidus in Unicode, is also known as an oblique stroke, and has several other historical or technical names including oblique and virgule.
+This character is distinct from U+2044 FRACTION SLASH. It is intended to represent the operation of dividing, not an actual fraction. For a discussion see this detailed answer on SuperUser.
+
+Voir également
+
+ISO 80000-2:2019
